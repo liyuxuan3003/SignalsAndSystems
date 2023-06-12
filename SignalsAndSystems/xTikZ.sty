@@ -1,0 +1,39 @@
+\ProvidesPackage{xTikZ}
+
+% tikz
+\RequirePackage{tikz}
+
+\usetikzlibrary{intersections}
+\usetikzlibrary{decorations.markings}
+
+\usetikzlibrary{quotes}
+\usetikzlibrary{angles}
+
+\tikzset%
+{%
+    point/.style=%
+    {%
+        circle,%
+        draw=#1,%
+        solid,%
+        thin,%
+        radius=0.03,%
+        fill=white,%
+        inner sep=0.8pt%
+    },%
+    point/.default=black%
+}%
+
+% pgfplots
+\RequirePackage{pgfplots}
+
+\pgfplotsset{trig format plots=rad}
+
+\usepgfplotslibrary{fillbetween}
+
+% circuitikz
+\RequirePackage[european,americaninductors,americanvoltages,americancurrents,RPvoltages]{circuitikz}
+
+\ctikzset{logic ports=ieee}
+\ctikzset{voltage/distance from node=0.85}
+
