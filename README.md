@@ -1,3 +1,3 @@
-# SemiconductorPhysics
+# SignalsAndSystems
 
-这是《半导体物理学》课程的LaTeX笔记。
+这是《信号与系统》课程的LaTeX笔记。
