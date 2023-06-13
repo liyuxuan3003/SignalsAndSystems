@@ -1,0 +1,181 @@
+\section{信号}
+信号可以表示为时间函数，而该时间函数的图像称为信号的波形。在讨论与信号有关的问题时，术语“信号”与“函数”常常可以互相换用。若信号可以用一个确定的函数表示，则称为\uwave{确定信号}（Determinate Signal），反之则称为\uwave{随机信号}（Random Signal）。我们会疑惑，为什么会有随机信号？实际上，这是因为信号在传输和处理过程中存在某些“不确定性”和“不可预见性”，例如受到外界干扰或噪声的影响，使信号发生随机性的失真和畸变。因此，严格的说，实践中经常遇到的信号还一般都是随机信号，研究随机信号需要用概率统计的观点和方法。虽然如此，研究确定信号，仍然是十分重要的，确定信号作为一种理想化应用，不仅足矣满足许多条件下的工程应用，还是进一步研究随机信号的基础。本课程只讨论确定信号。
+
+\subsection{连续信号和离散信号}
+信号可以依照其定义域的特点，分为连续时间信号和离散时间信号。
+\begin{Figure}[连续信号和离散信号]
+    \begin{FigureSub}[连续信号]
+        \includegraphics{build/Chapter01B_01a.fig.pdf}
+    \end{FigureSub}
+    \hspace{0.25cm}
+    \begin{FigureSub}[离散信号]
+        \includegraphics{build/Chapter01B_01b.fig.pdf}
+    \end{FigureSub}
+\end{Figure}
+
+\begin{itemize}
+    \item \uwave{连续时间信号}（Continuous-Time Signal）简称\uwave{连续信号}，是指在时间上连续的信号。
+    \item \uwave{离散时间信号}（Discrete-Time Signal）简称\uwave{离散信号}，是指在时间上离散的信号。
+\end{itemize}
+特别需要强调的是，连续信号和离散信号区分的关键，在于定义域是连续还是离散，对值域没有要求。例如，\xref{fig:连续信号}所示的正弦波是连续信号，而方波也是连续信号，尽管方波在值域上只能取$\pm 1$两个离散的值。\xref{fig:离散信号}则是离散信号，注意到它仅在一些离散的时刻才有定义。
+
+\xref{fig:连续信号}所示的连续信号是\setpeq{连续信号与离散信号}
+\begin{Equation}&[1]
+    f(t)=\sin(\omega t)\qquad -\infty<t<\infty
+\end{Equation}
+\xref{fig:离散信号}所示的离散信号是
+\begin{Equation}&[2]
+    f(k)=\sin(\beta k)\qquad k=0,\pm 1,\pm2,\cdots
+\end{Equation}
+
+我们会问，\xrefpeq{2}的离散信号怎么是关于一个序数$k$的？时间在哪里？这需要解释一下，离散信号是仅定义在一些离散时刻$t_k, k=0,\pm 1,\pm 2,\cdots$上的信号，离散时刻间$t_k$与$t_{k+1}$的间隔$T_k=t_{k+1}-t_k$可以是常量，也可以是随$k$变化的变量。本课程仅讨论$T_k$等于常数$T_k=T$的情况，这样一来，离散时刻就可以用$t_k=kT$表示了，离散信号$f_0$就可以表示为
+\begin{Equation}
+    f_0(t)=f_0(kT)\qquad k=0,\pm 1,\pm 2,\cdots
+\end{Equation}
+但简介起见，我们不妨令
+\begin{Equation}
+    f(k)=f_0(kT)
+\end{Equation}
+这样的离散信号也常称为序列$f(k)$，它形式上不再关于时间，而是关于序数$k$。
+
+\begin{itemize}
+    \item 时间和幅值均为连续的信号，称为\uwave{模拟信号}（Analog Signal）。
+    \item 时间和幅值均为离散的信号，称为\uwave{数字信号}（Digital Signal）。
+\end{itemize}
+
+尽管定义上有一些差异（连续/离散仅考察定义域，模拟/数字同时考察定义域和值域），但实践中不需要顾及这些繁文缛节，连续信号可与模拟信号混用，离散信号可与数字信号混用。
+
+\subsection{周期信号和非周期信号}
+\uwave{周期信号}（Periodic Signal）是指定义在$(-\infty,\infty)$区间上，每隔一定时间$T$（连续信号）或整数$N$（离散信号），按相同规律重复变化的信号，反之称为\uwave{非周期信号}（Non-Periodic Signal）。
+
+\begin{BoxDefinition}[连续信号的周期]
+    连续周期信号可以表示为
+    \begin{Equation}
+        f(t)=f(t+mT)\qquad m=0,\pm 1,\pm 2,\cdots
+    \end{Equation}
+    满足以上关系式的最小的$T$，称为该信号的\uwave{重复周期}，简称\uwave{周期}（Period）。
+\end{BoxDefinition}
+
+\begin{BoxDefinition}[离散信号的周期]
+    离散周期信号可以表示为
+    \begin{Equation}
+        f(k)=f(k+mN)\qquad m=0,\pm 1,\pm 2,\cdots\qquad N\in\Z^{+}
+    \end{Equation}
+    满足以上关系式的最小的正整数$N$，称为该离散信号的周期。
+\end{BoxDefinition}
+
+而对于\xref{fig:离散信号}所示的正弦序列
+\begin{Equation}
+    f(k)=\sin(\beta k)=\sin(\beta k+2m\pi)=\sin\qty[\beta\qty(k+m\frac{2\pi}{\beta})]
+\end{Equation}
+引入$N=2\pi/\beta$
+\begin{Equation}
+    f(k)=\sin[\beta(k+mN)]=f(k+mN)
+\end{Equation}
+这里$\beta$称为正弦序列的数字角频率，由上式可见，只有当$2\pi/\beta$为整数时这里引入的$N$才是整数，正弦序列才具有$N=2\pi/\beta$的周期（离散信号的周期必须是整数）。例如在\xref{fig:离散信号}中取$\beta=\pi/10$，此时$2\pi/\beta=20$为整数，因此,观察到信号每经过$N=20$个点循环一次
+\begin{itemize}
+    \item 若$2\pi/\beta$为有理数，例如$2\pi/\beta=N/M$，则此时仍为周期序列，但周期$N=M(2\pi/\beta)$。
+    \item 若$2\pi/\beta$为无理数，则序列不具有周期性（但包络线仍是正弦函数）。
+\end{itemize}
+由此可见，从一个周期的连续信号中等间隔抽取出的离散信号未必仍然是周期的。
+
+\subsection{实信号和复信号}
+通常来说，物理上可实现的信号往往都是实函数，其在各个时刻的函数值都是实数，例如正弦信号$\sin(\omega t)$或单边指数信号$\e^{\sigma t}, t>0$等，称为\uwave{实信号}（Real Signal）。在电路学中我们已经很熟悉于将物理量转化为复数形式的想法了，在信号与系统中也有类似作法（类似但不完全相同），引入\uwave{复信号}（Complex Signal）唯一的目的是表示的便利，并非因为物理量确为复数。
+
+最为常用的复信号是复指数信号，其对于连续信号和离散信号，分别定义如下。
+
+\begin{BoxDefinition}[连续信号的复指数信号]
+    连续信号的复指数信号可以表示为
+    \begin{Equation}
+        f(t)=\e^{st}
+    \end{Equation}
+    其中复变量$s=\sigma+\j\omega$，上式可以展开为
+    \begin{Equation}
+        f(t)=\e^{\sigma t}\e^{\j\omega t}=\e^{\sigma t}\cos(\omega t)+\j\e^{\sigma t}\sin(\omega t)
+    \end{Equation}
+    其实部和虚部分别为
+    \begin{Equation}
+        \Re[f(t)]=\e^{\sigma t}\cos(\omega t)\qquad
+        \Im[f(t)]=\e^{\sigma t}\sin(\omega t)
+    \end{Equation}
+\end{BoxDefinition}
+
+\begin{BoxDefinition}[离散信号的复指数信号]
+    离散信号的复指数信号可以表示为
+    \begin{Equation}
+        f(k)\e^{sk}
+    \end{Equation}
+    其中复变量$s=\alpha+\j\beta$，并令$a=\e^{\alpha}$，上式可以展开为
+    \begin{Equation}
+        f(k)=\e^{\alpha k}\e^{\j\beta k}=a^k\e^{\j\beta j}=a^k\cos(\beta k)+\j a^k\sin(\beta k)
+    \end{Equation}
+    其实部和虚部分别为
+    \begin{Equation}
+        \Re[f(k)]=a^k\cos(\beta k)\qquad
+        \Im[f(k)]=a^k\sin(\beta k)
+    \end{Equation}
+\end{BoxDefinition}
+
+复指数信号可以概况许多常用的实信号，通常我们会考察其实部，如\xref{tab:复指数信号与实信号}
+\begin{Table}[复指数信号与实信号]{cccccc}
+<
+\mc{3}(c){连续信号$\Re[f(t)]=\e^{\sigma t}\cos(\omega t)$}&
+\mc{3}(c){离散信号$\Re[f(k)]=a^k\cos(\beta k)$}\\
+$\sigma$&$\omega\neq 0$&$\omega=0$&
+$a$&$\beta\neq 0$&$\beta=0$\\
+>
+$\sigma>0$&增幅振荡信号&正指数信号&$a>1$&增幅振荡序列&正指数序列\\
+$\sigma=0$&简谐振荡信号&直流信号&$a=1$&简谐振荡序列&常值序列\\
+$\sigma<0$&衰减振荡信号&负指数信号&$a<1$&衰减振荡序列&负指数序列\\
+\end{Table}
+它们相应的图像是
+\begin{TableLong}[复指数信号的图像]{cc}
+<
+\mc{1}(c){连续信号$\Re[f(t)]=\e^{\sigma t}\cos(\omega t)$}&
+\mc{1}(c){离散信号$\Re[f(k)]=a^k\cos(\beta k)$}\\
+>
+\xcell<b>[2ex][0ex]{\includegraphics[scale=0.9]{build/Chapter01B_02a.fig.pdf}\hspace*{1.5em}}&
+\xcell<b>[2ex][0ex]{\includegraphics[scale=0.9]{build/Chapter01B_02d.fig.pdf}\hspace*{1.5em}}\\*
+$\sigma>0$&$a>1$\\
+\xcell<b>[2ex][0ex]{\includegraphics[scale=0.9]{build/Chapter01B_02b.fig.pdf}\hspace*{1.5em}}&
+\xcell<b>[2ex][0ex]{\includegraphics[scale=0.9]{build/Chapter01B_02e.fig.pdf}\hspace*{1.5em}}\\*
+$\sigma=0$&$a=1$\\
+\xcell<b>[2ex][0ex]{\includegraphics[scale=0.9]{build/Chapter01B_02c.fig.pdf}\hspace*{1.5em}}&
+\xcell<b>[2ex][0ex]{\includegraphics[scale=0.9]{build/Chapter01B_02f.fig.pdf}\hspace*{1.5em}}\\*
+$\sigma<0$&$a<1$\\
+\xcell<c>[2ex][0ex]{\includegraphics[scale=0.9]{build/Chapter01B_02g.fig.pdf}}&
+\xcell<c>[2ex][0ex]{\includegraphics[scale=0.9]{build/Chapter01B_02h.fig.pdf}}\\
+\end{TableLong}
+
+\subsection{能量信号与功率信号}
+能量信号与功率信号的概念，是从电压或电流在\textbf{单位电阻}上的能量和功率上抽象出来的。
+\begin{BoxDefinition}[能量信号]
+    \uwave{能量信号}（Energy Signal）代表信号在$(-\infty,\infty)$上的能量，对于连续信号定义为
+    \begin{Equation}
+        E=\Lim[a\to\infty]\Int[-a][a]|f(t)|^2\dd{t}
+    \end{Equation}
+    能量信号对于离散信号定义为
+    \begin{Equation}
+        E=\Lim[N\to\infty]\Sum[k=-N][N]|f(k)|^2
+    \end{Equation}
+\end{BoxDefinition}
+
+\begin{BoxDefinition}[功率信号]
+    \uwave{功率信号}（Power Signal）代表信号在$(-\infty,\infty)$上的平均功率，对于连续信号定义为
+    \begin{Equation}
+        P=\Lim[a\to\infty]\frac{1}{2a}\Int[-a][a]|f(t)|^2\dd{t}
+    \end{Equation}
+    功率信号对于离散信号定义为
+    \begin{Equation}
+        P=\Lim[N\to\infty]\frac{1}{2N+1}\Sum[k=-N][N]|f(k)|^2
+    \end{Equation}
+\end{BoxDefinition}
+
+需要注意的是，能量信号和功率信号不是一个随$t$或$k$变化的函数，而是一个值。\goodbreak
+
+关于能量信号和功率信号，我们有这样的论断
+\begin{itemize}
+    \item 若信号的能量有界$0<E<\infty$，称为\uwave{能量有限信号}\,，此时$P=0$为零。
+    \item 若信号的功率有界$0<P<\infty$，称为\uwave{功率有限信号}\,，此时$E=\infty$为无穷大。
+\end{itemize}
+为何会如此？正如概率论与数理统计中，对于一个随机变量，要么用概率描述，要么用概率密度描述。试想，若一个信号在$(-\infty,\infty)$的无限区间上具有一定的能量值，由于区间是无限长的，那么平均到单位时间上算得的功率值就必然是零了。反过来，若平均功率是有限值，那乘在无限区间上得到的能量就必然是无穷大了。总之，\empx{能量有限和功率有限不可能共存}。但值得注意的是，有少数信号既不是能量有限信号也不是功率有限信号，如$\e^{-t}$就是一个例子。\footnote{原因是$\e^{-t}$计算出的功率$P$都是无穷大，那能量$E$更是无穷大了。}

@@ -20,7 +20,7 @@ Fig1=Plot[
 		Table[{x,MaTeX[ToString[PaddedForm[x,{1,1}]],Magnification->0.7]},{x,-1,1,0.5}]
 	},
 	FrameLabel->{MaTeX["\\omega t",Magnification->0.8],MaTeX["f(t)=\\sin(\\omega t)",Magnification->0.8]},
-	ImageSize->Automatic->250,
+	ImageSize->Automatic->200,
 	PlotStyle->Black
 ]
 Export[StringReplace[nbPDFName,".fig"->"a.fig"],Fig1]
@@ -36,7 +36,7 @@ Fig2=DiscretePlot[
 		Table[{x,MaTeX[ToString[PaddedForm[x,{1,1}]],Magnification->0.7]},{x,-1,1,0.5}]
 	},
 	FrameLabel->{MaTeX["k\\quad(\\beta=\\pi/10)",Magnification->0.8],MaTeX["f(k)=\\sin(\\beta k)",Magnification->0.8]},
-	ImageSize->Automatic->250,
+	ImageSize->Automatic->200,
 	PlotStyle->Black
 ]
 Export[StringReplace[nbPDFName,".fig"->"b.fig"],Fig2]
