@@ -1,0 +1,11 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+    
+\node[draw,rectangle,inner sep=0.25cm] (sys) {系统}
+edge[-latex] node[label=above:{\small 输出信号},label=below:{\small 响应},inner sep=0cm] {} ++(+3,0)
+edge[latex-] node[label=above:{\small 输入信号},label=below:{\small 激励},inner sep=0cm] {} ++(-3,0);
+
+\end{tikzpicture}
+\end{document}
