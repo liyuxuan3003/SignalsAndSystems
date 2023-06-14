@@ -1,0 +1,229 @@
+\section{阶跃函数和冲激函数}
+阶跃函数和冲激函数是信号与系统中，两个极为重要的函数，本节将讨论两者的定义与性质。
+
+\subsection{阶跃函数的定义}
+阶跃函数当然可以直接的用分段函数定义，但是，比较有趣的一种观点是，我们可以将阶跃函数视为一个线性缓变函数序列的极限，当后者斜率趋于无穷大时，线性缓变就趋于阶跃了。
+
+\begin{BoxDefinition}[阶跃函数]
+    选定线性缓变函数序列$\gamma_n(t)$
+    \begin{Equation}
+        \gamma_n(t)=
+        \begin{cases}
+            0,&t<-\dfrac{1}{n}\\[4mm]
+            \dfrac{1}{2}+\dfrac{n}{2}t,&-\dfrac{1}{n}<t<\dfrac{1}{n}\\[4mm]
+            1,&t>\dfrac{1}{n}
+        \end{cases}
+    \end{Equation}
+    \uwave{阶跃函数}（Step Function）定义为$\gamma_n(t)$在$n\to\infty$时的极限，记为$\varepsilon(t)$
+    \begin{Equation}
+        \varepsilon(t)=\Lim[n][\infty]\gamma_n(t)
+    \end{Equation}
+    阶跃函数亦可以表示为
+    \begin{Equation}
+        \varepsilon(t)=
+        \begin{cases}
+            0,&t<0\\
+            1,&t>0
+        \end{cases}
+    \end{Equation}
+\end{BoxDefinition}\goodbreak
+
+阶跃函数的图像，如\xref{fig:阶跃函数}所示，注意到随着$n$增大，$\gamma_n(t)$斜率趋于无穷，变为阶跃。
+
+\begin{Figure}[阶跃函数]
+    \begin{FigureSub}[线性缓变函数$\gamma_n(t)$;线性缓变]
+        \includegraphics{build/Chapter01D_01a.fig.pdf}
+    \end{FigureSub}
+    \hspace{0.25cm}
+    \begin{FigureSub}[阶跃函数$\varepsilon(t)$;阶跃]
+        \includegraphics{build/Chapter01D_01c.fig.pdf}
+    \end{FigureSub}
+\end{Figure}
+
+\subsection{冲激函数}
+冲激函数即$\dirac(t)$，在数学物理方法中我们已经很熟悉了，它可以视为矩形脉冲的极限。
+
+\begin{BoxDefinition}[冲激函数]
+    选定矩形脉冲函数序列$p_n(t)$
+    \begin{Equation}
+        p_n(t)=
+        \begin{cases}
+            0,&t<-\dfrac{1}{n}\\[4mm]
+            \dfrac{n}{2},&-\dfrac{1}{n}<t<\dfrac{1}{n}\\[4mm]
+            0,&t>\dfrac{1}{n}
+        \end{cases}
+    \end{Equation}
+    \uwave{冲激函数}（Impulse Function）定义为$p_n(x)$在$n\to\infty$时的极限，记为$\dirac(t)$
+    \begin{Equation}
+        \dirac(t)=\Lim[n][\infty]p_n(t)
+    \end{Equation}
+    冲激函数亦可以表示为
+    \begin{Equation}
+        \dirac(t)=
+        \begin{cases}
+            0,&t\neq 0\\
+            \infty,&t=0
+        \end{cases}
+    \end{Equation}
+    并要求
+    \begin{Equation}
+        \Int[-\infty][\infty]\dirac(t)\dd{t}=1
+    \end{Equation}
+\end{BoxDefinition}
+
+冲激函数的图像，如\xref{fig:冲激函数}所示，随着$n$增大，脉冲宽度越来越窄，脉冲高度越来越高，但其脉冲面积始终为$1$，并不随$n$的增大而变化。因此，当$n\to\infty$时，从理论上来说，我们就得到了一个无限窄无限高，但面积为$1$的脉冲，这就是冲激函数$\dirac(t)$的基本想法。然而很明显的是，冲激函数是无法正常作图的，为了凸显冲激函数的特质，在冲激处，以一个键头进行标识，以键头的高度代表冲激脉冲的强度（即脉冲的面积/积分），这里$\dirac(t)$在$0$处的强度为$1$。
+
+冲激函数的这种特性，使其可以用于表示许多“物理量在空间坐标或时间坐标上集中于一点”的物理现象，例如，质量集中于一点的质点的密度函数，电荷集中于一点的点电荷的电荷密度函数，作用时间趋于零的冲击力等，当然，上述宽度趋于零的电脉冲也是一个极好的例子。
+
+\begin{Figure}[冲激函数]
+    \begin{FigureSub}[矩形脉冲函数$p_n(t)$;矩形脉冲]
+        \includegraphics{build/Chapter01D_01b.fig.pdf}
+    \end{FigureSub}
+    \hspace{0.25cm}
+    \begin{FigureSub}[冲激函数$\dirac(t)$;冲激]
+        \includegraphics{build/Chapter01D_01d.fig.pdf}
+    \end{FigureSub}
+\end{Figure}
+
+然而，尽管我们以函数序列极限的方式定义了冲激函数，但很明显的是，冲激函数$\dirac(t)$并不符合函数的定义，例如其在$t=0$处为无穷大，不是一个实数值。但另外一方面，冲激函数的意义非常清晰，而且在实践中有许多有价值的应用。因此，数学家一致在寻求这类奇异函数的严格定义，在1945至1950年间，施瓦兹（L.Schwartz）发表了论文和专著，建立了广义函数理论，从而使得奇异函数能在数学上被严格定义，为研究奇异函数的数学性质奠定了基础。
+
+接下来，我们介绍广义函数的初步概念和冲激函数$\dirac(x)$的的严格定义和性质。\cite{wiki:狄拉克函数}\cite{wiki:分布}
+
+\subsection{广义函数的引入}
+普通函数，如$y=f(x)$是将一维实数空间的实数$x$经过$f$所规定的运算，映射为一维实数空间的实数$y$，普通函数的概念可以推广。推广方向在于，函数的定义域不再要求是实数空间。
+
+问题是，定义域不是实数空间，还可以是什么空间呢？实数空间就是将实数集中的每个实数对应一个空间点，类似的，如果将某类函数集（连续函数集、可微函数集）中的每个函数视为空间中的一个点，这类函数的全体就构成了一个函数空间（连续函数空间、可微函数空间）。粗浅地说，\empx{广义函数就是定义域为函数空间的函数}，其代表了一个从函数集到实数集的映射。
+
+\begin{BoxDefinition}[广义函数]
+    \uwave{广义函数}（Generalized Function）$g(t)$是对检验函数空间中的每个\uwave{检验函数}（Testing Function）$\varphi(t)$赋予一个数值$N=N[g(t),\varphi(t)]$的映射，通常广义函数$g(t)$可以记为
+    \begin{Equation}
+        \Int[-\infty][\infty]g(t)\varphi(t)\dd{t}=N[g(t),\varphi(t)]
+    \end{Equation}
+    若$g(t)$是普通可积函数，上式可以视作积分运算，否则，上式只能作为一种记号。\footnote[2]{换言之，作为解析式不可知的广义函数，我们正是通过这种方式“定义”其积分。}
+\end{BoxDefinition}\goodbreak
+
+广义函数的性质，完全取决于所赋予的$N[g(t),\varphi(t)]$的值，因此，广义函数的相等定义如下。
+\begin{BoxDefinition}[广义函数的相等]
+    设$g_1(t),g_2(t)$是两个广义函数，若有
+    \begin{Equation}
+        \qquad\qquad
+        \Int[-\infty][\infty]g_1(t)\varphi(t)\dd{t}=\Int[-\infty][\infty]g_2(t)\varphi(t)\dd{t}
+        \qquad\qquad
+    \end{Equation}
+    则称$g_1(t),g_2(t)$相等，并记为
+    \begin{Equation}
+        g_1(t)=g_2(t)
+    \end{Equation}
+\end{BoxDefinition}
+
+类似的，也可以定义广义极限
+\begin{BoxDefinition}[广义极限]
+    设$g(t)$是一个广义函数，而$g_n(t)$是一个广义函数列，若有
+    \begin{Equation}
+        \Int[-\infty][\infty]g(t)\varphi(t)\dd{t}=\Lim[n][\infty]\Int[-\infty][\infty]g_n(t)\varphi(t)\dd{t}
+    \end{Equation}
+    则称$g(t)$是$g_n(t)$的广义极限，记作
+    \begin{Equation}
+        g(t)=\Lim[n][\infty]g(t)
+    \end{Equation}
+\end{BoxDefinition}
+
+广义函数的检验函数空间理论上是可以任意选取的，但由于我们希望我们所定义的广义函数具有比较好的性质，因此检验函数空间的选取要谨慎些，常用的一个是“急降函数空间”。\nopagebreak
+\begin{BoxDefinition}[急降函数空间]
+    定义\uwave{急降函数空间}为满足以下性质的全体$\varphi(t)$构成的集合，记作$\Phi$
+    \begin{enumerate}
+        \item $\varphi(t)$是连续且具有任意阶导数的。
+        \item $\varphi(t)$及其各阶导数在无限远处急速下降，即当$|t|\to\infty$时，其比$1/|t|^m$下降更快。
+    \end{enumerate}
+\end{BoxDefinition}
+
+定义在急降函数空间$\Phi$上的广义函数的全体构成\uwave{缓增广义函数空间}，记为$\Phi'$。其中，缓增是指当$|t|\to\infty$时其增长不比多项式快。这类广义函数之所以受到重视，是因为其具有非常良好的性质。例如，缓增广义函数空间$\Phi'$中的广义函数的极限、各阶导数、傅里叶变换等均存在且仍属于$\Phi'$。我们之后所讨论的广义函数，都是指缓增广义函数空间$\Phi'$中的广义函数。
+
+\subsection{冲激函数的广义函数定义}
+现在，让我们用广义函数的概念，再一次，以较为严格的方式定义冲激函数$\dirac(t)$。
+\begin{BoxDefinition}[冲激函数的广义函数定义]
+    冲激函数$\dirac(t)$在广义函数观点下定义为
+    \begin{Equation}
+        \Int[-\infty][\infty]\dirac(t)\varphi(t)\dd{t}=\varphi(0)
+    \end{Equation}
+    冲激函数$\dirac(t)$作用于检验函数$\varphi(t)$的效果是给它赋值$\varphi(0)$，这也称为\uwave{筛选性质}。
+\end{BoxDefinition}
+
+为什么选取这样一个定义呢？下面将证明，这样定义的$\dirac(t)$与原先的朴素定义是一致的。
+\begin{BoxProperty}[冲激函数的广义极限形式]
+    冲激函数$\dirac(t)$是$p_n(t)$的广义极限
+    \begin{Equation}
+        \dirac(t)=\Lim[n][\infty]p_n(t)
+    \end{Equation}
+\end{BoxProperty}
+
+\begin{Proof}
+    依照\fancyref{def:冲激函数}中$p_n(x)$的定义，其是普通函数，容易写出其广义函数形式
+    \begin{Equation}
+        \Int[-\infty][\infty]p_n(t)\varphi(t)\dd{t}=\frac{n}{2}\Int[-1/n][1/n]\varphi(t)\dd{t}
+    \end{Equation}
+    当$n\to\infty$时，在$(-1/n,1/n)$区间内有$\varphi(t)=\varphi(0)$，故
+    \begin{Equation}
+        \Lim[n][\infty]\Int[-\infty][\infty]p_n(t)\varphi(t)\dd{t}=
+        \Lim[n][\infty]\frac{n}{2}\Int[-1/n][1/n]\varphi(t)\dd{t}=\varphi(0)
+    \end{Equation}
+    而对比\fancyref{def:冲激函数的广义函数定义}，注意到
+    \begin{Equation}
+        \Lim[n][\infty]\Int[-\infty][\infty]p_n(t)\varphi(t)\dd{t}=\Int[-\infty][\infty]\dirac(t)\varphi(t)\dd{t}
+    \end{Equation}
+    依照\fancyref{def:广义极限}，即有广义极限成立
+    \begin{Equation}*
+        \dirac(t)=\Lim[n][\infty]p_n(t)\qedhere
+    \end{Equation}
+\end{Proof}
+
+实际上，除了$p_n(t)$外，还有许多函数序列的广义极限都是冲激函数$\dirac(t)$，这里列举一些
+
+高斯函数（当参数$\beta\to\infty$）
+\begin{Equation}
+    \dirac(t)=\Lim[\beta][\infty]\beta\exp[-\pi(\beta t)^2]
+\end{Equation}
+取样函数（当参数$\beta\to\infty$）
+\begin{Equation}
+    \dirac(t)=\Lim[\beta][\infty]\frac{\sin(\beta t)}{\pi t}
+\end{Equation}
+双边指数函数（当参数$\beta\to 0$）
+\begin{Equation}
+    \dirac(t)=\Lim[\beta][0]\frac{\exp\qty\big[-|t|/\beta]}{2\beta}
+\end{Equation}
+以及（当参数$\beta\to 0$）
+\begin{Equation}
+    \dirac(t)=\Lim[\beta][0]\frac{\beta}{\pi(\beta^2+t^2)}
+\end{Equation}
+这些函数统称为辅助函数，它们的图像如\xref{tab:冲激函数的其他辅助函数}所示。
+\begin{TableLong}[冲激函数的其他辅助函数]{lcc}
+<名称&表达式&图像\\>
+高斯函数&
+\xcell<c>{$\mal{\dirac(t)=\Lim[\beta][\infty]\beta\exp[-\pi(\beta t)^2]}$}&
+\xcell<c>[2ex][0ex]{\includegraphics[scale=0.85]{build/Chapter01D_02a.fig.pdf}}\\
+取样函数&
+\xcell<c>{$\mal{\dirac(t)=\Lim[\beta][\infty]\frac{\sin(\beta t)}{\pi t}}$}&
+\xcell<c>[2ex][0ex]{\includegraphics[scale=0.85]{build/Chapter01D_02b.fig.pdf}}\\
+双边指标函数&
+\xcell<c>{$\mal{\dirac(t)=\Lim[\beta][0]\frac{\exp\qty\big[-|t|/\beta]}{2\beta}}$}&
+\xcell<c>[2ex][0ex]{\includegraphics[scale=0.85]{build/Chapter01D_02c.fig.pdf}}\\
+--&
+\xcell<c>{$\mal{\dirac(t)=\Lim[\beta][0]\frac{\beta}{\pi(\beta^2+t^2)}}$}&
+\xcell<c>[2ex][0ex]{\includegraphics[scale=0.85]{build/Chapter01D_02d.fig.pdf}}\\
+\end{TableLong}
+
+类似的，亦可将阶跃函数$\varepsilon(t)$以广义函数的方式定义，确定其定义式并不困难，介于$\varepsilon(t)$是普通的可积函数。问题在于，阶跃函数$\varepsilon(t)$原本就是普通函数，为什么我们还要将其广义函数化？我们知道，阶跃函数$\varepsilon(t)$在$t=0$处的导数是无定义的。而实际上，广义函数的除了可以用于表达冲激函数$\dirac(t)$那样连函数表达式都无法写出的函数外，对于$\varepsilon(t)$这样有解析式但不可导的函数，广义函数化后，就可以将其导函数表示为一个广义函数。故这是有意义的。
+
+\begin{BoxDefinition}[阶梯函数的广义函数定义]
+    阶跃函数$\varepsilon(t)$在广义函数观点下定义为
+    \begin{Equation}
+        \Int[-\infty][\infty]\varepsilon(t)\varphi(t)\dd{t}=\Int[0][\infty]\varphi(t)\dd{t}
+    \end{Equation}
+\end{BoxDefinition}
+
+\begin{BoxProperty}[阶梯函数的广义极限形式]
+    阶梯函数$\varepsilon(t)$是$\gamma_n(t)$的广义极限
+    \begin{Equation}
+        \varepsilon(t)=\Lim[n][\infty]\gamma_n(t)
+    \end{Equation}
+\end{BoxProperty}

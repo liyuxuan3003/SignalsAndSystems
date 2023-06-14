@@ -25,45 +25,45 @@ funcDirac[t_]:=DiracDelta[t];
 
 
 fig=ReleaseHold[Hold[Plot[
-	f[t],{t,-4,4},PlotRange->{-0.1,1.1},
+	f[t],{t,-2,2},PlotRange->{-0.1,1.1},
 	Epilog->{sty,ArrowsDeltaFunction[f[t][[1]],t]},
 	GridLines->Automatic,
-	ImageSize->Automatic->250,
+	ImageSize->Automatic->200,
 	Frame->True,
 	Exclusions->None,
 	FrameTicks->{
-		Table[{x,MaTeX[ToString[x],Magnification->0.5]},{x,-4,4,1}],
+		Table[{x,MaTeX[ToString[x],Magnification->0.5]},{x,-2,2,1}],
 		Table[{x,MaTeX[ToString[PaddedForm[x,{1,1}]],Magnification->0.5]},{x,0,1,0.1}]
 	},
 	FrameLabel->lab,
-	PlotLegends->Placed[LineLegend[leg,LegendFunction->"Panel",LegendLayout->"ReversedColumn"],{Left,Top}],
+	PlotLegends->Placed[LineLegend[leg,LegendFunction->"Panel",LegendLayout->"Column"],{Left,Top}],
 	PlotStyle->sty
 ]]/.
 (
 	({f[t]->#[[1]],sty->#[[2]],lab->#[[3]],leg->#[[4]]}&)/@
 	{
 		{
-			(funcGamma[t,#]&)/@{0.5,1,2},
-			{{Gray,Dashed,Thickness[0.005]},{Black},{Red,Thin}},
+			(funcGamma[t,#]&)/@{1,2},
+			{{Black},{Gray,Dashed,Thickness[0.005]}},
 			{MaTeX["t",Magnification->0.8],MaTeX["\\gamma_n(t)",Magnification->0.8]},
-			{MaTeX["n=0.5",Magnification->0.8],MaTeX["n=1.0",Magnification->0.8],MaTeX["n=2.0",Magnification->0.8]}
+			{MaTeX["n=1",Magnification->0.8],MaTeX["n=2",Magnification->0.8]}
 		},
 		{
-			(funcP[t,#]&)/@{0.5,1,2},
-			{{Gray,Dashed,Thickness[0.005]},{Black},{Red,Thin}},
+			(funcP[t,#]&)/@{1,2},
+			{{Black},{Gray,Dashed,Thickness[0.005]}},
 			{MaTeX["t",Magnification->0.8],MaTeX["p_n(t)",Magnification->0.8]},
-			{MaTeX["n=0.5",Magnification->0.8],MaTeX["n=1.0",Magnification->0.8],MaTeX["n=2.0",Magnification->0.8]}
+			{MaTeX["n=1",Magnification->0.8],MaTeX["n=2",Magnification->0.8]}
 		},
 		{
 			{funcEpsilon[t]},
 			{Black},
-			{MaTeX["t",Magnification->0.8],MaTeX["\\varepsilon_n(t)",Magnification->0.8]},
+			{MaTeX["t",Magnification->0.8],MaTeX["\\varepsilon(t)",Magnification->0.8]},
 			{}
 		},
 		{
 			{funcDirac[t]},
 			{Black},
-			{MaTeX["t",Magnification->0.8],MaTeX["\\updelta_n(t)","Preamble"->{"\\usepackage{upgreek}"},Magnification->0.8]},
+			{MaTeX["t",Magnification->0.8],MaTeX["\\updelta(t)","Preamble"->{"\\usepackage{upgreek}"},Magnification->0.8]},
 			{}
 		}
 	}
