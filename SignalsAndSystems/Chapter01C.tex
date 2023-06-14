@@ -1,0 +1,92 @@
+\section{信号的基本运算}
+在系统分析中，常遇到信号的某些基本运算，这包含：加、乘、反转、平移、尺度变换。
+
+\subsection{加法和乘法}
+\begin{BoxDefinition}[信号的和]
+    信号$f_1(\cdot)$与$f_2(\cdot)$之和，是指同一瞬时两信号值对应相加构成的\uwave{和信号}
+    \begin{Equation}
+        f(\cdot)=f_1(\cdot)+f_2(\cdot)
+    \end{Equation}
+\end{BoxDefinition}
+
+\begin{BoxDefinition}[信号的积]
+    信号$f_1(\cdot)$与$f_2(\cdot)$之积，是指同一瞬时两信号值对应相乘构成的\uwave{积信号}
+    \begin{Equation}
+        f(\cdot)=f_1(\cdot)f_2(\cdot)
+    \end{Equation}
+\end{BoxDefinition}
+
+关于信号的加法和乘法，广播是一个极好的例子。广播的调音台就是信号相加的一个实例，它将背景音乐$f_1(t)$和主持人的声音$f_1(t)$混合到一起。广播调制常有调幅AM和调频FM两种方法，而所谓调幅，就是指将相对低频的音频信号$f_1(t)$加载到（乘到）一个相对高频的正弦信号$f_2(t)$上，由于是通过正弦的幅值变化传递信息的，故称调幅。这就是信号相乘的实例。
+
+\subsection{反转}
+\begin{BoxDefinition}[信号的反转]
+    \uwave{反转}（Reversal）是指，对于信号$f(t)$，作如下变换
+    \begin{Equation}
+        f(-t)
+    \end{Equation}
+    其意义是将信号$f(t)$以纵坐标轴为轴反转。
+\end{BoxDefinition}
+
+\subsection{平移}
+\begin{BoxDefinition}[信号的平移]
+    \uwave{平移}（Shifting）是指，对于信号$f(t)$和常数$t_0>0$，作如下变换
+    \begin{Equation}
+        f(t-t_0)\qquad f(t+t_0)
+    \end{Equation}
+    其意义是将信号$f(t)$沿横坐标轴平移
+    \begin{itemize}
+        \item $f(t-t_0)$是将原信号$f(t)$沿$t$轴正方向（向右）平移$t_0$时间，即延迟。
+        \item $f(t+t_0)$是将原信号$f(t)$沿$t$轴负方向（向左）平移$t_0$时间，即提前。
+    \end{itemize}
+\end{BoxDefinition}
+
+信号平移的一个实例是雷达系统，雷达接收到的目标反射的回波信号就是其发射信号$f(t)$的延迟信号$f(t-t_0)$，根据测得的延迟时间$t_0$的值，就可以计算出目标与雷达之间的距离。
+
+信号的反转和平移，以及稍后将介绍的尺度变换的图示，如\xref{tab:信号的基本运算}所示。
+
+\begin{TableLong}[信号的基本运算]{cc}
+<连续信号&离散信号\\>
+\xcell<c>[2ex][0ex]{\includegraphics{build/Chapter01C_01a.fig.pdf}}&
+\xcell<c>[2ex][0ex]{\includegraphics{build/Chapter01C_01g.fig.pdf}}\\*
+原信号$f(t)$&原信号$f(k)$\\
+\xcell<c>[2ex][0ex]{\includegraphics{build/Chapter01C_01b.fig.pdf}}&
+\xcell<c>[2ex][0ex]{\includegraphics{build/Chapter01C_01h.fig.pdf}}\\*
+反转$f(-t)$&反转$f(-k)$\\
+\xcell<c>[2ex][0ex]{\includegraphics{build/Chapter01C_01c.fig.pdf}}&
+\xcell<c>[2ex][0ex]{\includegraphics{build/Chapter01C_01i.fig.pdf}}\\*
+向右平移$f(t-t_0)$&向右平移$f(k-k_0)$\\
+\xcell<c>[2ex][0ex]{\includegraphics{build/Chapter01C_01d.fig.pdf}}&
+\xcell<c>[2ex][0ex]{\includegraphics{build/Chapter01C_01j.fig.pdf}}\\*
+向左平移$f(t+t_0)$&向左平移$f(k+k_0)$\\
+\xcell<c>[2ex][0ex]{\includegraphics{build/Chapter01C_01e.fig.pdf}}&
+\xcell<c>[2ex][0ex]{\includegraphics{build/Chapter01C_01k.fig.pdf}}\\
+压缩$f(at), a>1|_{a=2.0}$&压缩$f(ak), a>1|_{a=2.0}$\\
+\xcell<c>[2ex][0ex]{\includegraphics{build/Chapter01C_01f.fig.pdf}}&
+\xcell<c>[2ex][0ex]{\includegraphics{build/Chapter01C_01l.fig.pdf}}\\*
+展宽$f(at), a<1|_{a=0.5}$&展宽$f(ak), a<1|_{a=0.5}$\\
+\end{TableLong}
+
+\subsection{尺度变换}
+
+\begin{BoxDefinition}[尺度变换]
+    \uwave{尺度变换}（Scaling）又称为横坐标展缩，是指，对于信号$f(t)$和常数$a$，作如下变换
+    \begin{Equation}
+        f(at)
+    \end{Equation}
+    其意义是将信号$f(t)$横坐标展缩
+    \begin{itemize}
+        \item 若$|a|>1$，$f(at)$是将$f(t)$压缩至原来的$|a|$倍。
+        \item 若$|a|<1$，$f(at)$是将$f(t)$展宽至原来的$|a|^{-1}$倍。
+        \item 当$a$为负数时，还要在上述展缩的基础上叠加一个反转。
+    \end{itemize}
+\end{BoxDefinition}
+
+尺度变换的一个示例是倍速播放，如$f(2t)$可以视为$2$倍速，而$f(0.5t)$可以视为$0.5$倍速。
+
+尺度变换通常都是对连续信号而言的，离散信号通常不作展缩运算。这是因为展缩运算在离散信号下并非良定义的，由于$f(ak)$仅在$ak$为整数时才有定义，这会导致诸多问题，如\xref{tab:信号的基本运算}所示，若$a>1$且为整数，比如$2$，则$f(ak)$变为了一个只有在$k$为偶数时才有定义的序列，这是很怪异的。相反，若$a<1$，比如$0.5$，此时$f(ak)$的间隔是$1$了，但是丢失了原有信号一半的信息，确切的说，奇数点的信息。因此，我们通常不会对离散信号作尺度变换。
+
+最后我们指出，若结合反转、平移、尺度变换，其一般形式是
+\begin{Equation}
+    f(at+b)
+\end{Equation}
+注意变换作用顺序！在$f(t)$上，先作$-b$的平移得到$f(t+b)$，再作$a$的展缩得到$f(at+b)$。
