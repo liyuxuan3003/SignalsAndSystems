@@ -146,7 +146,7 @@
     \begin{Equation}
         \Int[-\infty][\infty]\dirac(t)\varphi(t)\dd{t}=\varphi(0)
     \end{Equation}
-    冲激函数$\dirac(t)$作用于检验函数$\varphi(t)$的效果是给它赋值$\varphi(0)$，这也称为\uwave{筛选性质}。
+    冲激函数$\dirac(t)$作用于检验函数$\varphi(t)$的效果是取出$\varphi(0)$，这也称为取样性质。
 \end{BoxDefinition}
 
 为什么选取这样一个定义呢？下面将证明，这样定义的$\dirac(t)$与原先的朴素定义是一致的。
@@ -214,16 +214,203 @@
 
 类似的，亦可将阶跃函数$\varepsilon(t)$以广义函数的方式定义，确定其定义式并不困难，介于$\varepsilon(t)$是普通的可积函数。问题在于，阶跃函数$\varepsilon(t)$原本就是普通函数，为什么我们还要将其广义函数化？我们知道，阶跃函数$\varepsilon(t)$在$t=0$处的导数是无定义的。而实际上，广义函数的除了可以用于表达冲激函数$\dirac(t)$那样连函数表达式都无法写出的函数外，对于$\varepsilon(t)$这样有解析式但不可导的函数，广义函数化后，就可以将其导函数表示为一个广义函数。故这是有意义的。
 
-\begin{BoxDefinition}[阶梯函数的广义函数定义]
+\begin{BoxDefinition}[阶跃函数的广义函数定义]
     阶跃函数$\varepsilon(t)$在广义函数观点下定义为
     \begin{Equation}
         \Int[-\infty][\infty]\varepsilon(t)\varphi(t)\dd{t}=\Int[0][\infty]\varphi(t)\dd{t}
     \end{Equation}
 \end{BoxDefinition}
 
-\begin{BoxProperty}[阶梯函数的广义极限形式]
-    阶梯函数$\varepsilon(t)$是$\gamma_n(t)$的广义极限
+\begin{BoxProperty}[阶跃函数的广义极限形式]
+    阶跃函数$\varepsilon(t)$是$\gamma_n(t)$的广义极限
     \begin{Equation}
         \varepsilon(t)=\Lim[n][\infty]\gamma_n(t)
     \end{Equation}
 \end{BoxProperty}
+
+\subsection{冲激函数的导数和积分}
+\begin{BoxFormula}[冲激函数的导数]
+    冲激函数$\dirac(t)$的导数$\dirac'(t)$应当定义为
+    \begin{Equation}
+        \Int[-\infty][\infty]\dirac'(t)\varphi(t)\dd{t}=-\varphi'(0)
+    \end{Equation}
+    更一般的，对于其$n$阶导数$\dirac^{(n)}(t)$
+    \begin{Equation}
+        \Int[-\infty][\infty]\dirac^{(n)}(t)\varphi(t)\dd{t}=(-1)^n\varphi^{(n)}(t)
+    \end{Equation}
+\end{BoxFormula}
+
+\begin{Proof}
+    作为对冲激函数导数的一个良定义，有理由认为它遵从分部积分的运算规则，故
+    \begin{Equation}
+        \Int[-\infty][\infty]{\dirac'(t)\varphi(t)\dd{t}}=\dirac(t)\varphi(t)|_{-\infty}^{+\infty}-\Int[-\infty][\infty]{\dirac(t)\varphi'(t)\dd{t}}
+    \end{Equation}
+    由于冲激函数$\dirac(t)$在$t=\pm\infty$处为零，且检测函数$\varphi(t)$是急降的，上式第一项为零。
+
+    而上式第二项，根据\fancyref{def:冲激函数的广义函数定义}得到
+    \begin{Equation}
+        \Int[-\infty][\infty]{\dirac'(t)\varphi(t)\dd{t}}=-\varphi(0)
+    \end{Equation}
+    重复该过程，亦可得到冲激函数$\dirac(t)$的各高阶导数$\dirac^{(n)}(t)$。
+\end{Proof}
+
+
+\begin{BoxFormula}[阶跃函数的导数]
+    阶跃函数$\varepsilon(t)$的导数$\varepsilon'(t)$应当定义为
+    \begin{Equation}
+        \Int[-\infty][\infty]\varepsilon'(t)\varphi(t)\dd{t}=\varphi(0)
+    \end{Equation}
+    即
+    \begin{Equation}
+        \varepsilon'(t)=\dirac(t)
+    \end{Equation}
+    这表明，阶跃函数$\varepsilon(t)$的导数$\varepsilon'(t)$是冲激函数$\dirac(t)$。
+\end{BoxFormula}
+
+\begin{Proof}
+    应用分部积分法
+    \begin{Equation}
+        \Int[-\infty][\infty]\varepsilon'(t)\varphi(t)\dd{t}=\varepsilon(t)\varphi(t)|_{-\infty}^{+\infty}-\Int[-\infty][\infty]\varepsilon(t)\varphi'(t)
+    \end{Equation}
+    由于阶跃函数$\varepsilon(t)$在$x=\pm\infty$处有界，且检测函数$\varphi(x)$是急降的，上式第一项为零。
+
+    而上式第二项，根据\fancyref{def:阶跃函数的广义函数定义}
+    \begin{Equation}
+        \Int[-\infty][\infty]\varepsilon'(t)\varphi(t)\dd{t}=-\Int[-\infty][\infty]\varphi'(t)\dd{t}=-\varphi(t)|_{0}^{\infty}
+    \end{Equation}
+    再次运用检测函数的急降性质
+    \begin{Equation}
+        \Int[-\infty][\infty]\varepsilon'(t)\varphi(t)\dd{t}=\varphi(0)
+    \end{Equation}
+    而对比\fancyref{def:冲激函数的广义函数定义}
+    \begin{Equation}
+        \Int[-\infty][\infty]\varepsilon'(t)\varphi(t)\dd{t}=\Int[-\infty][\infty]\dirac(t)\varphi(t)\dd{t}
+    \end{Equation}
+    因此
+    \begin{Equation}*
+        \varepsilon'(t)=\dirac(t)\qedhere
+    \end{Equation}
+\end{Proof}
+
+\subsection{冲激函数的性质}
+\begin{BoxProperty}[冲激函数的移位特性]
+    冲激函数具有以下移位特性
+    \begin{Equation}
+        \Int[-\infty][\infty]\dirac(t-t_0)\varphi(t)\dd{t}=\varphi(t_0)
+    \end{Equation}
+    更一般的
+    \begin{Equation}
+        \Int[-\infty][\infty]\dirac^{(n)}(t-t_0)\varphi(t)\dd{t}=(-1)^n\varphi^{(n)}(t_0)
+    \end{Equation}
+\end{BoxProperty}
+
+\begin{Proof}
+    作变量代换，令$x=t-t_0$，这就回到了\fancyref{def:冲激函数的广义函数定义}
+    \begin{Equation}
+        \Int[-\infty][\infty]\dirac(t-t_0)\varphi(t)\dd{t}=\Int[-\infty][\infty]\dirac(x)\varphi(x+t_0)\dx=\varphi(t_0)
+    \end{Equation}
+    类似地可以证明$\dirac^{(n)}(t-t_0)$的情形。
+\end{Proof}
+
+\begin{BoxProperty}[冲激函数的展缩特性]
+    冲激函数具有以下展缩特性
+    \begin{Equation}
+        \dirac(at)=\frac{1}{\abs{a}}\dirac(t)
+    \end{Equation}
+    更一般的
+    \begin{Equation}
+        \dirac^{(n)}(at)=\frac{1}{\abs{a}}\frac{1}{a^n}\dirac^{(n)}(t)
+    \end{Equation}
+\end{BoxProperty}
+
+\begin{Proof}
+    若$a>0$，令$x=at$，此时$t=\pm\infty$时$x=\pm\infty$
+    \begin{Equation}
+        \Int[-\infty][\infty]\dirac(at)\varphi(t)\dd{t}=
+        \Int[-\infty][\infty]\dirac(x)\varphi\qty(\frac{x}{a})\frac{1}{a}\dx=\frac{1}{a}\varphi(0)
+    \end{Equation}
+    若$a<0$，令$x=at$，此时$t=\pm\infty$时$x=\mp\infty$
+    \begin{Equation}
+        \Int[-\infty][\infty]\dirac(at)\varphi(t)\dd{t}=
+        -\Int[-\infty][\infty]\dirac(x)\varphi\qty(\frac{x}{a})\frac{1}{a}\dx=-\frac{1}{a}\varphi(0)
+    \end{Equation}
+    结合上两式，就有
+    \begin{Equation}
+        \Int[-\infty][\infty]\dirac(at)\varphi(t)\dd{t}=\frac{1}{|a|}\varphi(0)
+    \end{Equation}
+    即
+    \begin{Equation}
+        \dirac(at)=\frac{1}{|a|}\dirac(t)
+    \end{Equation}
+    类似地也可以证明$\dirac^{(n)}(at)$的情形。
+\end{Proof}
+
+作为一个推论，若在\fancyref{ppt:冲激函数的展缩特性}中取$a=-1$，则
+\begin{Equation}
+    \dirac^{(n)}(-t)=(-1)^n\dirac^{(n)}(t)
+\end{Equation}
+这就表明
+\begin{itemize}
+    \item 当$n$为偶数时，有$(-1)^n=+1$，此时$\dirac^{(n)}(t)$是一个偶函数。
+    \item 当$n$为奇数时，有$(-1)^n=-1$，此时$\dirac^{(n)}(t)$是一个奇函数。
+\end{itemize}
+
+\begin{BoxProperty}[冲激函数与普通函数的乘积]
+    冲激函数$\dirac(t-t_0)$与普通函数$f(t)$的乘积，等于其与$f(t_0)$的乘积
+    \begin{Equation}
+        \dirac(t-t_0)f(t)=\dirac(t-t_0)f(t_0)
+    \end{Equation}
+    更进一步的
+    \begin{Equation}
+        \dirac'(t-t_0)f(t)=\dirac'(t-t_0)f(t_0)-\dirac(t-t_0)f'(t_0)
+    \end{Equation}
+\end{BoxProperty}
+
+\begin{Proof}
+    冲激函数普通函数$f(t)$的乘积$\dirac(t-t_0)f(t)$也应看作广义函数，运用\xref{ppt:冲激函数的移位特性}
+    \begin{Equation}
+        \qquad\qquad\qquad
+        \Int[-\infty][\infty][\dirac(t-t_0)f(t)]\varphi(t)\dd{t}=
+        \Int[-\infty][\infty]\dirac(t-t_0)[f(t)\varphi(t)]\dd{t}=
+        f(t_0)\varphi(t_0)
+        \qquad\qquad\qquad
+    \end{Equation}
+    当然上式做最后一步计算时，$f(t)\varphi(t)$也必须是急降的检验函数，而事实上，这确实是可以满足的，因为$\varphi(t)$急降，即便$f(t)$缓增，只要$f(t)$在$t=t_0$处连续\footnote{为什么需要要求$f(t)$在$t=t_0$处连续？感觉和这里的推论没有关系？}，$f(t)\varphi(t)$就是急降的。
+
+    而另外一方面，根据\xref{ppt:冲激函数的移位特性}，显然
+    \begin{Equation}
+        \Int[-\infty][\infty][\dirac(t-t_0)f(t_0)]\varphi(t)\dd{t}=f(t_0)\varphi(t_0)
+    \end{Equation}
+    因此
+    \begin{Equation}
+        \dirac(t)f(t)=\dirac(t)f(0)
+    \end{Equation}
+    而$\dirac'(t-t_0)f(t)$的证明思路是完全相似的，这里从略。
+\end{Proof}
+
+\begin{BoxProperty}[冲激函数与普通函数的复合]
+    冲激函数与普通函数的复合函数$\dirac[f(t)]$，可以表达为
+    \begin{Equation}
+        \dirac[f(t)]=\Sum[i=1][n]\frac{1}{|f'(t_i)|}\dirac(t-t_i)
+    \end{Equation}
+    其中$t_i\,,\ (i=1,2,\cdots,n)$是$f(t)=0$的$n$个互不相等的实根。
+\end{BoxProperty}
+
+\begin{Proof}
+    在任一单根$t_i$附近足够小的领域内，$f(t)$可以展开为$(t-t_i)$的一阶阶泰勒级数
+    \begin{Equation}
+        f(t)=f(t_i)+f'(t_i)(t-t_i)
+    \end{Equation}
+    由于$t_i$是$f(t)=0$的单根，因此$f(t_i)=0$且$f'(t_i)\neq 0$
+    \begin{Equation}
+        f(t)=f'(t_i)(t-t_0)
+    \end{Equation}
+    因此$t$取值在$t_i$附近时就有下式，这里运用了\fancyref{ppt:冲激函数的展缩特性}
+    \begin{Equation}
+        \dirac[f(t)]=\dirac[f'(t_i)(t-t_i)]=\frac{1}{|f'(t_i)|}\dirac(t-t_i)
+    \end{Equation}
+    由于$t\neq t_i$时$\dirac[f(t)]=0$，因此一般结果（$t$取任意值）就是将上式对于每一$t_i$累加
+    \begin{Equation}*
+        \dirac[f(t)]=\Sum[i=1][n]\frac{1}{|f'(t_i)|}\dirac(t-t_i)\qedhere
+    \end{Equation}
+\end{Proof}
