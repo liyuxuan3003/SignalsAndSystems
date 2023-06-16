@@ -1,5 +1,22 @@
 \section{系统的描述}
 
+要分析一个系统，首先要建立描述该系统的基本特性的数学模型，那这个数学模型看起来是什么样的呢？若系统在任意时刻的响应仅取决于该时刻的激励，而与系统的过去状态无关，就称其为\uwave{即时系统}（Instantaneous System），否则，则称为\uwave{动态系统}（Dynamic System）。
+\begin{itemize}
+    \item 即时系统可以用代数方程描述，例如全部由无记忆元件（电阻）电路。
+    \item 动态系统需要用微分方程描述，例如包含记忆元件（电容、电感）的电路。\footnote{严格来说，应当是连续的动态系统需用微分方程描述。}
+\end{itemize}
+即时系统是简单而乏味的，信号与系统主要研究的是需要用微分方程描述的动态系统。
+
+\subsection{系统的数学模型}
+取决于系统的激励和响应的类型，我们可以将系统分为两类
+\begin{itemize}
+    \item 当系统的激励信号是连续信号时，若系统的响应信号也同样是连续信号，那么，我们称这样的系统为\uwave{连续系统}（Discrete System），描述连续系统的数学模型是微分方程。
+    \item 当系统的激励信号是离散信号时，若系统的响应信号也同样是离散信号，那么，我们称这样的系统为\uwave{离散系统}（Continuous System），描述离散系统的数学模型是差分方程。
+\end{itemize}
+
+在实际应用中，连续系统与离散系统常常组合起来使用，这称为\uwave{混合系统}（Hybird System）。\goodbreak
+
+现在的问题是，如何从具体的问题中，抽象出系统和系统的数学模型？
 \begin{Figure}[两个典型的系统]
     \begin{FigureSub}[电路系统]
         \includegraphics[width=6.5cm]{build/Chapter01E_01.fig.pdf}
@@ -9,3 +26,207 @@
         \includegraphics[width=6.5cm]{build/Chapter01E_02.fig.pdf}
     \end{FigureSub}
 \end{Figure}
+
+\subsubsection{连续系统的数学模型建立}
+
+\paragraph{电路系统}
+\xref{fig:电路系统}所示为$RLC$串联电路，由基尔霍夫电压定理（KVL）有\setpeq{电路系统}
+\begin{Equation}&[1]
+    u_L(t)+u_R(t)+u_C(t)=u_\te{S}(t)
+\end{Equation}
+这里，选取电压源的电压$u_\te{S}(t)$为激励，选取电容两端电压$u_C(t)$为响应。
+
+电容两端的电流，正比于电压的变化率
+\begin{Equation}&[2]
+    i(t)=Cu_C'(t)    
+\end{Equation}
+电阻两端的电压，正比于电流，并就电流$i(t)$代入\xrefpeq{2}
+\begin{Equation}&[3]
+    u_R(t)=Ri(t)=RCu_C'(t)
+\end{Equation}
+电感两端的电压，正比于电流的变化率，并就电流$i(t)$代入\xrefpeq{2}
+\begin{Equation}&[4]
+    u_L(t)=Li'(t)=LCu_C''(t)
+\end{Equation}
+将\xrefpeq{2},\xrefpeq{3},\xrefpeq{4}代入\xrefpeq{1}
+\begin{Equation}
+    LCu_C''(t)+RCu_C'(t)+u_C(t)=u_\te{S}(t)
+\end{Equation}
+两端整理一下
+\begin{Equation}&[6]
+    u_C''(t)+\frac{R}{L}u_C'(t)+\frac{1}{LC}u_C(t)=\frac{1}{LC}u_\te{S}(t)
+\end{Equation}
+这就得到了一个二阶线性微分方程，这就是该电路系统的数学模型。
+
+\paragraph{力学系统}
+
+\xref{fig:力学系统}所示的是一个简单的力学系统。质量为$M$的物体受到外力$f(t)$的作用相对平衡位置产生位移$y(t)$。这里，将外力$f(t)$看作系统的激励，而将位移$y(t)$看作系统的响应。\setpeq{力学系统}
+
+根据胡克定律，弹簧产生的恢复力$f_\te{k}(t)$满足
+\begin{Equation}&[1]
+    f_k(t)=ky(t)
+\end{Equation}
+根据摩擦力公式（这里认为摩擦力正比于速度），物体$M$受到底面的粘性摩擦力$f_\tau(t)$为
+\begin{Equation}&[2]
+    f_\tau(t)=\alpha y'(t)
+\end{Equation}
+而根据牛顿第二定律
+\begin{Equation}&[3]
+    My''(t)=f(t)-f_\tau(t)-f_\te{k}(t)
+\end{Equation}
+将\xrefpeq{1}和\xrefpeq{2}代入\xrefpeq{3}
+\begin{Equation}&[4]
+    My''(t)=f(t)-\alpha y'(t) -k y(t)
+\end{Equation}
+整理得到
+\begin{Equation}&[5]
+    y''(t)+\frac{\alpha}{M}y'(t)+\frac{k}{M}y(t)=\frac{1}{M}f(t)
+\end{Equation}
+
+这就得到了一个二阶线性微分方程，这就是该力学系统的数学模型。
+
+由此可见，如\xrefpeq[电路系统]{6}和\xrefpeq[力学系统]{5}所示，尽管电路和力学是完全不同的物理过程，但两者的系统均可以用相同形式的二阶线性微分方程来描述，这就是信号与系统作为抽象性的体现
+\begin{Equation}[连续系统微分方程引例]
+    y''(t)+a_1y'(t)+a_0y(t)=f(t)
+\end{Equation}
+
+\subsubsection{离散系统的数学模型建立}
+
+\paragraph{社会问题}
+设某地区在第$k$年的人口为$y(k)$，人口的出生率和死亡率为$a$和$b$，即第$k$年的出生人口和死亡人口分别为$ay(k)$和$by(k)$，而第$k$年从外地迁入的人口为$f(k)$，那么，应有\setpeq{社会问题}
+\begin{Equation}&[1]
+    y(k)=y(k-1)+ay(k-1)-by(k-1)+f(k)
+\end{Equation}
+或整理为
+\begin{Equation}&[2]
+    y(k)-(1+a+b)y(k-1)=f(k)
+\end{Equation}
+这是一个一阶差分方程，这就是该社会问题的数学模型。
+
+\paragraph{金融问题}
+设某人向银行贷款$M$元，月利率为$\beta$，他定期于每月初还款，设第$k$月初还款$f(k)$元，若记第$k$月尚未还清的钱款为$y(k)$元，则有（欠款$(1+\beta)y(k-1)$元减去当月还款$f(k)$元）\setpeq{金融问题}
+\begin{Equation}&[1]
+    y(k)=(1+\beta)y(k-1)-f(k)
+\end{Equation}
+或写为
+\begin{Equation}&[2]
+    y(k)-(1+\beta)y(k-1)=-f(k)
+\end{Equation}
+这是一个一阶差分方程，这就是该金融问题的数学模型。
+
+由此可见，如\xrefpeq[社会问题]{2}和\xrefpeq[金融问题]{2}所示，这两个问题的差分方程的形似也是统一的，写作
+\begin{Equation}[离散系统差分方程引例]
+    y(k)+by(k-1)=f(k)
+\end{Equation}
+
+\subsection{系统的框图表示}
+
+在信号与系统中，我们常用一种特定形式的框图表达激励和响应之间的关系，这可以视为一种对系统遵循的微分方程和差分方程的图示化方法，就像电路图与之电路方程一样。
+
+表达系统功能的基本单元如\xref{tab:框图的基本单元}所示
+\begin{TableLong}[框图的基本单元]{cc}
+<基本单元&符号\\>
+    积分器（连续）&\xcell<c>[2ex][2ex]{\includegraphics[scale=0.75]{build/Chapter01E_07.fig.pdf}}\\
+    延时器（连续）&\xcell<c>[2ex][2ex]{\includegraphics[scale=0.75]{build/Chapter01E_11.fig.pdf}}\\
+    迟延单元（离散）&\xcell<c>[2ex][2ex]{\includegraphics[scale=0.75]{build/Chapter01E_08.fig.pdf}}\\
+    数乘器&\xcell<c>[2ex][2ex]{\includegraphics[scale=0.75]{build/Chapter01E_09.fig.pdf}}\\
+    加法器&\xcell<c>[2ex][2ex]{\includegraphics[scale=0.75]{build/Chapter01E_10.fig.pdf}}\\
+\end{TableLong}
+
+例如，通过系统的框图表示，在\xref{subsec:系统的数学模型}中的\xref{eq:连续系统微分方程引例}和\xref{eq:离散系统差分方程引例}就可以分别表示为
+\begin{Figure}[系统框图表示的示例]
+    \begin{FigureSub}[连续系统的框图表示示例]
+        \includegraphics[scale=0.75]{build/Chapter01E_03.fig.pdf}
+    \end{FigureSub}\\ \vspace{0.5cm}
+    \begin{FigureSub}[离散系统的框图表示示例]
+        \includegraphics[scale=0.75]{build/Chapter01E_04.fig.pdf}
+    \end{FigureSub}
+\end{Figure}
+
+而相反的问题是，如何根据一张系统框图写出系统遵循的数学方程。
+
+\begin{BoxExample}[连续系统的框图读图例题]
+    分析以下连续系统的框图，写出该系统的微分方程
+    \begin{Figure}[连续系统的框图]
+        \includegraphics[scale=0.75]{build/Chapter01E_05.fig.pdf}
+    \end{Figure}\vspace{1ex}
+\end{BoxExample}
+
+\begin{Solution}
+    实际上，\xref{fig:连续系统的框图}与\xref{fig:连续系统的框图表示示例}并没有很大的差异，只有两个积分器，仍为二阶系统，但是，这里最大的不同在于，系统的响应$y(t)$并非刚好是右端积分器的输出信号，而是多了一个额外的中间信号$x(t)$。换一个角度，每一个加法器意味着一个方程。而这里，有两个加法器，即意味着有两个方程，我们需要先列出这两个方程，再设法从方程组中消去系统内的中间信号$x(t)$。
+
+    左侧加法器给出的方程是
+    \begin{Equation}&[1]
+        f(t)=x''(t)+a_1x'(t)+a_0x(t)
+    \end{Equation}
+    右侧加法器给出的方程是
+    \begin{Equation}&[2]
+        y(t)=b_2x''(t)+b_1x'(t)+b_0x(t)
+    \end{Equation}
+    在\xrefpeq{2}两端乘$a_0$
+    \begin{Equation}&[3]
+        a_0y(t)=b_2[a_0x''(t)]+b_1[a_0x'(t)]+b_0[a_0x(t)]
+    \end{Equation}
+    在\xrefpeq{2}两端乘$a_1$，求一阶导
+    \begin{Equation}&[4]
+        a_1y'(t)=b_2[a_1x''(t)]'+b_1[a_1x'(t)]'+b_0[a_1x(t)]'
+    \end{Equation}
+    在\xrefpeq{2}两端，求二阶导
+    \begin{Equation}&[5]
+        y''(t)=b_2[x''(t)]''+b_1[x'(t)]''+b_0[x(t)]''
+    \end{Equation}
+    就\xrefpeq{3},\xrefpeq{4},\xrefpeq{5}的式子，稍作些整理
+    \begin{Gather}
+        a_0y(t)=b_2[a_0x(t)]''+b_1[a_0x(t)]'+b_0[a_0x(t)]\xlabelpeq{6} \\ 
+        a_1y'(t)=b_2[a_1x'(t)]''+b_1[a_1x'(t)]'+b_0[a_1x'(t)]\xlabelpeq{7}\\
+        y''(t)=b_2[x''(t)]''+b_1[x''(t)]'+b_0[x''(t)] \xlabelpeq{8}
+    \end{Gather}
+    将\xrefpeq{6},\xrefpeq{7},\xrefpeq{8}相加，简洁起见，略去$t$
+    \begin{Equation}&[10]
+        \qquad\qquad
+        y''+a_1y'+a_0y=b_2[x''+a_1x'+a_0x]''+b_1[x''+a_1x'+a_0x]'+b_0[x''+a_1x'+a_0x]
+        \qquad\qquad
+    \end{Equation}
+    将\xrefpeq{2}代入\xrefpeq{11}
+    \begin{Equation}*
+        y''(t)+a_1y'(t)+a_0y=b_2f''(t)+b_1f'(t)+b_0f(t)\qedhere
+    \end{Equation}
+\end{Solution}
+
+\begin{BoxExample}[离散系统观点框图读图例题]
+    分析以下离散系统的框图，写出该系统的差分方程
+    \begin{Figure}[离散系统的框图]
+        \includegraphics[scale=0.75]{build/Chapter01E_06.fig.pdf}
+    \end{Figure}\vspace{1ex}
+\end{BoxExample}
+
+\begin{Solution}
+    这一例题与上一例题思路完全一样，只不过由连续系统换成了离散系统罢了。
+
+    左侧加法器给出的方程是
+    \begin{Equation}&[1]
+        f(k)=x(k)+a_1x(k-1)+a_0x(k-2)
+    \end{Equation}
+    右侧加法器给出的方程是
+    \begin{Equation}&[2]
+        y(k)=b_2x(k)-b_0x(k-2)
+    \end{Equation}
+    将\xrefpeq{2}中$k$以$k-1$代换，并同乘$a_1$
+    \begin{Equation}&[3]
+        a_1y(k-1)=b_2a_1x(k-1)-b_0a_1x(k-3)
+    \end{Equation}
+    将\xrefpeq{2}中$k$以$k-2$代换，并同乘$a_0$
+    \begin{Equation}&[4]
+        a_0y(k-2)=b_2a_0x(k-3)-b_0a_0x(k-4)
+    \end{Equation}
+    将\xrefpeq{2},\xrefpeq{3},\xrefpeq{4}相加，得到
+    \begin{Split}
+        y(k)+a_1y(k-1)+a_0y(k-2)
+        &=b_2[x(k)+a_1x(k-1)a_0x(k-2)]\\
+        &-b_0[x(k-2)+a_1x(k-3)+a_0x(k-4)]
+    \end{Split}
+    在上式中代入\xrefpeq{1}
+    \begin{Equation}*
+        y(k)+a_1y(k-1)+a_0y(k-2)=b_2f(k)-b_0f(k-2)\qedhere
+    \end{Equation}
+\end{Solution}

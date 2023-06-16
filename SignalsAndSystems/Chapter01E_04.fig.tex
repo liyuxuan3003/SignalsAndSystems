@@ -3,7 +3,7 @@
 \begin{document}
 \begin{tikzpicture}[ss graph]
 
-\graph [grow right sep=2.2cm,branch down=1cm]
+\graph [grow right sep=1.6cm,branch down=1cm]
 {
     /[coordinate,label=left:$f(t)$] ->[edge label=$f(t)$,ss pos=above]
     S1/[ss sum] --[edge label=$y(k)$]
@@ -12,6 +12,8 @@
 
     D1' -> [ss skip loop=-1cm,edge node={node[pos=0.25,auto] {$b$}},ss neg=left] S1;
 };
+
+\draw[ultra thin,gray] ($(-2.5,-2.25)$) rectangle ($(10.5,1)$);
 
 \end{tikzpicture}
 \end{document}
