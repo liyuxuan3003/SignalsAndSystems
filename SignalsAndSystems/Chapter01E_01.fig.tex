@@ -1,0 +1,17 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+    
+\draw coordinate (O) 
+    to[vsource,l_={$u_\te{S}(t)$}] ++(0,3)
+    to[L=$L$,v=$u_L(t)$] ++(3,0)
+    to[R=$R$,v=$u_R(t)$] ++(3,0)
+    coordinate (O')
+    to[C=$C$,v=$u_C(t)$] (\tikztostart|-O)
+    to[short,i=$i(t)$] (O);
+
+\draw[ultra thin,gray] ($(O)+(-1,-1)$) rectangle ($(O')+(1,1)$);
+
+\end{tikzpicture}
+\end{document}

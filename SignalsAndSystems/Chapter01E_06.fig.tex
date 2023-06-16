@@ -1,0 +1,25 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}[ss graph]
+
+\graph [grow right sep=1.0cm]
+{
+    /[coordinate,label=left:$f(k)$] ->[edge label=$f(k)$,ss pos=below]
+    S1/[ss sum] --[edge label=$x(k)$]
+    S1'/[ss dot] ->
+    D1/[ss delay] --[edge label=$x(k-1)$,pos=0.9]
+    D1'/[ss dot] ->
+    D2/[ss delay] --[edge label=$x(k-2)$,pos=0.9]
+    D2'/[ss dot] ->[edge node={node[below,pos=0.5]{$b_0$}},ss pos=below]
+    S2/[ss sum] ->[edge label=$y(k)$]
+    /[coordinate,label=right:$y(k)$];
+
+    D1' ->[ss skip loop=-1cm,edge node={node[pos=0.25,auto]{$a_1$}},ss neg=right] (S1.south east);
+    D2' ->[ss skip loop=-2cm,edge node={node[pos=0.25,auto]{$a_0$}},ss neg=left] (S1.south);
+
+    S1' ->[ss skip loop=2cm,edge node={node[pos=0.25,auto]{$b_2$}},ss pos=right] (S2);
+};
+
+\end{tikzpicture}
+\end{document}

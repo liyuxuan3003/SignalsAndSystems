@@ -1,0 +1,15 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}[ss graph]
+
+\node[ss delay] (D) {};
+
+\draw[->] (D) -- node[pos=0.1,above right] {$y(k)=f(k-1)$} ++(2,0);
+
+\draw[<-] (D) -- node[pos=0.5,above] {$f(k)$} ++(-2,0);
+
+\draw[gray,ultra thin] (-2.5,-0.75) rectangle (4.25,0.75);
+
+\end{tikzpicture}
+\end{document}

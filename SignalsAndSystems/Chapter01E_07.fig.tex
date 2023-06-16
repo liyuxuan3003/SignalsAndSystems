@@ -1,0 +1,15 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}[ss graph]
+
+\node[ss integ] (I) {};
+
+\draw[->] (I) -- node[pos=0.1,above right] {$y(t)=\Int[-\infty][t]f(\tau)\dd{\tau}$} ++(2,0);
+
+\draw[<-] (I) -- node[pos=0.5,above] {$f(t)\vphantom{\Int}$} ++(-2,0);
+
+\draw[gray,ultra thin] (-2.5,-0.75) rectangle (4.25,0.75);
+
+\end{tikzpicture}
+\end{document}

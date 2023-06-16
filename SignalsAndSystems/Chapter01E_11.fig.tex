@@ -1,0 +1,15 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}[ss graph]
+
+\node[ss dtime] (T) {};
+
+\draw[->] (T) -- node[pos=0.1,above right] {$y(t)=f(t-T)$} ++(2,0);
+
+\draw[<-] (T) -- node[pos=0.5,above] {$f(t)$} ++(-2,0);
+
+\draw[gray,ultra thin] (-2.5,-0.75) rectangle (4.25,0.75);
+
+\end{tikzpicture}
+\end{document}

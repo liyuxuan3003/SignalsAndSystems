@@ -1,0 +1,21 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}[ss graph]
+
+\graph [grow right sep=1.2cm]
+{
+    /[coordinate,label=left:$f(t)$] ->[edge label=$f(t)$,ss pos=above]
+    S1/[ss sum] ->[edge label=$y''(t)$]
+    I1/[ss integ] --[edge label=$y'(t)$]
+    I1'/[ss dot] ->
+    I2/[ss integ] --[edge label=$y(t)$]
+    I2'/[ss dot] ->
+    /[coordinate,label=right:$y(t)$];
+
+    I1' ->[ss skip loop=-1cm,edge node={node[pos=0.25,auto]{$a_1$}},ss neg=right] (S1.south east);
+    I2' ->[ss skip loop=-2cm,edge node={node[pos=0.25,auto]{$a_0$}},ss neg=left] (S1.south);
+};
+
+\end{tikzpicture}
+\end{document}

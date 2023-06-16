@@ -1,0 +1,29 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+
+\node[draw,rectangle,minimum size=1cm] (M) {$M$};
+
+\draw[-latex,decorate,decoration={zigzag,amplitude=0.25cm,segment length=0.2cm,pre length=0.25cm,post length=1.5cm}] (M) to["$f_k(t)$",pos=0.8,swap] ++(-3,0) coordinate(fk);
+
+\draw[-latex] (M) to["$f(t)$"] ++(3,0) coordinate(f);
+
+% \draw (fk) -- ++(0,1);
+
+\draw[thick] (fk|-M.south west)-- +(0,3) coordinate (Y);
+\draw[thick] (fk|-M.south west)-- +(6,0) coordinate (X);
+
+\draw[thin,<->] ($(fk|-M.south west)!0.8!(Y)$) coordinate(y) -- node[above] {$y(t)$} (y-|M.north west) coordinate (y');
+
+\draw[ultra thin] (y') -- +(0,0.25) -- +(0,-0.25);
+
+\draw[-latex] ($(M.south)+(0,-0.25)$) coordinate (M') 
+($(M')+(+0.75,0)$) 
+-- node[below] {$f_{\tau}(t)$} 
+($(M')+(-0.75,0)$);
+
+\draw[ultra thin,gray] ($(X-|Y)+(-1,-1)$) rectangle ($(X|-Y)+(1,1)$);
+
+\end{tikzpicture}
+\end{document}

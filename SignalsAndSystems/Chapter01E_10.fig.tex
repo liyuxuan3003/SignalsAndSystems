@@ -1,0 +1,16 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}[ss graph]
+
+\node[ss sum] (S) {};
+
+\draw[->] (S) -- node[pos=0.1,above right] {$y(\cdot)=f_1(\cdot)+f_2(\cdot)$} ++(2,0);
+
+\draw[<-] (S) -- ++(0,+1) -- node[above] {$f_1(\cdot)$} ++(-2,0);
+\draw[<-] (S) -- ++(0,-1) -- node[below] {$f_2(\cdot)$} ++(-2,0);
+
+\draw[gray,ultra thin] (-2.5,-1.75) rectangle (4.25,1.75);
+
+\end{tikzpicture}
+\end{document}
