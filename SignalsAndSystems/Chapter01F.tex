@@ -1,0 +1,183 @@
+\section{系统的特性和分析方法}
+
+连续或离散的动态系统，按其基本特性，可以从四个维度分类
+\begin{enumerate}
+    \item 线性的与非线性的。
+    \item 时变的与非时变的。
+    \item 因果的与非因果的。
+    \item 稳定的与非稳定的。
+\end{enumerate}
+
+在本节，我们会讨论以上四组特性的具体定义。为了讨论系统的特性，我们先需要将系统的激励$f(\cdot)$和响应$y(\cdot)$间的关系形式化的写出来，其中，系统扮演了一个作用在激励上的算子。
+
+\begin{BoxDefinition}[激励与响应]
+    激励$f(\cdot)$与响应$y(\cdot)$间的关系可以简记为
+    \begin{Equation}
+        y(\cdot)=T[f(\cdot)]
+    \end{Equation}
+    其中$T$是算子，反映了系统的作用。
+\end{BoxDefinition}
+
+\subsection{线性与非线性}
+线性性质包含了两个内容：齐次性、可加性。我们先分别定义这两个性质。
+
+\begin{BoxDefinition}[系统的齐次性]
+    若系统的激励$f(\cdot)$增大$\alpha$倍，其响应$y(\cdot)$也增大$\alpha$倍，即
+    \begin{Equation}
+        T[\alpha f(\cdot)]=\alpha T[f(\cdot)]
+    \end{Equation}
+    则称该系统具有\uwave{齐次性}（Homogeneity）。
+\end{BoxDefinition}
+
+\begin{BoxDefinition}[系统的可加性]
+    若系统对于激励$f_1(\cdot)$和$f_2(\cdot)$之和的响应等于各个激励所引起的响应之和，即
+    \begin{Equation}
+        T[f_1(\cdot)+f_2(\cdot)]=T[f_1(\cdot)]+T[f_2(\cdot)]
+    \end{Equation}
+    则称该系统具有\uwave{可加性}（Additive）。
+\end{BoxDefinition}
+
+线性性质实际上就是指一个系统，同时满足齐次性和可加性。
+
+\begin{BoxDefinition}[系统的线性]
+    若系统即是齐次又是可加的，即有
+    \begin{Equation}
+        T[\alpha_1f_1(\cdot)+\alpha_2f_2(\cdot)]=\alpha_1T[f_1(\cdot)]+\alpha_2T[f_2(\cdot)]
+    \end{Equation}
+    则称该系统具有\uwave{线性}（Linearity），这样的系统称为\uwave{线性系统}（Linear System）。
+\end{BoxDefinition}
+
+动态系统的响应不仅取决于激励，亦取决于初始状态（初始状态$t=t_0=0$或$k=k_0=0$）
+\begin{itemize}
+    \item 若系统有多个激励$f_1(\cdot),f_2(\cdot),\cdots,f_n(\cdot)$，则记为$\qty{f(\cdot)}$。
+    \item 若系统有多个初始状态$x_1(0),x_2(0),\cdots,x_n(0)$，则记为$\qty{y(0)}$。\footnote{这里所谓多个初始状态，是指其初始状态是多个初始状态的叠加。}
+\end{itemize}
+
+动态系统在任意时刻的响应$y(\cdot)$就可以由初始状态$\qty{y(0)}$和$[0,t]$或$[0,k]$上的激励$\qty{f(\cdot)}$完全确定了。而从某种意义上，初始状态可以视为系统的另外一种激励，这样，系统的响应就将取决于两类不同的激励：输入信号$\qty{f(\cdot)}$、初始状态$\qty{y(0)}$。此时，沿用\xref{def:激励与响应}的记法
+
+\begin{BoxDefinition}[全响应]
+    \uwave{全响应}（Complete Response）是指输入信号和初始状态共同作用的响应
+    \begin{Equation}
+        y(\cdot)=T\qty[\qty{y(0)},\qty{f(\cdot)}]
+    \end{Equation}
+\end{BoxDefinition}
+
+\begin{BoxDefinition}[零输入响应]
+    \uwave{零输入响应}（Zero Input Response, zir）是指令输入信号$\qty{f(\cdot)}$为零$\qty{0}$时的响应
+    \begin{Equation}
+        y_\te{zi}(\cdot)=T\qty[\qty{y(0)},\qty{0}]
+    \end{Equation}
+    零输入响应中，仅有初始状态$\qty{y(0)}$的作用。
+\end{BoxDefinition}
+
+\begin{BoxDefinition}[零状态响应]
+    \uwave{零状态响应}（Zero Status Response, zsr）是指令初始状态$\qty{x(0)}$为零$\qty{0}$时的响应
+    \begin{Equation}
+        y_\te{zs}(\cdot)=T\qty[\qty{0},\qty{f(\cdot)}]
+    \end{Equation}
+    零状态响应中，仅有输入信号$\qty{f(\cdot)}$的作用。
+\end{BoxDefinition}
+
+而若一个系统是线性的，其应当满足以下三个性质
+\begin{itemize}
+    \item 系统的全响应是z.i.r和z.s.r的和，即$y(\cdot)=y_\te{zi}(\cdot)+y_\te{zs}(\cdot)$，称为\uwave{分解特性}。
+    \item 系统的零输入响应呈现线性，称为\uwave{零输入线性}。
+    \item 系统的零状态响应呈现线性，称为\uwave{零状态线性}。
+\end{itemize}
+
+综上，同时具有分解特性、零输入线性、零状态线性的系统，是线性系统，否则是非线性系统。
+
+\subsection{时变与非时变}
+应当指出的是，这里所谓的时变或非时变并不是指响应$y(\cdot)$是否随时间变化，作为动态系统响应$y(\cdot)$总是随时间变化的。相反，\empx{时变和非时变是指系统的参数是否随时间变化}
+\begin{itemize}
+    \item 描述\uwave{时不变系统}（Time Invariant System）的数学模型，是常系数微分方程/差分方程。
+    \item 描述\uwave{时变系统}（Time Varying System）的数学模型，是变系数微分方程/差分方程。
+\end{itemize}
+简单来说，所谓时不变，就是指我现在使用这个系统和过两秒使用这个系统，得到的响应是一样的，当然，晚了两秒。这种对于时不变的诠释，我们可以比较严格的表述为以下形式。
+\begin{BoxDefinition}[系统的时不变性]*
+    若激励$f(\cdot)$的零状态响应为$y_\te{zs}(\cdot)$
+    \begin{Equation}
+        T[\qty{0},f(\cdot)]=y_\te{zs}(\cdot)
+    \end{Equation}
+    那么，当激励延迟一定时间$t_\te{d}$或$k_\te{d}$接入时，若引起的零状态响应也延迟相同时间
+    \begin{Gather}[6pt]
+        T[\qty{0},f(t-t_\te{d})]=y_\te{zs}(t-t_\te{d})\\
+        T[\qty{0},f(k-k_\te{d})]=y_\te{zs}(k-k_\te{d})
+    \end{Gather}
+    则称该系统是\uwave{时不变性系统}，否则称为\uwave{时变系统}。
+\end{BoxDefinition}
+在本课程中，我们讨论的都是性质比较好的线性时不变系统，即LTI系统。
+
+LTI系统具有一些性质，这包括下面的微分特性和积分特性。
+
+\begin{BoxProperty}[LTI系统的微分特性]
+    LTI连续系统具有微分特性，若激励$f(t)$下零状态响应$y_\te{zs}(t)$
+    \begin{Equation}
+        T[\qty{0},f(t)]=y_\te{zs}(t)
+    \end{Equation}
+    则
+    \begin{Equation}&[]
+        T\qty[\qty{0},\dv{f(t)}{t}]=\dv{y_\te{zs}(t)}{t}
+    \end{Equation}
+\end{BoxProperty}
+
+\begin{Proof}
+    我们已知
+    \begin{Equation}
+        T\qty[\qty{0},f(t)]=y_\te{zs}(t)
+    \end{Equation}
+    根据\fancyref{def:系统的时不变性}
+    \begin{Equation}
+        T[\qty{0},f(t-\delt{t})]=y_\te{zs}(t-\delt{t})
+    \end{Equation}
+    根据\fancyref{def:系统的线性}
+    \begin{Equation}
+        T\qty[\qty{0},\frac{f(t)-f(t-\delt{t})}{\delt{t}}]=\frac{y_\te{zs}(t)-y_\te{zs}(t-\delt{t})}{\delt{t}}
+    \end{Equation}
+    而对上式取$\delt{t}\to 0$的极限即得\xrefpeq{}。
+\end{Proof}
+
+\begin{BoxProperty}[LTI系统的积分特性]
+    LTI连续系统具有微分特性，若激励$f(t)$下零状态响应$y_\te{zs}(t)$
+    \begin{Equation}
+        T[\qty{0},f(t)]=y_\te{zs}(t)
+    \end{Equation}
+    则
+    \begin{Equation}
+        T\qty[\qty{0},\Int[-\infty][t]f(\tau)\dd{\tau}]=\Int[-\infty][t]y_\te{zs}(\tau)\dd{\tau}
+    \end{Equation}
+\end{BoxProperty}
+
+在LTI系统中，若$f(t)$得到$y_\te{zs}(t)$，则$f(t)$的导数和积分也得到$y_\te{zs}(t)$的导数和积分。
+
+\subsection{因果与非因果}
+许多时候，我们常将激励与零状态响应的关系看作因果关系，我们认为，零状态响应完全是由激励产生的，因此，零状态响应不应出现于激励之前。当然，这并不总是成立的，如果系统确实有这样的特性，我们就称之为因果系统，否则称为非因果系统。确切的定义如下
+\begin{BoxDefinition}[系统的因果性]
+    对于任意激励$f(\cdot)$，如果
+    \begin{Equation}
+        f(\cdot)=0\qquad t<t_0~(k<k_0)
+    \end{Equation}
+    若其零状态响应满足
+    \begin{Equation}
+        y_\te{zs}(\cdot)=T[|\qty{0},f(\cdot)]=0\qquad t<t_0~(k<k_0)
+    \end{Equation}
+    则称该系统是\uwave{因果系统}（Casual System），否则称为\uwave{非因果系统}。
+\end{BoxDefinition}
+借用“因果”一词，常将$t=0$时接入的信号（即$t<0$时$f(t)=0$的信号）称为\uwave{因果信号}。
+
+\subsection{稳定与非稳定}
+所谓稳定性，是指对于有界的激励，系统的零状态响应是否也是有界的。
+
+\begin{BoxDefinition}[稳定与非稳定性]
+    对于有界的$f(\cdot)$，即
+    \begin{Equation}
+        \abs{f(\cdot)}<\infty
+    \end{Equation}
+    若其零状态响应也是有界的
+    \begin{Equation}
+        \abs{y_\te{zs}(\cdot)}<\infty
+    \end{Equation}
+    则称该系统是\uwave{稳定系统}（Stable System），否则称为\uwave{非稳定系统}。
+\end{BoxDefinition}
+
+
