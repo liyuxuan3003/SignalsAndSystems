@@ -1,0 +1,33 @@
+\section{LTI连续系统的分解特性}
+当然，经典解法将$y(t)$拆分为齐次通解$y_\te{h}(t)$和特解$y_\te{p}(t)$的作法是正确且可行的，但是作为信号与系统，有时，我们更愿意将$y(t)$拆分为零输入响应$y_\te{zi}(t)$和零状态响应$y_\te{zs}(t)$来看。
+
+\begin{BoxTheorem}[常系数线性微分方程的分解]
+    对于常系数线性非齐次微分方程
+    \begin{Equation}
+        \Sum[i=0][n]a_if^{(i)}(t)=f(t)
+    \end{Equation}
+    其解可以表示为两部分
+    \begin{Equation}
+        y=y_\te{zi}(t)+y_\te{zs}(t)
+    \end{Equation}
+    其中，$y_\te{zi}(t)$是零输入响应，无激励，有$\zm$初值，且$\zp$初值与$\zm$初值相同
+    \begin{Equation}
+        \Sum[i=0][n]a_iy_\te{zi}^{(i)}(t)=0\qquad
+        y_\te{zi}^{(i)}(\zm)=y_\te{zi}^{(i)}(\zp)
+    \end{Equation}
+    其中，$y_\te{zs}(t)$是零状态响应，有激励，无$\zm$初值，但$\zp$初值与$\zm$初值不同
+    \begin{Equation}
+        \Sum[i=0][n]a_iy_\te{zs}^{(i)}(t)=f(t)\qquad
+        y_\te{zs}^{(i)}(\zm)=0
+    \end{Equation}
+\end{BoxTheorem}
+我们可能会觉得$y_\te{h}(t),y_\te{p}(t)$与这里的$y_\te{zi}(t),y_\te{zs}(t)$很像，但其实两者是很不同的
+\begin{itemize}
+    \item $y_\te{h}(t), y_\te{p}(t)$是在解同一个非齐次方程，只不过按照微分方程的求解方法，我们将求解过程分为了两步，$y_\te{h}(t)$给出对应齐次方程的通解，保留待定系数，$y_\te{p}(t)$给出非齐次方程的任意一个特解，而两者相加得到$y(t)$后，再用初值条件定出$y_\te{h}(t)$中的待定系数。
+    \item $y_\te{zi}(t), y_\te{zs}(t)$是在解两个独立的方程
+    \begin{itemize}
+        \item 零输入响应$y_\te{zi}(t)$是在解一个齐次但初值非零（适用$y(t)$的初值）的方程。
+        \item 零状态响应$y_\te{zs}(t)$是在解一个非齐次但初值为零的方程。
+    \end{itemize}
+\end{itemize}
+我们之后将主要采用零输入响应$y_\te{zi}(t)$与零状态响应$y_\te{zs}(t)$的这种方法求解。
