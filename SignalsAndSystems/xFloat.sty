@@ -28,6 +28,9 @@
 %引入跨页长表格的命令
 \RequirePackage{longtable}
 
+%引入定宽表格的命令
+\RequirePackage{tabularx}
+
 %引入绘制粗表现的环境
 \RequirePackage{boldline}
 
@@ -180,6 +183,33 @@
         \endlastfoot%------------------------------------
         #9
     \end{longtable}
+}{}
+
+%创建Tablex环境
+%Table为了与TableLong接口兼容，保留了不使用的其余页表头和表尾的参数项（使用圆括号作分界符），但是，Tablex由于需要一个额外的参数表示表格总长，取消了这两个保留项。
+\NewDocumentEnvironment{Tablex}{O{}G{lllllllll}G{\linewidth}O{\small}sD<>{}D<>{}b}
+{
+    \par
+    \begin{table}[H]
+        \centering
+        \captionmake{tab}{#1}
+        #4
+        \begin{tabularx}{#3}{#2}
+            \IfBooleanF{#5}{\hlinetop}
+            \if\relax\detokenize{#6}\relax
+                %...
+            \else
+                #6
+                \IfBooleanF{#5}{\hlinemid}
+            \fi
+            #8
+            \if\relax\detokenize{#7}\relax
+                \IfBooleanF{#5}{\hlinebot}
+            \else
+                #7
+            \fi
+        \end{tabularx}
+    \end{table}
 }{}
 
 %使得单元格具有更大的上下间距

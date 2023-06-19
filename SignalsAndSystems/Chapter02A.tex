@@ -1,3 +1,286 @@
-\section{LTI连续系统的响应}
+\section{LTI连续系统的经典解法}
+
+\subsection{微分方程}
+通常来说，若单输入--单输出系统，激励为$f(t)$，响应为$y(t)$，则描述LTI连续系统激励与响应之间关系的数学模型是$n$阶常系数线性微分方程，它可以写为以下形式
+\begin{BoxDefinition}[连续系统的微分方程]
+    LTI连续系统可以由以下$n$阶常系数线性微分方程描述
+    \begin{Equation}
+        \Sum[i=0][n]a_iy^{(i)}(t)=
+        \Sum[j=0][m]b_jf^{(j)}(t)
+    \end{Equation}
+\end{BoxDefinition}
+
+注意到，非齐次项是以激励$f(t)$及激励$f(t)$的导数的形式出现的，然而$f(t)$导数的存在往往会为我们的计算带来困难，不过幸运的是，通过一些简单的变化我们就可以解决这个问题。
+
+\begin{BoxFormula}[连续系统的简化微分方程]*
+    LTI连续系统中，若相对响应$y(t)$引入代换函数$y_1(t)$
+    \begin{Equation}
+        y(t)=\Sum[j=0][m]b_j y_1^{(j)}(t)
+    \end{Equation}
+    则微分方程可以简化为
+    \begin{Equation}
+        \Sum[i=0][n]a_iy_1^{(i)}(t)=f(t)
+    \end{Equation}
+\end{BoxFormula}
+\begin{Proof}
+    我们已经知道的是\fancyref{def:连续系统的微分方程}
+    \begin{Equation}&[1]
+        \Sum[i=0][n]a_iy^{(i)}(t)=
+        \Sum[j=0][m]b_jf^{(j)}(t)
+    \end{Equation}
+    我们希望在不改变左端形式的情况下，将右端变成$f(t)$
+    \begin{Equation}&[2]
+        \Sum[i=0][n]a_iy_1^{(i)}(t)=f(t)
+    \end{Equation}
+    现在的问题是，$y(t)$怎么用这里新引入的$y_1(t)$表达呢？
+
+    这要运用\fancyref{ppt:LTI系统的微分特性}，在\xrefpeq{2}的基础上求导乘常系数，得到
+    \begin{Gather}[8pt]
+        \Sum[i=0][n]a_i[b_0y_1^{(i)}(t)]=b_0f(t)\\
+        \Sum[i=0][n]a_i[b_1y_1^{(i+1)}(t)]=b_1f^{(1)}(t)\\
+        \Sum[i=0][n]a_i[b_2y_1^{(i+2)}(t)]=b_2f^{(2)}(t)\\
+        \vdots\\
+        \Sum[i=0][n]a_i[b_my_1^{(i+m)}(t)]=b_mf^{(m)}(t)
+    \end{Gather}
+    将以上各式相加
+    \begin{Equation}&[3]
+        \Sum[i=0][n]a_i\qty[\Sum[j=0][m]b_jy_1^{(j)}]^{(i)}=\Sum[j=0][m]b_jf^{(j)}(t)
+    \end{Equation}
+    将\xrefpeq{3}对比\xrefpeq{1}，即得
+    \begin{Equation}*
+        y(t)=\Sum[j=0][m]b_jy_1^{(j)}\qedhere
+    \end{Equation}
+\end{Proof}
+之后，以上这两种形式的微分方程我们都会使用，不过后面这种用的多些，也更为重要。
 
 \subsection{微分方程的经典解}
+微分方程的经典解法，在微积分的课程中我们已经很熟悉了，下面简要概况结论。
+
+\begin{BoxTheorem}[常系数线性微分方程解的结构]
+    对于常系数线性非齐次微分方程
+    \begin{Equation}
+        \Sum[i=0][n]a_iy^{(i)}(t)=f(t)
+    \end{Equation}
+    其解可以表示为两部分
+    \begin{Equation}
+        y=y_\te{h}(t)+y_\te{p}(t)
+    \end{Equation}
+    其中，$y_\te{p}(t)$是非齐次方程的特解，$y_\te{h}(t)$是对应齐次方程的通解，也称为齐次解。
+\end{BoxTheorem}
+
+\subsubsection{通解部分}
+
+通解$y_\te{h}(t)$的形式与激励$f(t)$无关，仅取决于齐次微分方程，即
+\begin{Equation}
+    \Sum[i=0][n]a_iy_\te{h}^{(i)}(t)=0
+\end{Equation}
+常考虑以下的特征根方程，即将$y(t)$的几阶导数换成$\lambda$的几次方
+\begin{Equation}
+    \Sum[i=0][n]a_i\lambda^i=0
+\end{Equation}
+通解$y_\te{p}(t)$的具体形式，就与以上关于$\lambda$的特征方程根的情况有关，如\xref{tab:不同特征根对应的通解}。
+
+\begin{Tablex}[不同特征根对应的通解]{XX}{\linewidth}
+<特征根$\lambda$&通解$y_\text{h}(t)$应添加什么项？\\>
+对于每一个$r$重实根$\lambda$&\xgp[4pt][-10pt]{$\mal{\e^{\lambda t}\Sum[k=0][r-1]C_k t^{k}}$}\\
+对于每一个$r$重共轭复根$\lambda=\alpha+\j\beta$&\xgp[6pt][-10pt]{$\mal{\e^{\alpha t}\Sum[k=0][r-1]A_kt^k\cos(\beta t)+B_kt^k\sin(\beta t)}$}\\
+\end{Tablex}
+    
+以二阶微分方程为例
+\begin{Equation}
+    y_\te{h}''(t)+a_1y_\te{h}'(t)+a_0y_\te{h}(t)=0
+\end{Equation}
+其对应的特征方程应为
+\begin{Equation}
+    \lambda^2+a_1\lambda+a_0=0
+\end{Equation}
+判别式
+\begin{Equation}
+    \Delta=a_1^2-4a_0
+\end{Equation}
+当$\Delta=a_1^2-4a_0>0$时，此时特征方程有两个不等的实根$\lambda_1,\lambda_2$
+\begin{Equation}
+    y(t)=C_1\e^{\lambda_1t}+C_2\e^{\lambda_2t}
+\end{Equation}
+当$\Delta=a_1^2-4a_0=0$时，此时特征方程有两个相等的实根$\lambda$
+\begin{Equation}
+    y(t)=[C_1+C_2t]\e^{\lambda t}
+\end{Equation}
+当$\Delta=a_1^2-4a_0<0$时，此时特征方程有两个共轭的复根$\alpha\pm\j\beta$
+\begin{Equation}
+    y(t)=[C_1\cos(\beta t)+C_2\sin(\beta t)]\e^{\alpha t}
+\end{Equation}
+通解$y_\te{h}(t)$中包含待定的常系数，这些常系数暂时还不能确定，需要等求出特解$y_\te{p}(t)$后，将通解和特解相加得到非齐次方程完整的解$y(t)=y_\te{h}(t)+y_\te{p}(t)$，再由$y(t)$的初值条件定出。
+
+\subsubsection{特解部分}
+
+特解$y_\te{p}(t)$则与激励$f(t)$的形式有关，我们目前只能处理特定形式的激励，如\xref{tab:不同激励所对应的特解}。
+\begin{Tablex}[不同激励所对应的特解]{XlX}
+<激励$f(t)$&条件&特解$y_\te{p}(t)$应满足什么形式？\\>
+\xgp[4pt][-10pt]{$\mal{\e^{\lambda t}\Sum[k=0][r-1]R_k't^k}$}&$\lambda$是$s$重实根&\xgp[4pt][-10pt]{$\mal{\e^{\lambda t}x^s\Sum[k=0][r-1]R_kt^k}$}\\
+\xgp[4pt][-10pt]{$\mal{\e^{\alpha t}\Sum[k=0][r-1]P_kt^k\cos(\beta t)+Q_kt^k\sin(\beta t)}$}&$\lambda=\alpha\pm\j\beta$是$s$重共轭复根&\xgp[4pt][-10pt]{$\mal{\e^{\alpha t}x^s\Sum[k=0][r-1]P_kt^k\cos(\beta t)+Q_kt^k\sin(\beta t)}$}\\
+\end{Tablex}
+特解$y_\text{p}(t)$中包含的的待定常系数，可以通过将$y_\text{p}(t)$代回微分方程确定，无关初值条件。
+
+再让我们回顾一下完整解的形式，在信号与系统中
+\begin{Equation}
+    y(t)=y_\te{h}(t)+y_\te{p}(t)
+\end{Equation}
+\begin{itemize}
+    \item 通解$y_\te{h}(t)$常称为\uwave{自由响应}（Nature Response）或\uwave{瞬态响应}（Transient Response）。
+    \item 特解$y_\te{p}(t)$常称为\uwave{强迫响应}（Forced Response）或\uwave{稳态响应}（Steady Response）。
+\end{itemize}
+由以上分析可见，LTI系统的数学模型，常系数线性微分方程的完整解，由齐次通解和特解组成：特解$y_\te{p}(t)$的形式由激励$f(t)$确定，通解$y_\te{h}(t)$的形式则仅仅依赖系统本身的特性，而与激励$f(t)$无关，但需要注意的是，通解$y_\te{h}(t)$中的待定常系数是却是与激励$f(t)$有关的。
+
+\subsection{关于初值的一个重要讨论}
+经典解法好像没有任何问题？让我们来看看我们有什么疏漏。试想我们有一个关于$y(t)$的二阶微分方程，非齐次项是$f(t)=\cos(t), t>0$或$f(t)=\e^{-t}, t>0$一类的东西。并且，我们已知初值条件$y(0)$和$y'(0)$。这样按照\xref{subsec:微分方程的经典解}中的流程，应该可以很顺利的解出$y(t)$。但问题出在初值上，很明显，严格的说，这里的初值应当是$y(0_{+})$和$y'(0_{+})$，作为微分方程的练习题，直接给出$y(0_{+})$和$y'(0_{+})$并无大碍。但是，作为实际的应用，我们其实只应该知道激励作用前$y(0_{-})$和$y'(0_{-})$情况，而激励实质上$f(t)=\cos(t)\varepsilon(t)$或$f(t)=\e^{-t}\varepsilon(t)$是包含阶跃函数的，因此，激励作用前后$y(t)$的变化是不连续的，即$y(0_{+})\neq y(0_{-})$以及$y'(0_{+})\neq y'(0_{-})$。
+
+现在的问题就是，如何通过$y(0_{-}), y'(0_{-})$求出$y(0_{+}), y'(0_{+})$？这主要包含两种方法，我们分别称为\uwave{积分法}和\uwave{待定系数法}。作为技巧性的内容，我们下面通过两道例题体会一下其思想。
+
+\begin{BoxExample}[积分法]
+    设描述某LTI系统的微分方程为
+    \begin{Equation}&[]
+        y''(t)+a_1y'(t)+a_0y(t)=b_1f'(t)+b_0f(t)
+    \end{Equation}
+    已知初值$y(0_{-}), y'(0_{-})$，并且激励是阶跃函数，即$f(t)=\varepsilon(t)$，现求$y(0_{+}), y'(0_{+})$。
+\end{BoxExample}
+
+\begin{Proof}
+    在\xrefpeq{}中代入$f(t)=\varepsilon(t)$，得到
+    \begin{Equation}&[1]
+        y''(t)+a_1y'(t)+a_0y(t)=b_1\dirac(t)+b_0\varepsilon(t)
+    \end{Equation}
+    比较\xrefpeq{1}的等式两端，$y''(t)$应包含$\dirac(t)$，$y'(t)$应包含$\varepsilon(t)$，因而，$y(t)$连续。
+
+    在\xrefpeq{1}两端作$0_{-}$至$0_{+}$的积分
+    \begin{Equation}&[2]
+        \qquad
+        \Int[\zm][\zp]y''(t)\dd{t}+
+        a_1\Int[\zm][\zp]y'(t)\dd{t}+
+        a_0\Int[\zm][\zp]y(t)\dd{t}=
+        b_1\Int[\zm][\zp]\dirac(t)\dd{t}+
+        b_0\Int[\zm][\zp]\varepsilon(t)\dd{t}
+        \qquad
+    \end{Equation}
+    由于$y(t)$连续故积分为零，而$\varepsilon(t)$以及最高包含$\varepsilon(t)$的$y'(t)$虽然在$0$处发生阶跃，但是两者在无穷小的区间$[\zm,\zp]$上的积分为仍然为零，因此，上式可以简化为
+    \begin{Equation}
+        \Int[\zm][\zp]y''(t)\dd{t}=b_1\Int[\zm][\zp]\dirac(t)
+    \end{Equation}
+    即
+    \begin{Equation}
+        y'(\zp)-y'(\zm)=b_1
+    \end{Equation}
+    而由于$y(t)$是连续的
+    \begin{Equation}
+        y(\zp)-y(\zm)=0
+    \end{Equation}
+    这就求得了$y(\zp), y'(\zp)$相对$y(\zm), y'(\zm)$的表达式。
+\end{Proof}
+
+\begin{BoxExample}[待定系数法]
+    设描述某LTI系统的微分方程为
+    \begin{Equation}&[]
+        y''(t)+a_1y'(t)+a_0y(t)=b_2f''(t)+b_1f'(t)+b_0f(t)
+    \end{Equation}
+    已知初值$y(0_{-}), y'(0_{-})$，并且激励是冲激函数，即$f(t)=\dirac(t)$，现求$y(0_{+}), y'(0_{+})$。
+\end{BoxExample}
+
+\begin{Proof}
+    在\xrefpeq{}中代入$f(t)=\dirac(t)$，得到
+    \begin{Equation}&[1]
+        y''(t)+a_1y'(t)+a_0y(t)=b_2\dirac''(t)+b_1\dirac'(t)+b_0\dirac(t)
+    \end{Equation}
+    很明显，$y''(t)$最高包含冲激函数的二阶导数$\dirac''(t)$
+    \begin{Equation}&[2]
+        y''(t)=A\dirac''(t)+B\dirac'(t)+C\dirac(t)+r_2(t)
+    \end{Equation}
+    $y'(t)$可以表示为
+    \begin{Equation}&[3]
+        y'(t)=A\dirac'(t)+B\dirac(t)+r_1(t)\qquad r_1(t)=C\varepsilon(t)+\Int[-\infty][t]r_2(t)\dd{t}
+    \end{Equation}
+    $y(t)$可以表示为
+    \begin{Equation}&[4]
+        y(t)=A\dirac(t)+r_0(t)\qquad r_0(t)=B\varepsilon(t)+\Int[-\infty][t]r_1(t)\dd{t}
+    \end{Equation}
+    将\xrefpeq{2},\xrefpeq{3},\xrefpeq{4}相加，得到
+    \begin{Split}
+        A\dirac''(t)+(a_1A+B)\dirac'(t)&+(a_0A+a_1B+C)\dirac(t)\\ 
+        &+[r_2(t)+a_1r_1(t)+a_0r_0(t)]=b_2\dirac''(t)+b_1\dirac'(t)+b_0\dirac(t)
+    \end{Split}
+    两端冲激函数的各阶导数应当对应系数相等
+    \begin{Equation}
+        A=b_2\qquad a_1A+B=b_1\qquad a_0A+a_1B+C=b_0
+    \end{Equation}
+    写成矩阵形式
+    \begin{Equation}
+        \begin{pmatrix}
+            1&0&0\\
+            a_1&1&0\\
+            a_0&a_1&1\\
+        \end{pmatrix}
+        \begin{pmatrix}
+            A\\
+            B\\
+            C\\
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            b_2\\
+            b_1\\
+            b_0
+        \end{pmatrix}
+    \end{Equation}
+    系数行列式$D$
+    \begin{Equation}
+        D=\begin{vmatrix}
+            1&0&0\\
+            a_1&1&0\\
+            a_0&a_1&1\\
+        \end{vmatrix}=1
+    \end{Equation}
+    系数$A$
+    \begin{Equation}
+        A=D_A/D=\begin{vmatrix}
+            b_2&0&0\\
+            b_1&1&0\\
+            b_0&a_1&1\\
+        \end{vmatrix}=b_2
+    \end{Equation}
+    系数$B$
+    \begin{Equation}
+        B=D_B/D=\begin{vmatrix}
+            1&b_2&0\\
+            a_1&b_1&0\\
+            a_0&b_0&1\\
+        \end{vmatrix}=b_1-a_1b_2
+    \end{Equation}
+    系数$C$
+    \begin{Equation}
+        C=D_C/D\begin{vmatrix}
+            1&0&b_2\\
+            a_1&1&b_1\\
+            a_0&a_1&b_0\\
+        \end{vmatrix}=b_0-b_1a_1-b_2(a_0-a_1^2)
+    \end{Equation}
+    至此，$A,B,C$这三个待定系数都是已知的了。
+
+    根据\xrefpeq{2}
+    \begin{Equation}
+        y''(t)=A\dirac''(t)+B\dirac'(t)+C\dirac(t)+r_2(t)
+    \end{Equation}
+    两端在$[\zm,\zp]$的区间上积分，注意到$\dirac'(t),\dirac''(t)$的积分都是零
+    \begin{Equation}
+        y'(\zp)-y'(\zm)=C
+    \end{Equation}
+    根据\xrefpeq{3}
+    \begin{Equation}
+        y'(t)=A\dirac'(t)+B\dirac(t)+r_1(t)
+    \end{Equation}
+    两端在$[\zm,\zp]$的区间上积分，注意到$\dirac'(t)$的积分是零
+    \begin{Equation}
+        y(\zp)-y(\zm)=B
+    \end{Equation}
+    这就求得了$y(\zp), y'(\zp)$相对$y(\zm), y'(\zm)$的表达式。
+\end{Proof}
+
+积分法和待定系数法是由$\zm$值计算$\zp$值的两种不同方法，积分法过程相对较为简单，但仅能适合较简单的情况，待定系数法过程相对较为复杂，但相对通用。积分法用的比较多些。
