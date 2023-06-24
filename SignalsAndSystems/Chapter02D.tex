@@ -1,0 +1,247 @@
+\section{零状态响应与卷积积分}
+在本节，我们将探究如何通过冲激响应求出任意函数的零状态响应，并引入卷积积分。
+
+\subsection{任意激励的零状态响应}
+\begin{BoxFormula}[任意激励的零状态响应]
+    设激励$f(t)$的零状态响应为$y_\te{zs}$，即
+    \begin{Equation}
+        \Sum[i=0][n]a_iy_\te{zs}^{(i)}(t)=f(t)\qquad
+        y_\te{zs}^{(i)}(\zm)=0
+    \end{Equation}
+    若$h(t)$为该系统的冲激响应，则
+    \begin{Equation}
+        y_\te{zs}(t)=\Int[-\infty][\infty]f(\tau)h(t-\tau)\dd{\tau}
+    \end{Equation}
+    该运算称为卷积积分，亦记为
+    \begin{Equation}
+        y_\te{zs}(t)=f(t)*h(t)
+    \end{Equation}
+    这表明$f(t)$的零状态响应，是$f(t)$与冲激响应的卷积积分。
+\end{BoxFormula}
+
+\begin{Proof}
+    证明的关键在于运用冲激函数的筛选特性，考虑$f(t_0)$可以被表示为
+    \begin{Equation}
+        f(t_0)=\Int[-\infty][\infty]f(\tau)\dirac(\tau-t_0)\dd{t}
+    \end{Equation}
+    由于冲激函数是偶函数，因此
+    \begin{Equation}
+        f(t_0)=\Int[-\infty][\infty]f(\tau)\dirac(t_0-\tau)\dd{t}
+    \end{Equation}
+    我们不妨将常量$t_0$改换为变量$t$，此时积分将给出一个关于$t$的函数，即$f(t)$自身
+    \begin{Equation}
+        f(t)=\Int[-\infty][\infty]f(\tau)\dirac(t-\tau)\dd{t}
+    \end{Equation}
+
+    根据\fancyref{ppt:LTI系统的积分特性}，可将$f(t),\dirac(t-\tau)$换为其零状态响应$y_\te{zs}(t), \dirac(t-\tau)$
+    \begin{Equation}*
+        y_\te{zs}(t)=\Int[-\infty][\infty]f(\tau)h(t-\tau)\dd{t}\qedhere
+    \end{Equation}
+\end{Proof}
+上述过程，从直观上看，就是将任意激励$f(t)$分解为为一系列冲激函数，再运用LTI系统的积分特性，使得$f(t)$的零状态响应$y_\te{zs}(t)$可以被表示为一系列冲激响应$f(\tau)h(t-\tau)$的积分和，并将其定义为卷积积分$f(t)*h(t)$。通过这种方式，我们就将任意激励$f(t)$的零状态响应的求解转化为冲激响应$h(t)$的求解以及卷积$f(t)*h(t)$的计算，大幅简化了求解的复杂性。
+
+\subsection{卷积积分}
+卷积积分是一种重要的数学运算，在\xref{subsec:任意激励的零状态响应}中，我们曾自然的引出了卷积的概念，而实际上，卷积的概念同样出现在许多领域中，具有十分深刻的意义\cite{3b1b:卷积}。现就卷积积分定义如下。
+\begin{BoxDefinition}[卷积积分]
+    \uwave{卷积积分}（Convolution Integral）定义为
+    \begin{Equation}
+        f_1(t)*f_2(t)=\Int[-\infty][\infty]f_1(\tau)f_2(t-\tau)\dd{\tau}
+    \end{Equation}
+\end{BoxDefinition}
+
+\subsection{卷积的基本性质}
+\begin{BoxProperty}[卷积的交换律]
+    卷积运算满足交换律
+    \begin{Equation}
+        f_1(t)*f_2(t)=f_2(t)*f_1(t)
+    \end{Equation}
+\end{BoxProperty}
+
+\begin{Proof}
+    根据\fancyref{def:卷积积分}
+    \begin{Equation}&[1]
+        f_1(t)*f_2(t)=\Int[-\infty][\infty]f_1(\tau)f_2(t-\tau)\dd{\tau}
+    \end{Equation}
+    换元，令$\tau=t-\tau'$，则$t-\tau=\tau'$，注意换元后积分限反转
+    \begin{Equation}&[2]
+        \qquad\qquad
+        f_1(t)*f_2(t)=\Int[\infty][-\infty]f_1(t-\tau')f_2(\tau')\dd{(t-\tau')}=\Int[-\infty][\infty]f_1(t-\tau')f_2(\tau')\dd{\tau'}
+        \qquad\qquad
+    \end{Equation}
+    反过来运用\fancyref{def:卷积积分}
+    \begin{Equation}*
+        f_1(t)*f_2(t)=\Int[-\infty][\infty]f_2(\tau')f_1(t-\tau')\dd{\tau'}=f_2(t)*f_1(t)\qedhere
+    \end{Equation}
+\end{Proof}
+
+\begin{BoxProperty}[卷积的分配律]
+    卷积运算满足分配律
+    \begin{Equation}
+        f(t)*[g_1(t)+g_2(t)]=
+        f(t)*g_1(t)+f(t)*g_2(t)
+    \end{Equation}
+\end{BoxProperty}
+
+\begin{Proof}
+    根据\fancyref{def:卷积积分}
+    \begin{Equation}&[1]
+        f(t)*[g_1(t)+g_2(t)]=
+        \Int[-\infty][\infty]f(\tau)[g_1(t-\tau)+g_2(t-\tau)]\dd{\tau}
+    \end{Equation}
+    根据积分的线性特性
+    \begin{Equation}*
+        ~~~
+        f(t)*[g_1(t)+g_2(t)]=
+        \Int[-\infty][\infty]f(\tau)g_1(t-\tau)\dd{\tau}+
+        \Int[-\infty][\infty]f(\tau)g_2(t-\tau)\dd{\tau}=f(t)*g_1(t)+f(t)*g_2(t)
+        ~~~ \qedhere
+    \end{Equation}
+\end{Proof}
+
+\begin{BoxProperty}[卷积的结合律]
+    卷积运算满足结合律
+    \begin{Equation}
+        f_1(t)*[f_2(t)+f_3(t)]=[f_1(t)*f_2(t)]*f_3(t)
+    \end{Equation}
+\end{BoxProperty}
+
+\begin{Proof}
+    从右往左证明，根据\fancyref{def:卷积积分}
+    \begin{Equation}&[1]
+        [f_1(t)*f_2(t)]*f_3(t)=\Int[-\infty][\infty]\qty[f_1(\tau)*f_2(\tau)]f_3(t-\tau)\dd{\tau}
+    \end{Equation}
+    再应用一次\fancyref{def:卷积积分}
+    \begin{Equation}&[2]
+        \qquad\qquad\quad
+        [f_1(t)*f_2(t)]*f_3(t)=\Int[-\infty][\infty]\qty[\Int[-\infty][\infty]f_1(\tau')f_2(\tau-\tau')\dd{\tau'}]f_3(t-\tau)\dd{\tau}
+        \qquad\qquad\quad
+    \end{Equation}
+    交换积分顺序
+    \begin{Equation}&[3]
+        \qquad\qquad\quad
+        [f_1(t)*f_2(t)]*f_3(t)=\Int[-\infty][\infty]f_1(\tau')\qty[\Int[-\infty][\infty]f_2(\tau-\tau')f_3(t-\tau)\dd{\tau}]\dd{\tau'}
+        \qquad\qquad\quad
+    \end{Equation}
+    并令$\eta=\tau-\tau'$，则$t-\tau=t-\tau'-\eta$
+    \begin{Equation}&[4]
+        \qquad\qquad\quad
+        [f_1(t)*f_2(t)]*f_3(t)=\Int[-\infty][\infty]f_1(\tau')\qty[\Int[-\infty][\infty]f_2(\eta)f_3(t-\tau'-\eta)\dd{\eta}]\dd{\tau'}
+        \qquad\qquad\quad
+    \end{Equation}
+    即
+    \begin{Equation}&[5]
+        [f_1(t)*f_2(t)]*f_3(t)=\Int[-\infty][\infty]f_1(\tau')[f_2(t-\tau')*f_3(t-\tau')]\dd{\tau'}
+    \end{Equation}
+    或
+    \begin{Equation}*
+        \qty[f_1(t)*f_2(t)]*f_3(t)=f_1(t)*[f_2(t)*f_3(t)]\qedhere
+    \end{Equation}
+\end{Proof}
+
+\subsection{卷积与冲激函数}
+\begin{BoxProperty}[卷积与冲激函数]
+    函数$f(t)$与冲激函数$\dirac(t-t_0)$的卷积，给出$f(t)$的$t_0$延时，即
+    \begin{Equation}
+        f(t)*\dirac(t-t_0)=f(t-t_0)
+    \end{Equation}
+    特别的
+    \begin{Equation}
+        f(t)*\dirac(t)=f(t)
+    \end{Equation}
+\end{BoxProperty}
+\begin{Proof}
+    根据\fancyref{def:卷积积分}和冲激函数的筛选性质
+    \begin{Equation}*
+        f(t)*\dirac(t-t_0)=\Int[-\infty][\infty]f(\tau)*\dirac(t-t_0-\tau)\dd{\tau}=f(t-t_0)\qedhere
+    \end{Equation}
+\end{Proof}
+
+\begin{BoxProperty}[卷积与延时]
+    函数$f(t)$若为$f_1(t)$和$f_2(t)$的卷积，即
+    \begin{Equation}
+        f_1(t)*f_2(t)=f(t)
+    \end{Equation}
+    那么，$f(t)$的时延将是$f_1(t),f_2(t)$的时延之和
+    \begin{Equation}
+        f_1(t-t_1)*f_2(t-t_2)=f(t-t_1-t_2)
+    \end{Equation}
+\end{BoxProperty}
+
+\begin{Proof}
+    根据\fancyref{ppt:卷积与冲激函数}，先将时延用卷积的方式表达
+    \begin{Equation}
+        f_1(t-t_1)*f_2(t-t_2)=[f_1(t)*\dirac(t-t_1)]*[f_2(t)*\dirac(t-t_2)]
+    \end{Equation}
+    运用\fancyref{ppt:卷积的交换律}
+    \begin{Equation}
+        f_1(t-t_1)*f_2(t-t_2)=f_1(t)*f_2(t)*\dirac(t-t_1)*\dirac(t-t_2)
+    \end{Equation}
+    由于$f(t)=f_1(t)*f_2(t)$，因此
+    \begin{Equation}*
+        f_1(t-t_1)*f_2(t-t_2)=f(t)*\dirac(t-t_1)*\dirac(t-t_2)=f(t-t_1)*\dirac(t-t_2)=f(t-t_1-t_2)\qedhere
+    \end{Equation}
+\end{Proof}
+
+\subsection{卷积的微分与积分}
+卷积的微分运算和积分运算规则与通常的乘法有所不同，为便于表述，现引入以下符号，对于任一函数$f(t)$，用符号$f^{(1)}(t)$表示其一阶导数，用符号$f^{(-1)}(t)$表示其一次积分，即
+\begin{Equation}
+    f^{(1)}(t)=\dv{f(t)}{t}\qquad
+    f^{(-1)}(t)=\Int[-\infty][t]f(\tau)\dd{\tau}
+\end{Equation}
+通过这种记号，卷积的微分和积分特性可以表述如下
+\begin{BoxProperty}[卷积的微分与积分特性]
+    设$f(t)$是$f_1(t)$和$f_2(t)$的卷积
+    \begin{Equation}
+        f(t)=f_1(t)*f_2(t)
+    \end{Equation}
+    卷积的微分特性可以表述为
+    \begin{Equation}
+        f^{(1)}(t)=f_1^{(1)}(t)*f_2(t)=f_1(t)*f_2^{(1)}(t)
+    \end{Equation}
+    卷积的积分特性可以表述为
+    \begin{Equation}
+        f^{(-1)}(t)=f_1^{(-1)}(t)*f_2(t)=f_1(t)*f_2^{(-1)}(t)
+    \end{Equation}
+    更一般的
+    \begin{Equation}
+        f^{(i)}(t)=f_1^{(j)}(t)*f_2^{(i-j)}(t)
+    \end{Equation}
+\end{BoxProperty}
+
+\begin{Proof}
+    先证导数，交换导数与卷积积分的顺序
+    \begin{Equation}
+        \qquad
+        f^{(1)}(t)=\dv{t}\Int[-\infty][\infty]f_1(\tau)f_2(t-\tau)\dd{\tau}=\Int[-\infty][\infty]f_1(\tau)\qty[\dv{t}f_2(t-\tau)]\dd{\tau}=f_1(t)*f_2^{(1)}(t)
+        \qquad
+    \end{Equation}
+    再证积分
+    \begin{Equation}
+        \quad
+        f^{(-1)}(t)=\Int[-\infty][t]f(\tau')\dd{\tau'}=\Int[-\infty][t]f_1(\tau')*f_2(\tau')\dd{\tau'}=\Int[-\infty][t]\Int[-\infty][\infty]f_1(\tau)f_2(\tau'-\tau)\dd{\tau}\dd{\tau'}
+        \quad
+    \end{Equation}
+    交换积分顺序
+    \begin{Equation}
+        f^{(-1)}(t)=\Int[-\infty][\infty]f_1(\tau)\qty[\Int[-\infty][t]f_2(\tau'-\tau)\dd{\tau'}]\dd{\tau}
+    \end{Equation}
+    注意到$\dd{\tau'}=\dd(\tau'-\tau)$，此时积分上限应由$t$变为$t-\tau$
+    \begin{Equation}
+        f^{{(-1)}}(t)=\Int[-\infty][\infty]f_1(\tau)\qty[\Int[-\infty][t-\tau]f_2(\tau'-\tau)\dd{(\tau'-\tau)}]\dd{\tau}
+    \end{Equation}
+    即
+    \begin{Equation}
+        f^{(-1)}(t)=\Int[-\infty][\infty]f_1(\tau)f_2^{(-1)}(t-\tau)\dd{\tau}=f_1(t)*f_2^{(-1)}(t)
+    \end{Equation}
+    类似的可以证明一般情况。
+\end{Proof}
+
+应用卷积的微分特性，我们可以推广\fancyref{fml:任意激励的零状态响应}的结果。
+
+\begin{BoxFormula}[杜阿密尔积分]
+    LTI系统的零状态响应，既是激励与冲激响应的卷积，亦是激励的导数与阶跃响应的卷积
+    \begin{Equation}
+        y_\te{zs}(t)=f(t)*h(t)=f'(t)*g(t)
+    \end{Equation}
+    该式称为\uwave{杜阿密尔积分}（Duhamel Integral）。
+\end{BoxFormula}
