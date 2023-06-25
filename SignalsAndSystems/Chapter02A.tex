@@ -63,7 +63,7 @@
     \end{Equation}
     其解可以表示为两部分
     \begin{Equation}
-        y=y_\te{h}(t)+y_\te{p}(t)
+        y(t)=y_\te{h}(t)+y_\te{p}(t)
     \end{Equation}
     其中，$y_\te{p}(t)$是非齐次方程的特解，$y_\te{h}(t)$是对应齐次方程的通解，也称为齐次解。
 \end{BoxTheorem}
@@ -78,12 +78,12 @@
 \begin{Equation}
     \Sum[i=0][n]a_i\lambda^i=0
 \end{Equation}
-通解$y_\te{p}(t)$的具体形式，就与以上关于$\lambda$的特征方程根的情况有关，如\xref{tab:不同特征根对应的通解}。
+通解$y_\te{h}(t)$的具体形式，就与以上关于$\lambda$的特征方程根的情况有关，如\xref{tab:微分方程不同特征根对应的通解}。
 
-\begin{Tablex}[不同特征根对应的通解]{XX}{\linewidth}
+\begin{Tablex}[微分方程不同特征根对应的通解]{XX}{\linewidth}
 <特征根$\lambda$&通解$y_\text{h}(t)$应添加什么项？\\>
 对于每一个$r$重实根$\lambda$&\xgp[4pt][-10pt]{$\mal{\e^{\lambda t}\Sum[k=0][r-1]C_k t^{k}}$}\\
-对于每一个$r$重共轭复根$\lambda=\alpha+\j\beta$&\xgp[6pt][-10pt]{$\mal{\e^{\alpha t}\Sum[k=0][r-1]A_kt^k\cos(\beta t)+B_kt^k\sin(\beta t)}$}\\
+对于每一个$r$重共轭复根$\lambda=\alpha\pm\j\beta$&\xgp[6pt][-10pt]{$\mal{\e^{\alpha t}\Sum[k=0][r-1]A_kt^k\cos(\beta t)+B_kt^k\sin(\beta t)}$}\\
 \end{Tablex}
     
 以二阶微分方程为例
@@ -114,11 +114,11 @@
 
 \subsubsection{特解部分}
 
-特解$y_\te{p}(t)$则与激励$f(t)$的形式有关，我们目前只能处理特定形式的激励，如\xref{tab:不同激励所对应的特解}。
-\begin{Tablex}[不同激励所对应的特解]{XlX}
+特解$y_\te{p}(t)$则与激励$f(t)$的形式有关，我们目前只能处理特定形式的激励，如\xref{tab:微分方程不同激励所对应的特解}。
+\begin{Tablex}[微分方程不同激励所对应的特解]{XlX}
 <激励$f(t)$&条件&特解$y_\te{p}(t)$应满足什么形式？\\>
-\xgp[4pt][-10pt]{$\mal{\e^{\lambda t}\Sum[k=0][r-1]R_k't^k}$}&$\lambda$是$s$重实根&\xgp[4pt][-10pt]{$\mal{\e^{\lambda t}x^s\Sum[k=0][r-1]R_kt^k}$}\\
-\xgp[4pt][-10pt]{$\mal{\e^{\alpha t}\Sum[k=0][r-1]P_k't^k\cos(\beta t)+Q_k't^k\sin(\beta t)}$}&$\lambda=\alpha\pm\j\beta$是$s$重共轭复根&\xgp[4pt][-10pt]{$\mal{\e^{\alpha t}x^s\Sum[k=0][r-1]P_kt^k\cos(\beta t)+Q_kt^k\sin(\beta t)}$}\\
+\xgp[4pt][-10pt]{$\mal{\e^{\lambda t}\Sum[k=0][r-1]R_k't^k}$}&$\lambda$是$s$重实根&\xgp[4pt][-10pt]{$\mal{\e^{\lambda t}t^s\Sum[k=0][r-1]R_kt^k}$}\\
+\xgp[4pt][-10pt]{$\mal{\e^{\alpha t}\Sum[k=0][r-1]P_k't^k\cos(\beta t)+Q_k't^k\sin(\beta t)}$}&$\lambda=\alpha\pm\j\beta$是$s$重共轭复根&\xgp[4pt][-10pt]{$\mal{\e^{\alpha t}t^s\Sum[k=0][r-1]P_kt^k\cos(\beta t)+Q_kt^k\sin(\beta t)}$}\\
 \end{Tablex}
 特解$y_\text{p}(t)$中包含的的待定常系数，可以通过将$y_\text{p}(t)$代回微分方程确定，无关初值条件。
 

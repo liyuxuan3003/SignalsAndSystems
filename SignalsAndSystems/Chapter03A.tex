@@ -1,0 +1,225 @@
+\section{LTI离散系统的经典解法}
+
+\subsection{差分方程}
+首先，我们来明确一件事，什么是差分？
+
+\begin{BoxDefinition}[前向差分]
+    设序列$f(k)$，\uwave{前向差分}（Forward Difference）定义为
+    \begin{Equation}
+        \Delta f(k)=f(k+1)-f(k)
+    \end{Equation}
+    所谓“前向”，就是指$f(k)$在差分运算中是“前一个”。
+\end{BoxDefinition}
+
+\begin{BoxDefinition}[后向差分]
+    设序列$f(k)$，\uwave{后向差分}（Backward Difference）定义为
+    \begin{Equation}
+        \nabla f(k)=f(k)-f(k-1)
+    \end{Equation}
+    所谓“后向”，就是指$f(k)$在差分运算中是“后一个”。
+\end{BoxDefinition}
+
+我们可以很容易的写出前向差分和后向差分间的关系。
+
+\begin{BoxProperty}[两类差分的关系]
+    前向差分与后向差分的关系是
+    \begin{Equation}
+        \nabla f(k)=\Delta f(k-1)
+    \end{Equation}
+\end{BoxProperty}
+
+由此可见，前向差分和后向差分仅仅是偏移上的差别，因而性质也是完全相同的，在接下来的内容中我们主要采用后向差分，即$\nabla f(k)=f(k)-f(k-1)$，并简称其为\uwave{差分}（Difference）。
+
+\begin{BoxProperty}[差分的线性性质]
+    差分具有线性性质
+    \begin{Equation}
+        \nabla[a_1f_1(k)+a_2f_2(k)]=a_1\nabla f_1(k)+a_2\nabla f_2(k)
+    \end{Equation}
+\end{BoxProperty}
+
+\begin{Proof}
+    根据\fancyref{def:后向差分}
+    \begin{Equation}&[1]
+        \qquad\qquad
+        \nabla[a_1f_1(k)+a_2f_2(k)]=
+        [a_1f_1(k)+a_2f_2(k)]-
+        [a_1f_1(k-1)+a_2f_2(k-1)]
+        \qquad\qquad
+    \end{Equation}
+    经整理得到
+    \begin{Equation}&[2]
+        \qquad\qquad\qquad
+        \nabla[a_1f_1(k)+a_2f_2(k)]=
+        a_1[f_1(k)-f_1(k-1)]+
+        a_2[f_2(k)-f_2(k-1)]
+        \qquad\qquad\qquad
+    \end{Equation}
+    再次应用\fancyref{def:后向差分}
+    \begin{Equation}*
+        \nabla[a_1f_1(k)+a_2f_2(k)]=
+        a_1\nabla f_1(k)+
+        a_2\nabla f_2(k)\qedhere
+    \end{Equation}
+\end{Proof}
+
+我们知道，微分的反运算是积分，差分也有其反运算，即求和
+\begin{Equation}
+    F(t)=\Int[-\infty][t]f(\tau)\dd{\tau}\qquad
+    F(k)=\Sum[\kappa=-\infty][k]f(\kappa)
+\end{Equation}
+
+\begin{BoxDefinition}[高阶差分]
+    $n$阶差分定义为$n-1$阶差分的差分
+    \begin{Equation}
+        \nabla^n f(k)=\nabla[\nabla^{n-1}f(k)]
+    \end{Equation}
+\end{BoxDefinition}
+
+\begin{BoxFormula}[高阶差分]
+    $n$阶差分的计算公式为
+    \begin{Equation}
+        \nabla^n f(k)=\Sum[i=0][n](-1)^i\mqty(n\\ i)f(k-i)
+    \end{Equation}
+\end{BoxFormula}
+
+关于高阶差分的计算公式，这里仅以二阶差分为例说明，为何公式中会出现二项式系数
+\begin{Equation}
+    \nabla^2 f(k)=
+    \nabla[\nabla f(k)]=
+    \nabla[f(k)-f(k-1)]=
+    f(k)-2f(k-1)+f(k-2)
+\end{Equation}
+% 严格的证明可以由数学归纳法给出。
+
+差分方程是包含关于$y(k)$及其各阶差分的方程式，它的一般形式可以写为
+\begin{Equation}
+    F[k,y(k),\nabla y(k),\nabla^2 y(k),\cdots,\nabla^n y(k)]=0
+\end{Equation}
+这里差分的最高阶为$n$阶，故称为$n$阶差分方程，亦可以写为以下形式（两处$F$不相同）
+\begin{Equation}
+    F[k,y(k),y(k-1),y(k-2),\cdots,y(k-n)]=0
+\end{Equation}
+若上式中序列$y(k)$及其各移位序列$y(k-1),y(k-2),\cdots,y(k-n)$前的系数均为常数，就称其为常系数差分方程，否则称为变系数差分方程。描述LTI离散系统的是常系数差分方程。
+
+\begin{BoxDefinition}[离散系统的差分方程]
+    LTI离散系统可以由以下$n$阶常系数线性微分方程描述
+    \begin{Equation}
+        \Sum[i=0][n]a_{n-i}y(k-i)=\Sum[j=0][m]b_{m-j}f(k-j)
+    \end{Equation}
+\end{BoxDefinition}
+
+务必注意，差分方程的系数$a_{n-i}$与微分方程的系数$a_n$的习惯是相反的，因为对于差分方程而言，$y(k)$被认为是$n$阶的，$y(k-1)$被认为是$n-1$阶的，$y(k-2)$被认为是$n-2$阶的。
+
+\begin{BoxFormula}[离散系统的简化差分方程]
+    LTI离散系统中，若相对响应$y(k)$引入代换函数$y_q(k)$
+    \begin{Equation}
+        y(k)=\Sum[j=0][m]b_{m-j}y(k-j)
+    \end{Equation}
+    则差分方程可以简化为
+    \begin{Equation}
+        \Sum[i=0][n]a_{n-i}y_1(k-i)=f(k)
+    \end{Equation}
+\end{BoxFormula}
+
+\subsection{差分方程的经典解}
+差分方程和微分方程的解法和解的形式几乎是完全一致的，可将本小节与\xref{subsec:微分方程的经典解}对比。
+
+\begin{BoxTheorem}[常系数线性差分方程解的结构]*
+    对于常系数线性非齐次差分方程
+    \begin{Equation}
+        \Sum[i=0][n]a_{n-i}y(k-i)=f(k)
+    \end{Equation}
+    其解可以表示为两部分
+    \begin{Equation}
+        y(k)=y_\te{h}(k)+y_\te{p}(k)
+    \end{Equation}
+    其中，$y_\te{p}(k)$是非齐次方程的特解，$y_\te{h}(k)$是对应齐次方程的通解，也称为齐次解。
+\end{BoxTheorem}
+
+\subsubsection{通解部分}
+通解$y_\te{h}(k)$的形式与激励$f(k)$无关，仅取决于齐次差分方程，即
+\begin{Equation}
+    \Sum[i=0][n]a_{n-i}y_\text{h}(k-i)=0
+\end{Equation}
+常考虑以下的特征根方程，即将$y(k)$的几阶项换成$\lambda$的几次方
+\begin{Equation}
+    \Sum[i=0][n]a_{n-i}\lambda^i=0
+\end{Equation}
+再次强调这里的对应关系
+\begin{Equation}
+    \qquad\qquad
+    y(k)\to\lambda^n\quad y(k-1)\to\lambda^{n-1}\quad y(k-2)\to\lambda^{n-2}\quad\cdots\quad y(k-n)\to 1
+    \qquad\qquad
+\end{Equation}
+
+通解$y_\te{h}(k)$的具体形式，就与以下关于$\lambda$的特征方程根的情况有关，如\xref{tab:差分方程不同特征根对应的通解}
+\begin{Tablex}[差分方程不同特征根对应的通解]{XX}{\linewidth}
+    <特征根$\lambda$&通解$y_\text{h}(k)$应添加什么项？\\>
+    对于每一个$r$重实根$\lambda$&\xgp[4pt][-10pt]{$\mal{\lambda^k\Sum[i=0][r-1]C_i k^{i}}$}\\
+    对于每一个$r$重共轭复根$\lambda=\rho\e^{\pm\j\beta}$&\xgp[6pt][-10pt]{$\mal{\rho^k\Sum[i=0][r-1]A_ik^{i}\cos(\beta t)+B_ik^i\sin(\beta t)}$}\\
+\end{Tablex}
+
+这里需要注意，微分方程通解中的$\e^{\lambda t}$在差分方程通解中会变为$\lambda^k$（对比\xref{tab:微分方程不同特征根对应的通解}和\xref{tab:差分方程不同特征根对应的通解}）。\footnote{感觉这种差异背后有更深刻的原理，尚没有理清楚。}
+
+这里我们通过一个很经典的示例，斐波那契数列来，实践一下\xref{tab:差分方程不同特征根对应的通解}的理论。
+
+\begin{BoxExample}[斐波那契数列]*
+    斐波那契数列是指以下差分方程（递推公式）
+    \begin{Equation}
+        y(k)=y(k-1)+y(k-2)\qquad 
+        y(0)=0\qquad
+        y(1)=1
+    \end{Equation}
+    证明$y(k)$满足（通项公式）
+    \begin{Equation}
+        y(k)=\frac{\sqrt{5}}{5}\qty\Bigg[\qty(\frac{1+\sqrt{5}}{2})^k-\qty(\frac{1-\sqrt{5}}{2})^k]
+    \end{Equation}
+\end{BoxExample}
+
+\begin{Proof}
+    斐波那契数列的差分方程可以写作
+    \begin{Equation}&[1]
+        y(k)-y(k-1)-y(k-2)=0
+    \end{Equation}
+    转换为特征方程
+    \begin{Equation}&[2]
+        \lambda^2-\lambda-1=0
+    \end{Equation}
+    容易解得
+    \begin{Equation}&[3]
+        \lambda=\frac{1+\sqrt{5}}{2}\qquad
+        \lambda=\frac{1-\sqrt{5}}{2}
+    \end{Equation}
+    这是两个不同的实根，依据\xref{tab:差分方程不同特征根对应的通解}
+    \begin{Equation}&[4]
+        y(k)=C_1\qty(\frac{1+\sqrt{5}}{2})^k+C_2\qty(\frac{1-\sqrt{5}}{2})^k
+    \end{Equation}
+    依据$y(0)=0$的初值，定出
+    \begin{Equation}&[5]
+        C_1+C_2=0
+    \end{Equation}
+    依据$y(1)=1$的初值，定出
+    \begin{Equation}&[6]
+        C_1\qty(\frac{1+\sqrt{5}}{2})+C_2\qty(\frac{1-\sqrt{5}}{2})=1
+    \end{Equation}
+    将\xrefpeq{5}代入\xrefpeq{6}
+    \begin{Equation}&[7]
+        C_1\qty(\frac{1+\sqrt{5}}{2})-C_1\qty(\frac{1-\sqrt{5}}{2})=1
+    \end{Equation}
+    即
+    \begin{Equation}&[8]
+        C_1\sqrt{5}=1\qquad C_1=\frac{\sqrt{5}}{5}\qquad C_2=-\frac{\sqrt{5}}{5}
+    \end{Equation}
+    将\xrefpeq{8}代入\xrefpeq{4}
+    \begin{Equation}*
+        y(k)=\frac{\sqrt{5}}{5}\qty\Bigg[\qty(\frac{1+\sqrt{5}}{2})^k-\qty(\frac{1-\sqrt{5}}{2})^k]\qedhere
+    \end{Equation}
+\end{Proof}
+
+\subsubsection{特解部分}
+特解$y_\te{p}(k)$则与激励$f(k)$的形式有关，这与微分方程的结论是对应的（对比\xref{tab:微分方程不同激励所对应的特解}和\xref{tab:差分方程不同激励所对应的特解}）。
+\begin{Tablex}[差分方程不同激励所对应的特解]{XlX}
+    <激励$f(k)$&条件&特解$y_\te{p}(k)$应满足什么形式？\\>
+    \xgp[4pt][-10pt]{$\mal{\lambda^k\Sum[i=0][r-1]R_i'k^i}$}&$\lambda$是$s$重实根&\xgp[4pt][-10pt]{$\mal{\lambda^kk^s\Sum[i=0][r-1]R_ik^i}$}\\
+    \xgp[4pt][-10pt]{$\mal{\rho^k\Sum[i=0][r-1]P_i'k^i\cos(\beta t)+Q_i'k^i\sin(\beta t)}$}&$\lambda=\rho\e^{\pm\j\beta}$是$s$重共轭复根&\xgp[4pt][-10pt]{$\mal{\rho^kk^s\Sum[i=0][r-1]P_ik^i\cos(\beta t)+Q_ik^i\sin(\beta t)}$}\\
+\end{Tablex}

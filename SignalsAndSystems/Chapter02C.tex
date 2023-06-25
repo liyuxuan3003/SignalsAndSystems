@@ -1,11 +1,11 @@
 \section{连续系统的冲激响应和阶跃响应}
-零输入响应总是容易求解的，这是一个齐次方程，依\xref{tab:不同特征根对应的通解}求出通解后依初值定出系数即可
+零输入响应总是容易求解的，这是一个齐次方程，依\xref{tab:微分方程不同特征根对应的通解}求出通解后依初值定出系数即可
 \begin{Equation}
     \Sum[i=0][n]a_iy_\te{zi}^{(i)}(t)=0\qquad
         y_\te{zi}^{(i)}(\zm)=y_\te{zi}^{(i)}(\zp)
 \end{Equation}
 
-零状态响应的求解就会有些麻烦，这是一个包含激励$f(t)$的非齐次方程，而非齐次方程我们只能对$f(t)$具有\xref{tab:不同激励所对应的特解}所列的特定形式进行求解，具有局限性，且过程较为复杂，需要先求相应齐次方程的通解，再写出一个非齐次方程的特解，最后还需要依据通过\xref{subsec:关于初值的一个重要讨论}中提到的积分法或待定系数法从$y_\te{zs}^{(i)}(\zm)=0$求出$y_\te{zs}^{(i)}(\zp)$的值，作为初值条件定出通解中的系数
+零状态响应的求解就会有些麻烦，这是一个包含激励$f(t)$的非齐次方程，而非齐次方程我们只能对$f(t)$具有\xref{tab:微分方程不同激励所对应的特解}所列的特定形式进行求解，具有局限性，且过程较为复杂，需要先求相应齐次方程的通解，再写出一个非齐次方程的特解，最后还需要依据通过\xref{subsec:关于初值的一个重要讨论}中提到的积分法或待定系数法从$y_\te{zs}^{(i)}(\zm)=0$求出$y_\te{zs}^{(i)}(\zp)$的值，作为初值条件定出通解中的系数
 \begin{Equation}
     \Sum[i=0][n]a_iy_\te{zs}^{(i)}(t)=f(t)\qquad
         y_\te{zs}^{(i)}(\zm)=0
@@ -160,7 +160,7 @@
     \begin{Equation}&[6]
         \lambda=-\alpha\pm\beta
     \end{Equation}
-    依据\xref{tab:不同特征根对应的通解}，此时的通解为
+    依据\xref{tab:微分方程不同特征根对应的通解}，此时的通解为
     \begin{Equation}&[7]
         h_0(t)=C_1\e^{-(\alpha-\beta)t}+C_2\e^{-(\alpha+\beta)t}
     \end{Equation}
@@ -203,7 +203,7 @@
     \begin{Equation}&[16]
         \lambda=-\alpha\pm\j\beta
     \end{Equation}
-    依据\xref{tab:不同特征根对应的通解}，此时的通解为
+    依据\xref{tab:微分方程不同特征根对应的通解}，此时的通解为
     \begin{Equation}&[17]
         h_0(t)=[C_1\cos\beta t+C_2\sin\beta t]\e^{-\alpha t}
     \end{Equation}
@@ -237,7 +237,7 @@
     \begin{Equation}&[23]
         \lambda=-\alpha
     \end{Equation}
-    依据\xref{tab:不同特征根对应的通解}，此时的通解为
+    依据\xref{tab:微分方程不同特征根对应的通解}，此时的通解为
     \begin{Equation}&[24]
         h_0(t)=[C_1t+C_2]\e^{-\alpha t}
     \end{Equation}
