@@ -1,0 +1,24 @@
+\section{LTI离散系统的分解特性}
+类似于LIT连续系统，LTI离散系统也可以分解为零输入响应和零状态响应。
+\begin{BoxTheorem}[常系数线性差分方程的分解]
+    对于常系数线性非齐次差分方程
+    \begin{Equation}
+        \Sum[i=0][n]a_iy(k-i)=f(k)
+    \end{Equation}
+    其解可以表示为两部分
+    \begin{Equation}
+        y(k)=y_\te{zi}(k)+y_\te{zs}(k)
+    \end{Equation}
+    其中，$y_\te{zi}(k)$是零输入响应，无激励，有初值
+    \begin{Equation}
+        \Sum[i=0][n]a_iy_\te{zi}(k-i)=0\qquad
+        y_\te{zi}(-i)=y(-i),~~i=1,2,\cdots,n
+    \end{Equation}
+    其中，$y_\te{zs}(k)$是零状态响应，有激励，无初值
+    \begin{Equation}
+        \Sum[i=0][n]a_iy_\te{zs}(k-i)=f(k)\qquad y_\te{zs}(-i)=0
+    \end{Equation}
+\end{BoxTheorem}
+
+总的来说，尽管我们总是将两者对比着看，离散系统还是要比连续系统简单的。$n$阶微分方程的初值是$y(t)$的$0,1,2\cdots,n-1$阶导数在$\zp$处的值，将其转换为$\zm$处的值还要花费一些功夫。相比之下，$n$阶差分方程的初值是$y(k)$在$-1,-2,\cdots,-n$处的值，无$\zm,\zp$问题。
+
