@@ -1,0 +1,99 @@
+\section{离散系统的单位序列响应和阶跃序列响应}
+在连续系统中，我们定义有冲激函数$\dirac(t)$和阶跃函数$\varepsilon(t)$的。这可以推广到离散情形。
+
+\subsection{单位序列和阶跃序列}
+\begin{BoxDefinition}[单位序列]
+    \uwave{单位序列}（Unit Sequence）定义为
+    \begin{Equation}
+        \dirac(k)=
+        \begin{cases}
+            1,&k=0\\
+            0,&k\neq 0
+        \end{cases}
+    \end{Equation}
+\end{BoxDefinition}
+
+\begin{BoxDefinition}[阶跃序列]
+    \uwave{阶跃序列}（Step Sequence）定义为
+    \begin{Equation}
+        \varepsilon(k)=
+        \begin{cases}
+            1,&k\geq 0\\
+            0,&k<0
+        \end{cases}
+    \end{Equation}
+\end{BoxDefinition}
+
+单位序列和阶跃序列$\dirac(k), \varepsilon(k)$的图像如\xref{fig:单位序列和阶跃序列}所示
+\begin{Figure}[单位序列和阶跃序列]
+    \begin{FigureSub}[单位序列]
+        \includegraphics{build/Chapter03C_01a.fig.pdf}
+    \end{FigureSub}
+    \hspace{0.25cm}
+    \begin{FigureSub}[阶跃序列]
+        \includegraphics{build/Chapter03C_01b.fig.pdf}
+    \end{FigureSub}
+\end{Figure}
+单位序列和阶跃序列$\dirac(k), \varepsilon(k)$可以视为冲激函数和阶跃函数$\dirac(t), \varepsilon(t)$的对应离散版本，但仍有一些细节值得关注。首先，冲激函数$\dirac(t)$是一个在$t=0$处脉冲宽度趋于零而高度趋于无穷大的信号，需要通过广义函数的定义，是较为复杂的，单位序列$\dirac(k)$在$k=0$处则简单的定义为$1$。其次，$\varepsilon(t)$在$t=0$的跃变处通常不作定义，$\varepsilon(k)$在$k=0$处则被定义为$1$。\goodbreak
+
+类似于$\dirac(t)$是$\varepsilon(t)$的导数，这里$\dirac(k)$也是$\varepsilon(k)$的差分，有以下结论。\nopagebreak
+\begin{BoxFormula}[阶跃序列与单位序列]
+    阶跃序列的差分给出单位序列
+    \begin{Equation}
+        \dirac(k)=\nabla\varepsilon(k)=\varepsilon(k)-\varepsilon(k-1)
+    \end{Equation}
+    阶跃序列反过来可以由单位序列的求和表示
+    \begin{Equation}
+        \varepsilon(k)=\Sum[i=-\infty][\infty]\dirac(i)
+    \end{Equation}
+\end{BoxFormula}
+
+\subsection{单位序列响应}
+\begin{BoxDefinition}[单位序列响应]
+    \uwave{单位序列响应}（Unit Sequence Response）是指激励为单位序列$\dirac(k)$时的零状态响应
+    \begin{Equation}
+        h(k)=T[\qty{0},\dirac(k)]
+    \end{Equation}
+    即单位序列响应是以下差分方程的解
+    \begin{Equation}
+        \Sum[i=0][n]a_{n-i}h(k-i)=\dirac(k)\qquad h(-i)=0\qquad i=1,2,\cdots,n
+    \end{Equation}
+\end{BoxDefinition}
+
+\begin{BoxFormula}[单位序列响应]
+    单位序列响应$h(k)$可以表达为以下形式
+    \begin{Equation}
+        h(k)=h_0(k)\varepsilon(k)
+    \end{Equation}
+    其中$h_0(k)$满足以下差分方程
+    \begin{Equation}&[b]
+        \Sum[i=0][n]a_{n-i}h_0(k-i)=0\qquad k\geq 0
+    \end{Equation}
+    其初值条件为
+    \begin{Equation}
+        h_0(0)=\frac{1}{a_n}
+    \end{Equation}
+    而$h_0(1), h_0(2), \cdots, h_0(n-1)$可以通过\xrefpeq{b}递推得到（在$k$取负值时$h_0(k)$为零）。
+\end{BoxFormula}
+离散系统中的单位序列响应与连续系统中的冲激响应，具有相同的重要地位。
+
+\subsection{阶跃序列响应}
+\begin{BoxDefinition}[阶跃序列响应]*
+    阶跃序列响应（Step Sequence Response）是指激励为阶跃序列$\varepsilon(k)$时的零状态响应
+    \begin{Equation}
+        g(k)=T[\qty{0},\varepsilon(k)]
+    \end{Equation}
+    即阶跃序列响应是以下差分方程的解
+    \begin{Equation}
+        \Sum[i=0][n]a_{n-i}g(k-i)=\varepsilon(k)\qquad
+        g(-i)=0\qquad
+        i=1,2,\cdots,n
+    \end{Equation}
+\end{BoxDefinition}
+
+\begin{BoxFormula}[阶跃序列响应]
+    阶跃序列响应$g(k)$可以表示为单位序列响应$h(k)$的求和
+    \begin{Equation}
+        g(k)=\Sum[i=-\infty][k]h(i)
+    \end{Equation}
+\end{BoxFormula}

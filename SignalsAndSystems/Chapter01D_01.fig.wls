@@ -27,7 +27,7 @@ funcDirac[t_]:=DiracDelta[t];
 fig=ReleaseHold[Hold[Plot[
 	f[t],{t,-2,2},PlotRange->{-0.1,1.1},
 	Epilog->{sty,ArrowsDeltaFunction[f[t][[1]],t]},
-	GridLines->Automatic,
+	GridLines->All,
 	ImageSize->Automatic->200,
 	Frame->True,
 	Exclusions->None,

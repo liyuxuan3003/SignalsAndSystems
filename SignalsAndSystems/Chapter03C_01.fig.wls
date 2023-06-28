@@ -5,7 +5,7 @@ SetDirectory[NotebookDirectory[]];
 Needs["MaTeX`"];
 
 
-nbFileName="Chapter02C_01.fig.wls";
+nbFileName="Chapter03C_01.fig.wls";
 nbPDFName="build/"<>StringReplace[nbFileName,"wls"->"pdf"];
 nbPDFNameList=(StringReplace[nbPDFName,".fig"->#<>".fig"]&)/@Alphabet[];
 Export[nbPDFName,""]
@@ -14,6 +14,7 @@ Export[nbPDFName,""]
 fig=ReleaseHold[Hold[DiscretePlot[
 	f[k],{k,-5,5},PlotRange->{-0.1,1.1},
 	GridLines->Automatic,
+	Axes->None,
 	ImageSize->Automatic->200,
 	Frame->True,
 	FrameTicks->{
@@ -27,7 +28,7 @@ fig=ReleaseHold[Hold[DiscretePlot[
 	({f[k]->#[[1]],lab->#[[2]]}&)/@
 	{
 		{KroneckerDelta[k,0],"\\updelta(k)"},
-		{HeavisideTheta[k],"\\varepsilon(k)"}
+		{UnitStep[k],"\\varepsilon(k)"}
 	}
 )]
 

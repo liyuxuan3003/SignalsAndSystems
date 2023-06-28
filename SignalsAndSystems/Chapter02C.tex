@@ -41,7 +41,7 @@
     \end{Equation}
     其初值条件为
     \begin{Equation}
-        h_0^{(n-1)}(\zp)=1\qquad
+        h_0^{(n-1)}(\zp)=\frac{1}{a_n}\qquad
         h_0^{(i)}(\zp)=0\quad i=1,2,\cdots,n-2
     \end{Equation}
 \end{BoxFormula}
@@ -55,19 +55,19 @@
 
     运用\fancyref{exp:积分法}的思想，就\xrefpeq{1}两端作$[\zm,\zp]$的积分
     \begin{Equation}
-        \Int[\zm][\zp]h^{(n)}(t)\dd{t}=\Int[\zm][\zp]\dirac(t)\dd{t}
+        \Int[\zm][\zp]a_nh^{(n)}(t)\dd{t}=\Int[\zm][\zp]\dirac(t)\dd{t}
     \end{Equation}
     容易得到
     \begin{Equation}
-        h^{(n-1)}(\zp)-h^{(n-1)}(\zm)=1
+        a_n[h^{(n-1)}(\zp)-h^{(n-1)}(\zm)]=1
     \end{Equation}
     而我们已知$h^{(i)}(\zm)=0, i=1,2,\cdots,n-1$
     \begin{Equation}
-        h^{(n-1)}(\zp)=1
+        h^{(n-1)}(\zp)=\frac{1}{a_n}
     \end{Equation}
     而由于比$n-1$更低阶的导数连续，因此
     \begin{Equation}
-        h^{i}(\zp)=0\qquad i=1,2,\cdots,n-2
+        h^{(i)}(\zp)=0\qquad i=1,2,\cdots,n-2
     \end{Equation}
     现在我们就求得了$h(t)$在$0^{+}$的初值条件了，那如何进一步解出$h(t)$呢？由于$h(t)$是零状态响应，而冲激出现在$t=0$处，因此$h(t)$必然可以表达为$h(t)=h_0(t)\varepsilon(t)$，而$h_0(t)$适用
     \begin{Equation}
@@ -75,7 +75,7 @@
     \end{Equation}
     这是因为当$t>0$时有$h(t)=h_0(t)$且$\dirac(t)=0$，同时，$h_0(t)$的初值条件与$h(t)$也一致
     \begin{Equation}
-        h_0^{(n-1)}(\zp)=1\qquad
+        h_0^{(n-1)}(\zp)=\frac{1}{a_n}\qquad
         h_0^{(i)}(\zp)=0\quad i=1,2,\cdots,n-2
     \end{Equation}
     至此，我们就将冲激响应的求解，转化为了一个具有特定初值条件的齐次方程的求解。
