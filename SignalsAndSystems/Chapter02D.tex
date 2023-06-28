@@ -1,9 +1,9 @@
 \section{零状态响应与卷积积分}
 在本节，我们将探究如何通过冲激响应求出任意函数的零状态响应，并引入卷积积分。
 
-\subsection{任意激励的零状态响应}
-\begin{BoxFormula}[任意激励的零状态响应]
-    设激励$f(t)$的零状态响应为$y_\te{zs}$，即
+\subsection{连续系统任意激励的零状态响应}
+\begin{BoxFormula}[连续系统任意激励的零状态响应]
+    设激励$f(t)$的零状态响应为$y_\te{zs}(t)$，即
     \begin{Equation}
         \Sum[i=0][n]a_iy_\te{zs}^{(i)}(t)=f(t)\qquad
         y_\te{zs}^{(i)}(\zm)=0
@@ -33,7 +33,7 @@
         f(t)=\Int[-\infty][\infty]f(\tau)\dirac(t-\tau)\dd{t}
     \end{Equation}
 
-    根据\fancyref{ppt:LTI系统的积分特性}，可将$f(t),\dirac(t-\tau)$换为其零状态响应$y_\te{zs}(t), \dirac(t-\tau)$
+    根据\fancyref{ppt:LTI系统的积分特性}，将$f(t),\dirac(t-\tau)$换为其零状态响应$y_\te{zs}(t), h(t-\tau)$
     \begin{Equation}*
         y_\te{zs}(t)=\Int[-\infty][\infty]f(\tau)h(t-\tau)\dd{t}\qedhere
     \end{Equation}
@@ -41,7 +41,7 @@
 上述过程，从直观上看，就是将任意激励$f(t)$分解为为一系列冲激函数，再运用LTI系统的积分特性，使得$f(t)$的零状态响应$y_\te{zs}(t)$可以被表示为一系列冲激响应$f(\tau)h(t-\tau)$的积分和，并将其定义为卷积积分$f(t)*h(t)$。通过这种方式，我们就将任意激励$f(t)$的零状态响应的求解转化为冲激响应$h(t)$的求解以及卷积$f(t)*h(t)$的计算，大幅简化了求解的复杂性。
 
 \subsection{卷积积分}
-卷积积分是一种重要的数学运算，在\xref{subsec:任意激励的零状态响应}中，我们曾自然的引出了卷积的概念，而实际上，卷积的概念同样出现在许多领域中，具有十分深刻的意义\cite{3b1b:卷积}。现就卷积积分定义如下。
+卷积积分是一种重要的数学运算，在\xref{subsec:连续系统任意激励的零状态响应}中，我们曾自然的引出了卷积的概念，而实际上，卷积的概念同样出现在许多领域中，具有十分深刻的意义\cite{3b1b:卷积}。现就卷积积分定义如下。
 \begin{BoxDefinition}[卷积积分]
     \uwave{卷积积分}（Convolution Integral）定义为
     \begin{Equation}

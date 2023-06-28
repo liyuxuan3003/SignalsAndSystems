@@ -1,0 +1,48 @@
+\section{零状态响应与卷积和}
+本节的思路与\xref{sec:零状态响应与卷积积分}是对应的
+\begin{itemize}
+    \item 连续系统中，任意激励的零状态响应是冲激响应与激励的卷积积分。
+    \item 离散系统中，任意激励的零状态响应是单位序列响应与激励的卷积和。
+\end{itemize}
+
+\subsection{离散系统任意激励的零状态响应}
+\begin{BoxFormula}[离散系统任意激励的零状态响应]*
+    设激励$f(k)$的零状态响应为$y_\te{zs}(k)$，即
+    \begin{Equation}
+        \Sum[i=0][n]a_{n-i}y_\te{zs}(k-i)=f(k)\qquad
+        y_\te{zs}(-i)=0\qquad i=1,2,\cdots,n
+    \end{Equation}
+    若$h(k)$为该系统的单位序列响应，即
+    \begin{Equation}
+        y_\te{zs}(k)=\Sum[i=-\infty][\infty]f(i)h(k-i)
+    \end{Equation}
+    该运算称为卷积和，亦记为
+    \begin{Equation}
+        y_\te{zs}(k)=f(k)*h(k)
+    \end{Equation}
+\end{BoxFormula}
+
+\begin{Proof}
+    类似于连续情形，任何序列$f(k)$都可以通过单位序列$\dirac(k)$表示
+    \begin{Equation}
+        f(k)=\Sum[i=-\infty][\infty]f(i)\dirac(i-k)
+    \end{Equation}
+    而根据\fancyref{def:单位序列}，很明显$\dirac(i-k)=\dirac(k-i)$
+    \begin{Equation}
+        f(k)=\Sum[i=-\infty][\infty]f(i)\dirac(k-i)
+    \end{Equation}
+    将$f(k)$和$\dirac(k-i)$分别换为其零状态响应$y_\te{zs}(k), h(k-i)$
+    \begin{Equation}*
+        y_\te{zs}(k)=\Sum[i=-\infty][\infty]f(i)h(k-i)\qedhere
+    \end{Equation}
+\end{Proof}
+
+\subsection{卷积和}
+\begin{BoxDefinition}[卷积和]
+    \uwave{卷积和}（Convolution Sum）定义为
+    \begin{Equation}
+        f_1(k)*f_2(k)=\Sum[i=-\infty][\infty]f_1(i)f_2(k-i)
+    \end{Equation}
+\end{BoxDefinition}
+
+容易证明，卷积和与卷积积分一样，满足交换律和结合律等性质。
