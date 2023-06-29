@@ -1,0 +1,20 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+    
+
+\foreach \t in {0.5,1,1.5,2}
+{
+    \draw[dashed] plot[domain=0:6,smooth,samples=500] (\x,{-3*\t+0.4*sin(deg(2*pi*\x*\t/6))});
+    \draw plot[domain=0:6,smooth,samples=500] (\x,{-3*\t-0.4*sin(deg(2*pi*\x*\t/6))});
+    \draw[thick](0,-3*\t) -- +(0,0.5) -- +(0,-0.5);
+    \draw[thick](6,-3*\t) -- +(0,0.5) -- +(0,-0.5);
+}
+
+\draw[->,thin] (0,0) node[left] {\small $0$} --node[above] {\small 沿弦的位置} (6,0) node[right] {\small $x$};
+
+\draw[<->,thin] (-0.5,-0.8) -- node[left,align=center] {\small 垂直位移\\\small $f(x,t)$} (-0.5,-2.2);
+
+\end{tikzpicture}
+\end{document}
