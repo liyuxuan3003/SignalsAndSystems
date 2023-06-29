@@ -43,7 +43,7 @@ fig=ReleaseHold[Hold[Plot[Evaluate[y[t]/.ysolve/.{w0->1,HeavisideTheta[0]->0}/.T
 	FrameLabel->{MaTeX["t",Magnification->1],MaTeX[funcName,Magnification->1]},
 	PlotLegends->Placed[
 		LineLegend[
-			(MaTeX["\\alpha="<>#,Magnification->0.8]&)/@alphaListStr,
+			(MaTeX["\\alpha="<>#,Magnification->1]&)/@alphaListStr,
 			LegendFunction->"Panel",
 			LegendLayout -> {"Column",4}],{Center,Bottom}]
 ]]/.(({ysolve->#[[1]],funcName->#[[2]]}&)/@{{ysolveG,"g(t)"},{ysolveH,"h(t)"}})]
