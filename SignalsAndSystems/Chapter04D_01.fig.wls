@@ -12,9 +12,9 @@ Export[nbPDFName,""]
 
 
 fig=ReleaseHold[Hold[Plot[
-	{Evaluate@FourierTrigSeries[SquareWave[t+0.25],t,n,FourierParameters->{1,2Pi}],SquareWave[t+0.25]},
+	{Evaluate@FourierTrigSeries[SquareWave[t+0.25]/2+0.5,t,n,FourierParameters->{1,2Pi}],SquareWave[t+0.25]/2+0.5},
 	{t,-1,1},
-	PlotRange->{-1.5,1.5},
+	PlotRange->{-0.2,1.2},
 	Frame->True,
 	GridLines->All,
 	Axes->None,
@@ -22,10 +22,10 @@ fig=ReleaseHold[Hold[Plot[
 	ExclusionsStyle->{{Dashed,Red,Thin}},
 	PlotPoints->4000,
 	PlotStyle->{{Black,Thickness[0.004]},{Red,Thin}},
-	FrameLabel->{MaTeX["n="<>ToString[n],Magnification->0.8,ContentPadding->False],None},
+	FrameLabel->{MaTeX["N="<>ToString[n],Magnification->0.8,ContentPadding->False],None},
 	FrameTicks->{
 		Table[{x,MaTeX[ToString[PaddedForm[x,{1,1}]],Magnification->0.4]},{x,-1,1,0.5}],
-		Table[{Chop[x],MaTeX[ToString[PaddedForm[Chop[x],{2,1}]],Magnification->0.4]},{x,-1.4,1.4,0.2}]
+		Table[{Chop[x],MaTeX[ToString[PaddedForm[Chop[x],{2,1}]],Magnification->0.4]},{x,-0.2,1.2,0.1}]
 	}]]/.(({n->#[[1]]}&)/@{{3},{5},{10},{20},{40},{80}})]
 
 

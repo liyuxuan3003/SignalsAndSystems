@@ -1,0 +1,185 @@
+\section{连续时间傅里叶级数的表示}
+
+\subsection{连续时间傅里叶级数}\setpeq{连续时间傅里叶级数}
+正如\xref{chap:信号与系统}中\xref{def:连续信号的周期}，若连续信号是周期的，那对于所有的$t$，存在某个正值的$T$，有
+\begin{Equation}
+    x(t)=x(t+T)
+\end{Equation}
+在这里，我们将上述$T$的最小非零值称为\uwave{基波周期}，而$\omega_0=2\pi/T$则相应称为\uwave{基波频率}。
+
+在本章中我们所关注的复指数信号也是一个周期信号
+\begin{Equation}
+    x(t)=\e^{\j\omega_0t}
+\end{Equation}
+
+而与之呈\uwave{谐波关系}（Harmonically Related）的复指数信号集就是
+\begin{Equation}
+    \phi_k(t)=\e^{\j k\omega_0t}\qquad k=0,\pm 1,\pm 2,\cdots 
+\end{Equation}
+这些信号的每一个都有一个基波频率，它们都是$\omega_0$的整数倍$1\omega_0, 2\omega_0, 3\omega_0, \cdots$，因此，它们的周期相应即为$(T/1), (T/2), (T/3), \cdots$，换言之，这些信号对于$T$来说仍然都是周期的（尽管对于$k\geq 2$的信号，$T$并非基波周期），故一个由成谐波关系的复指数线性组合的信号
+\begin{Equation}&[1]
+    x(t)=\Sum[k=-\infty][\infty]a_k\e^{\j k\omega_0t}
+\end{Equation}
+仍然是关于$T$的周期信号。其中，$k=0$的项其实就是一个常数，$k=\pm 1$这两项的基波频率都等于$\omega_0$，两者合在一起称为\uwave{基波分量}（Fundamental Component）或\uwave{一次谐波分量}（First Harmonic Component），$k=\pm 2$的频率则是基波分量的两倍，两者合在一起称为\uwave{二次谐波分量}（Second Harmonic Component）。而一般来说，$k=\pm N$就相应称为$N$次谐波分量。\goodbreak
+
+而一个周期信号表示为\xrefpeq{1}的形式，就称为其傅里叶级数表示。
+\begin{BoxDefinition}[连续傅里叶级数]
+    若一个频率为$\omega_0$的连续周期信号$x(t)$被表示为以下形式
+    \begin{Equation}
+        x(t)=\Sum[k=-\infty][\infty]a_k\e^{\j k\omega_0t}
+    \end{Equation}
+    就称之为为$x(t)$的\uwave{傅里叶级数}（Fourier Series）表示。
+\end{BoxDefinition}
+
+我们在微积分等课程中更熟悉的那种傅里叶级数，通常是由$\sin(k\omega_0 t)$和$\cos(k\omega_0 t)$表示的，让我们来看，那种形式是如何从\xref{def:傅里叶级数}产生的。事实上，若$x(t)$是实信号，由于$x(t)=x^{*}(t)$
+\begin{Equation}
+    x(t)=x^{*}(t)=\Sum[k=-\infty][\infty]a_k^{*}\e^{-\j k\omega_0 t}
+\end{Equation}
+以$-k$代替$k$并不妨碍结果
+\begin{Equation}
+    x(t)=\Sum[k=-\infty][\infty]a_{-k}^{*}\e^{\j k\omega_0 t}
+\end{Equation}
+而将其与\xref{def:连续傅里叶级数}的原始定义比较
+\begin{Equation}
+    x(t)=\Sum[k=-\infty][\infty]a_k\e^{\j k\omega_0t}
+\end{Equation}
+我们就可以得到
+\begin{Equation}
+    a_k^{*}=a_{-k}
+\end{Equation}
+这是一个重要的性质，即，若$x(t)$是实信号，那其傅里叶系数就满足$a_k^{*}=a_{-k}$，或者说
+\begin{itemize}
+    \item $a_k$的实部是一个关于$k$的偶函数（序列）。
+    \item $a_k$的虚部是要给关于$k$的奇函数（序列）。
+\end{itemize}
+现在，为了导出傅里叶级数的另外一种形式，我们将\xref{def:连续傅里叶级数}的求和重新写成
+\begin{Equation}
+    x(t)=a_0+\Sum[k=1][\infty][a_k\e^{\j k\omega_0t}+a_{-k}\e^{-\j k\omega_0t}]
+\end{Equation}
+由于$x(t)$被假定是实信号，有$a_{k}^{*}=a_{-k}$
+\begin{Equation}
+    x(t)=a_0+\Sum[k=1][\infty][a_k\e^{\j k\omega_0t}+a_k^{*}\e^{-\j k\omega_0t}]
+\end{Equation}
+由于括号内的两项互为共轭，重新写作
+\begin{Equation}
+    x(t)=a_0+\Sum[k=1][\infty]2\Re{a_k\e^{\j k\omega_0t}}
+\end{Equation}
+若$a_k$以极坐标形式呈现$a_k=A_k\e^{j\theta_k}$，这就有
+\begin{Equation}
+    x(t)=a_0+2\Sum[k=1][\infty]A_k\cos(k\omega_0t+\theta_k)
+\end{Equation}
+若$a_k$以直接坐标形式呈现$a_k=B_k+\j C_k$，这就有
+\begin{Equation}
+    x(t)=a_0+2\Sum[k=1][\infty][B_k\cos(k\omega_0t)-C_k\sin(k\omega_0t)]
+\end{Equation}
+值得强调的是，这两种三角形式的傅里叶级数，与\xref{def:连续傅里叶级数}中复指数形式的傅里叶级数并不完全等价。三角形式仅适用于$x(t)$为实信号的情况，若$x(t)$为复信号，则只能使用复指数形式。实际上，傅里叶级数的三角形式是最普遍被采用的（也是微积分中最初接触的形式），傅里叶最初工作中使用的傅里叶级数就是三角形式的，但是，复指数形式的傅里叶级数对于我们将讨论的问题来说，却是特别方便，今后我们都将毫无例外的采用复指数形式的傅里叶级数。
+
+\subsection{连续时间傅里叶级数的表示}
+现在的问题是，若一个周期信号可以表示为傅里叶级数，那傅里叶级数的系数如何确定呢？
+\begin{BoxFormula}[连续傅里叶级数的系数]
+    若$x(t)$能表示为傅里叶级数的形式
+    \begin{Equation}&[a]
+        x(t)=\Sum[k=-\infty][\infty]a_k\e^{\j k\omega_0t}
+    \end{Equation}
+    那么其中的\uwave{傅里叶系数}（Fourier Series Conefficient）$a_k$就相应为（其中$T=2\pi/\omega_0$）
+    \begin{Equation}&[b]
+        a_k=\frac{1}{T}\Int[T]x(t)\e^{-\j k\omega_0t}\dd{t}
+    \end{Equation}
+    \xrefpeq{a}称为\uwave{综合}（Synthesis）公式，\xrefpeq{b}称为\uwave{分析}（Analysis）公式。
+\end{BoxFormula}
+
+\begin{Proof}
+    假设一个给定的周期信号$x(t)$可以表示为傅里叶级数，根据\fancyref{def:连续傅里叶级数}
+    \begin{Equation}&[1]
+        x(t)=\Sum[k=-\infty][\infty]a_k\e^{\j k\omega_0 t}
+    \end{Equation}
+    两边各乘$\e^{-\j n\omega_0t}$，其中$n$是任意整数
+    \begin{Equation}&[2]
+        x(t)\e^{-\j n\omega_0t}=\Sum[k=-\infty][\infty]a_k\e^{\j k\omega_0t}\e^{-\j n\omega_0t}
+    \end{Equation}
+    两边从$0$到$T=2\pi/\omega_0$对$t$积分，有
+    \begin{Equation}&[3]
+        \Int[0][T]x(t)\e^{-\j n\omega_0t}\dd{t}=\Int[0][T]\Sum[k=-\infty][\infty]a_k\e^{\j k\omega_0t}\e^{-\j n\omega_0t}\dd{t}
+    \end{Equation}
+    交换积分和求和的次序
+    \begin{Equation}&[4]
+        \Int[0][T]x(t)\e^{-\j n\omega_0t}\dd{t}=\Sum[k=-\infty][\infty]a_k\Int[0][T]\e^{\j(k-n)\omega_0t}\dd{t}
+    \end{Equation}
+    \xrefpeq{4}右端的积分是很容易的，为此，利用欧拉关系可得
+    \begin{Equation}&[5]
+        \Int[0][T]\e^{\j(k-n)\omega_0t}\dd{t}=\Int[0][T]\cos[(k-n)\omega_0t]+\j\Int[0][T]\sin[(k-n)\omega_0t]\dd{t}
+    \end{Equation}
+    对于$k\neq n$，由于$\cos[(k-n)\omega_0t]$和$\sin[(k-n)\omega_0t]$都是关于$T$的周期函数，积分值为零。特别的，对于$k=n$，左端$\cos$的为常数$1$，积分后为$T$，右端$\sin$的积分为$0$，因此
+    \begin{Equation}&[6]
+        \Int[0][T]\e^{\j(k-n)\omega_0t}\dd{t}=
+        \begin{cases}
+            T,&k=n\\
+            0,&k\neq n
+        \end{cases}
+    \end{Equation}
+    将\xrefpeq{6}代回\xrefpeq{4}
+    \begin{Equation}
+        \Int[0][T]x(t)\e^{-\j n\omega_0t}\dd{t}=Ta_n
+    \end{Equation}
+    即
+    \begin{Equation}
+        a_n=\frac{1}{T}\Int[0][T]x(t)\e^{-\j n\omega_0t}\dd{t}
+    \end{Equation}
+    将$n$改记为$k$，且$[0,T]$上积分也可以换成在任意周期内积分，故
+    \begin{Equation}*
+        a_k=\frac{1}{T}\Int[T]x(t)\e^{-\j k\omega_0t}\dd{t}\qedhere
+    \end{Equation}
+\end{Proof}
+
+现在让我们来实践一下上述结论，如\xref{tab:周期性方波的傅里叶系数}所示，考虑周期性方波，其在一个周期内的定义是
+\begin{Equation}
+    x(t)=
+    \begin{cases}
+        1,&|t|<T_1\\
+        0,&T_1<|t|<T/2\\
+    \end{cases}
+\end{Equation}
+换言之，作为偶函数定义，方波周期为$T$，方波高电平的一半为$T_1$，即占空比是$2T_1/T$。
+
+首先，对于$k=0$，这实质就是在计算占空比
+\begin{Equation}
+    a_0=\frac{1}{T}\Int[-T/2][T/2]x(t)\dd{t}=\frac{1}{T}\Int[-T_1][T_1]\dd{t}=\frac{2T_1}{T}
+\end{Equation}
+随后，对于$k\neq 0$，计算得到
+\begin{Equation}
+    a_k=\frac{1}{T}\Int[-T/2][T/2]x(t)\e^{-\j k\omega_0t}\dd{t}=\frac{1}{T}\Int[-T_1][T_1]\e^{-\j k\omega_0t\dd{t}}=\eval{-\frac{1}{\j k\omega_0T}\e^{-\j k\omega_0t}}_{-T_1}^{T_1}
+\end{Equation}
+或重新写作
+\begin{Equation}
+    a_k=\frac{2}{ k\omega_0T}\qty[\frac{\e^{\j k\omega_0T_1}-\e^{-\j k\omega_0T_1}}{2\j}]
+\end{Equation}
+即，并考虑到$\omega_0=2\pi/T$
+\begin{Equation}
+    a_k=\frac{2\sin(k\omega_0T_1)}{k\omega_0T}=\frac{\sin[k\pi(2T_1/T)]}{k\pi}
+\end{Equation}
+综上，对于这里的方波，其傅里叶系数满足
+\begin{Equation}
+    a_k=
+    \begin{cases}
+        2T_1/T,&k=0\\
+        \sin[k\pi(2T_1/T)]/k\pi,&k=0\\
+    \end{cases}
+\end{Equation}
+特别的，如果$T=4T_1$，即占空比$2T_1/T=0.5$时，此时的方波高电平和低电平各占一半。
+
+\begin{Table}[周期性方波的傅里叶系数]{cc}
+<时域$x(t)$&频域$a_k$\\>
+\xcell<c>[2ex][0ex]{\includegraphics{build/Chapter04C_01a.fig.pdf}}&
+\xcell<c>[2ex][0ex]{\includegraphics{build/Chapter04C_01d.fig.pdf}}\\
+$T=4T_1$&$T=4T_1$\\
+\xcell<c>[2ex][0ex]{\includegraphics{build/Chapter04C_01b.fig.pdf}}&
+\xcell<c>[2ex][0ex]{\includegraphics{build/Chapter04C_01e.fig.pdf}}\\
+$T=8T_1$&$T=8T_1$\\
+\xcell<c>[2ex][0ex]{\includegraphics{build/Chapter04C_01c.fig.pdf}}&
+\xcell<c>[2ex][0ex]{\includegraphics{build/Chapter04C_01f.fig.pdf}}\\
+$T=16T_1$&$T=16T_1$\\
+\end{Table}
+
+\xref{tab:周期性方波的傅里叶系数}中，分别就$T=4T_1, T=8T_1, T=16T_1$的方波$x(t)$及其傅里叶系数$a_k$进行了绘图。
+
+需要说明的是，这里$a_k$是整数只是一个巧合，通常$a_k$是复数，需要两张图才能表示。

@@ -1,0 +1,139 @@
+\section{离散时间傅里叶级数的表示}
+本节将讨论离散时间周期信号的傅里叶级数表示，虽然这一节与\xref{sec:连续时间傅里叶级数的表示}的讨论完全以并行的方式进行，但是它们之间有一些很重要的区别，特别是
+\begin{itemize}
+    \item 连续时间周期信号的傅里叶级数，是无穷级数。
+    \item 离散时间周期信号的傅里叶级数，是有限项级数。
+\end{itemize}
+因此，离散傅里叶级数并不存在连续傅里叶级数中的收敛问题（狄利克雷定理和吉布斯现象）。
+
+\subsection{离散时间傅里叶级数}\setpeq{离散时间傅里叶级数}
+正如\xref{chap:信号与系统}中\xref{def:离散信号的周期}，若离散信号是周期的，那对于所有的$n$，存在某个正值的$N$，有
+\begin{Equation}
+    x(n)=x(n+N)
+\end{Equation}
+在这里，我们将上述$N$的最小正整数称为基波周期，而$\omega_0=2\pi/N$则相应称为基波频率。
+
+离散信号最大的不同，就表现在离散复指数信号集中
+\begin{Equation}
+    \phi_k(n)=\e^{\j k\omega_0n}\qquad
+    k=0,\pm 1,\pm 2,\cdots
+\end{Equation}
+离散复指数信号集中实质上只有$N$个信号是不同的，具体而言
+\begin{Equation}
+    \phi_k(n)=\phi_{k+rN}(n)
+\end{Equation}
+换言之，当$k$变化一个$N$的整数倍时，就得到了一个完全一样的序列。因为尽管频率变得更高了，但由于离散信号仅考察一些离散的整数点，在被考察的整数点上，和过去完全一样！
+
+现在我们尝试用$\phi_k(n)$的线性组合表示更一遍的周期序列
+\begin{Equation}
+    x(n)=\Sum[k=0][N-1]a_k\phi_{k}(n)=\Sum[k=0][N-1]a_k\e^{\j k\omega_0 n}
+\end{Equation}
+但由于前述原因，实际上除了$k=0, 1, 2, \cdots, N-1$，完全也可以取$k=1, 2, 3, \cdots, N$，只要是任意$N$个$k$的连续取值即可，介于$\phi_k(n)$仅在$k$的$N$个连续取值范围内是不同的。为了表示这种一般性，特将求和限表示为$k=\<N>$的形式，代表任意$N$个连续取值，即
+\begin{Equation}&[1]
+    x(n)=\Sum[k=\<N>]a_k\phi_{k}(n)=\Sum[k=\<N>]a_k\e^{\j k\omega_0 n}
+\end{Equation}
+这就是离散信号的傅里叶级数表示。
+
+\begin{BoxDefinition}[离散傅里叶级数]
+    若一个频率为$\omega_0$的离散周期信号$x(n)$被表示为以下形式
+    \begin{Equation}
+        x(n)=\Sum[k=\<N>]a_k\e^{\j k\omega_0 n}
+    \end{Equation}
+    就称之为离散信号$x(n)$的傅里叶级数表示。
+\end{BoxDefinition}
+
+\subsection{离散时间傅里叶级数的表示}\setpeq{离散时间傅里叶级数的表示}
+假设一个周期序列$x(n)$，其周期为$N$，现在想确定$x(n)$能否表示为傅里叶级数的形式？如果可以，那么这些系数$a_k$是什么？这个问题实质上就是要求得一组线性联立方程的解。
+
+根据\fancyref{def:离散傅里叶级数}
+\begin{Equation}&[1]
+    x(n)=\Sum[k=\<N>]a_k\e^{\j k\omega_0n}
+\end{Equation}
+联立方程组如何建立？依次令$x(n)$对$n=0,1,2,\cdots,N-1$取值
+\begin{Equation}&[2]
+    \begin{cases}
+        x(0)=\Sum[k=\<N>]a_k\\
+        x(1)=\Sum[k=\<N>]a_k\e^{\j k\omega_0}\\
+        x(2)=\Sum[k=\<N>]a_k\e^{\j 2k\omega_0}\\
+        x(3)=\Sum[k=\<N>]a_k\e^{\j 3k\omega_0}\\
+        \vdots\\
+        x(N-1)=\Sum[k=\<N>]a_k\e^{\j (N-1)k\omega_0}
+    \end{cases}
+\end{Equation}
+这样，\xrefpeq{2}就是一个具有$N$个未知系数$a_k, k=\<N>$的$N$个线性方程。从理论上可以证明，这$N$个方程是线性独立的，因此可以利用已知的$x(n)$值求得系数$a_k$。不过在这里，我们并不计划这么做，而是仍采用与连续时间情况并行的方法进行推导，得到$x(n)$的一个闭式。
+
+\begin{BoxFormula}[离散傅里叶级数的系数]
+    若$x(n)$能表示为傅里叶级数的形式
+    \begin{Equation}&[a]
+        x(n)=\Sum[k=\<N>]a_k\e^{\j k\omega_0 n}
+    \end{Equation}
+    那么其中的傅里叶系数$a_k$就相应为（其中$N=2\pi/\omega_0$）
+    \begin{Equation}&[b]
+        a_k=\frac{1}{N}\Sum[n=\<N>]x(n)\e^{-\j k\omega_0n}
+    \end{Equation}
+    \xrefpeq{a}称为综合公式，\xrefpeq{b}称为分析公式。
+\end{BoxFormula}
+
+\begin{Proof}
+   假设一个给定的周期序列$x(n)$可以表示为傅里叶级数，根据\fancyref{def:离散傅里叶级数}
+   \begin{Equation}&[1]
+       x(n)=\Sum[k=\<N>]a_k\e^{\j k\omega_0n}
+   \end{Equation}
+   两边各乘$\e^{-\j r\omega_0n}$，其中$r$是任意整数
+   \begin{Equation}&[2]
+       x(n)\e^{-\j r\omega_0n}=\Sum[k=\<N>]a_k\e^{\j k\omega_0 n}\e^{-\j r\omega_0n}
+   \end{Equation}
+   两边对$n$在任意连续$N$项上求和
+   \begin{Equation}&[3]
+       \Sum[n=\<N>]x(n)\e^{-\j r\omega_0n}=\Sum[n=\<N>]\Sum[k=\<N>]a_k\e^{\j k\omega_0 n}\e^{-\j r\omega_0n}
+   \end{Equation}
+   交换右边的求和顺序
+   \begin{Equation}&[4]
+    \Sum[n=\<N>]x(n)\e^{-\j r\omega_0n}=\Sum[k=\<N>]a_k\Sum[n=\<N>]\\e^{\j(k-r)\omega_0n}
+   \end{Equation}
+   而一个显然的事实是
+   \begin{Equation}&[5]
+       \Sum[n=\<N>]\e^{\j k\omega_0n}=
+       \begin{cases}
+           N,&k=0,\pm N,\pm 2N,\cdots\\
+           0,&\text{otherwise}
+       \end{cases}
+   \end{Equation}
+   即周期复指数序列的值在一个完整周期内求和的结果为零，除非该复指数是某一常数\footnote{当$k=0$时$\e^{\j k\omega_0n}=1$为常数，而$k=\pm N,\pm 2N,\cdots$的结果同$k=0$。}。
+
+   在\xrefpeq{4}中应用\xrefpeq{5}的结果，\xrefpeq{4}右边内层对$n$的求和为零，除非$(k-r)$为零或者是$N$的整倍数。简便起见，不妨假设$r$的取值在$k$的变化范围内，所以，此处右侧的内层求和，在$k=r$时为$N$，在$k\neq r$时为$0$，因此右侧的求和结果就演变为$Na_r$，于是有
+   \begin{Equation}
+       \Sum[n=\<N>]x(n)\e^{-\j r\omega_0n}=Na_r
+   \end{Equation}
+   即
+   \begin{Equation}
+       a_r=\frac{1}{N}\Sum[n=\<N>]x(n)\e^{-\j r\omega_0n}
+   \end{Equation}
+   将$r$改记为$k$，得到
+   \begin{Equation}*
+       a_k=\frac{1}{N}\Sum[n=\<N>]x(n)\e^{-\j k\omega_0n}\qedhere
+   \end{Equation}
+\end{Proof}
+
+现在让我们回过来看\fancyref{fml:离散傅里叶级数的系数}
+\begin{Equation}
+    x(n)=\Sum[k=\<N>]a_k\phi_k(n)
+\end{Equation}
+若$k$依次取$0,1,2\cdots,N-1$
+\begin{Equation}
+    x(n)=a_0\phi_0(n)+a_1\phi_1(n)+a_2\phi_2(n)+\cdots+a_{N-1}\phi_{N-1}(n)
+\end{Equation}
+若$k$依次取$1,2,3,\cdots,N$
+\begin{Equation}
+    x(n)=a_1\phi_1(n)+a_2\phi_2(n)+a_3\phi_3(n)+\cdots+a_{N}\phi_{N}(n)
+\end{Equation}
+由于$\phi_0(n)=\phi_N(n)$，因此$a_0=a_N$，更一般的说
+\begin{Equation}
+    a_k=a_{k+N}
+\end{Equation}
+即$a_k$和$\phi_k(n)$一样都是以$N$为周期重复的。诚然，傅里叶级数中只需要$N$个连续的$a_k$值就可以了，但有时需要将$a_k$视作定义在全部$k$值上的序列，此时$a_k=a_{k+N}$就很重要了。
+
+应当指出的是，对于一个离散信号$x(n)$，离散傅里叶级数总是存在的，没有收敛问题，没有吉布斯现象。这是由于这样一个事实，任何离散时间周期序列$x(n)$完全是由有限个参数，这就是在一个周期内的$N$个序列值。从这个角度看，分析公式只是把这$N$个参数变为一组等效的$N$个傅里叶系数值，综合公式则告诉我们如何利用一个有限项级数来回复原来的序列值。
+
+
+

@@ -1,0 +1,80 @@
+\section{LTI系统对复指数信号的响应}
+正如我们在本章首指出的那样，在LTI系统中，将信号表示成基本信号的线性组合是很有利的，但是，这些基本信号应当如何选取呢？我们提出以下两条基本信号应具有的性质
+\begin{enumerate}
+    \item 这些基本信号在LTI系统上的响应应当十分简单。
+    \item 这些基本信号的线性组合，能构成相当广泛的一类信号。
+\end{enumerate}
+傅里叶分析的很多重要价值就来自于这两点。我们知道，傅里叶分析选取的基本信号是复指数函数，取决于系统是连续时间还是离散时间，其分别可以记作$\e^{st}, z^n$，其中$s$和$z$均为复数，而复指数函数$\e^{st}, z^n$实际上就满足以上两条好的性质，具体来说，在LTI系统中，复指数函数的响应仍然是复指数函数，同时，复指数函数的线性组合可以表示任意满足狄利克雷条件的周期函数，后者是一个相当宽松的条件。在本节和下两节我们将分别具体讨论这两条性质。
+
+那么，为什么在LTI系统中，复指数信号的响应仍然是复指数信号呢？
+\begin{BoxProperty}[LTI系统对复指数信号的响应]
+    LTI系统对复指数信号的响应，同样是一个复指数信号，但幅度不同。
+
+    对于连续时间系统
+    \begin{Equation}
+        \e^{st}\to H(s)\e^{st}
+    \end{Equation}
+    对于离散时间系统
+    \begin{Equation}
+        z^n\to H(z)z^n
+    \end{Equation}
+    其中$H(s)$或$H(z)$是复振幅因子，通常是关于$s$或$z$的函数。
+\end{BoxProperty}
+
+\begin{Proof}
+    \paragraph{连续时间系统的证明}
+    对于任意输入$x(t)$，其响应可由卷积分积分确定，因此若$x(t)=\e^{st}$
+    \begin{Equation}
+        y(t)=\Int[-\infty][\infty]h(\tau)x(t-\tau)\dd{\tau}=\Int[-\infty][\infty]h(\tau)\e^{s(t-\tau)}\dd{\tau}
+    \end{Equation}
+    将$\e^{st}$从积分内移出来
+    \begin{Equation}
+        y(t)=\e^{st}\Int[-\infty][\infty]h(\tau)\e^{-s\tau}\dd{\tau}
+    \end{Equation}
+    若上式右端的积分收敛，记其为$H(s)$
+    \begin{Equation}*
+        y(t)=\e^{st}H(s)
+    \end{Equation}
+    \paragraph{离散时间系统的证明}
+    对于任意输入$x(n)$，其响应可由卷积核确定，因此若$x(n)=z^n$
+    \begin{Equation}
+        y(n)=\Sum[k=-\infty][\infty]h(k)x(n-k)=\Sum[k=-\infty][\infty]h(k)z^{n-k}
+    \end{Equation}
+    将$z^n$从求和内移出来
+    \begin{Equation}
+        y(n)=z^n\Sum[k=-\infty][\infty]h(k)z^{-k}
+    \end{Equation}
+    若上式右端的求和收俩，记其为$H(z)$
+    \begin{Equation}*
+        y(n)=z^nH(z)\qedhere
+    \end{Equation}
+\end{Proof}
+
+我们已经相当熟悉特征值与特征函数的概念，若函数经过某个算子的作用后仍然为该函数的常数倍，那么，该常数称为这个算子的\uwave{特征值}（Eigenvalue），该函数则称为这个算子的\uwave{特征函数}（Eigenfunction）。在这里，LTI系统即算子，而复指数信号$\e^{st},z^n$经过其作用后是幅度变化的复指信号$H(s)\e^{st}, H(z)\e^{st}$，因此，我们就可以说，复指数信号$\e^{st}, z^n$和其对应的复振幅因子$H(s), H(z)$分别是LTI系统的特征函数和特征值。当然，尽管$H(s),H(z)$看起来是函数，但是对于每一个确定的特征函数而言$s$和$z$是固定的，因此$H(s),H(z)$确实为常数。
+
+我们如果将上述性质与LTI系统的叠加性质联合起来，就意味着以下性质
+\begin{BoxProperty}[LTI系统的叠加性与复指数响应]
+    若连续LTI系统的输入为复指数信号的线性组合
+    \begin{Equation}
+        x(t)=\Sum[k]a_k\e^{s_kt}
+    \end{Equation}
+    那么输出一定是
+    \begin{Equation}
+        y(t)=\Sum[k]a_kH(s_k)\e^{s_kt}
+    \end{Equation}
+    若离散LTI系统的输入为复指数信号的线性组合
+    \begin{Equation}
+        x(n)=\Sum[k]a_kz_k^n
+    \end{Equation}
+    那么输出一定是
+    \begin{Equation}
+        y(n)=\Sum[k]a_kH(z_k)z_k^n
+    \end{Equation}
+\end{BoxProperty}
+
+换言之，如果一个LTI系统的输入能够表示复指数组合，那么系统的输出也能表示为相同复指数的线性组合。并且，在输出表达式中的每一个系数，都可以用输入中的相应系数$a_k$分别与相应特征函数$\e^{s_kt}$或$z_k^n$有关的特征值$H(s_k)$或$H(z_k)$相乘求得。欧拉在弦振动问题的研究中发现的的正是这一事实，高斯及其他学者在时间序列分析中所用的也是这一点。这也就促使傅里叶及其后的其他人考虑这样一个问题：\empx{究竟多大范围内的信号可以用复指数的线性组来表示？}在本章接下来的几节中，将先对周期信号研究这个问题，次序是先连续后离散。在接下来的两章中再将这些表达式推广到非周期信号。除此之外，值得强调的是，理论上这里出现的$s$和$z$都可以是任意复数，但傅里叶分析仅限于这些变量的特殊形式，具体而言
+\begin{itemize}
+    \item 连续时间下$\e^{st}$的$s$仅限于纯虚部值$s=\j\omega$，因此仅考虑$\e^{\j\omega t}$形式的复指数。
+    \item 离散时间下$z^n$的$z$仅限于单位振幅值$z=\e^{\j\omega}$，因此仅考虑$\e^{\j\omega n}$形式的复指数。
+\end{itemize}
+假若我们取消这一限制，就将从傅里叶变换过渡到拉普拉斯变换，不过这是更后面的问题了。

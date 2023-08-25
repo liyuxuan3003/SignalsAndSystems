@@ -1,0 +1,52 @@
+\section{离散傅里叶级数的性质}\setpeq{离散傅里叶级数的性质}
+离散傅里叶级数的性质与连续傅里叶级数的性质非常相似，可以对照记忆，如\xref{tab:离散傅里叶级数的性质}所示。
+
+在\xref{tab:连续傅里叶级数的性质}中，若连续信号$x(t), y(t)$满足
+\begin{Equation}
+    x(t)\FSarr a_k\qquad y(t)\FSarr b_k
+\end{Equation}
+那么连续相乘性质指出
+\begin{Equation}&[1]
+    x(t)y(t)\FSarr h_k=a_k*b_k=\Sum[l=-\infty][\infty]a_lb_{k-l}
+\end{Equation}
+
+在\xref{tab:离散傅里叶级数的性质}中，若离散信号$x(n), y(n)$满足
+\begin{Equation}
+    x(n)\FSarr a_k\qquad y(n)\FSarr b_k
+\end{Equation}
+那么离散相乘性质指出
+\begin{Equation}&[2]
+    x(n)y(n)\FSarr h_k=a_k*b_k=\Sum[l=\<N>]a_lb_{k-l}
+\end{Equation}\goodbreak
+注意到\xrefpeq{1}和\xrefpeq{2}虽然同为离散卷积，但略有不同
+\begin{itemize}
+    \item \xrefpeq{1}中的这种从$-\infty$至$\infty$卷积，称为\uwave{非周期卷积}（Aperiodic Convolution）。
+    \item \xrefpeq{2}中的这种在周期$N$内进行的卷积，称为\uwave{周期卷积}（Periodic Convolution）。
+\end{itemize}
+
+\begin{Tablex}[离散傅里叶级数的性质]{lXX}
+<性质&时域&频域\\>
+    线性&$Ax(n)+By(n)$&$Aa_k+Bb_k$\\
+    时移&$x(n-n_0)$&$a_k\e^{-\j k\omega_0n_0}$\\
+    频移&$x(n)\e^{\j M\omega_0 n}$&$a_{k-M}$\\
+    共轭&$x^{*}(n)$&$a^{*}_{-k}$\\
+    时间反转&$x(-n)$&$a_{-n}$\\
+    时域尺度变换&$x(n/m), m\in\Z^{+}$&$a_k/m$\\
+    卷积&$x(n)*y(n)=\Sum[r=\<N>]x(r) y(n-r)$&$a_kb_kN$\\
+    相乘&$x(n)y(n)$&$a_k*b_k=\Sum[l=\<N>]a_lb_{k-l}$\\
+    差分&$x(n)-x(n-1)$&$(1-\e^{-\j k\omega_0})a_k$\\
+    求和&$\Sum[k=-\infty][n]x(t)\dd{t}$&$(1-\e^{-\j k\omega_0})^{-1}a_k$\\
+    实信号&$x(t)$为实信号&\xcell<l>[2ex][0ex]{
+    $\begin{cases}
+        a_k=a_{-k}^{*}\\
+        \Re{a_k}=\Re{a_{-k}}\\
+        \Im{a_k}=-\Im{a_{-k}}\\
+        |a_k|=|a_{-k}|\\
+        \arg a_k=-\arg a_{-k}
+    \end{cases}$}\\
+    实偶信号&$x(t)$为实偶信号&$a_k$仅有实部，且实部为偶序列\\
+    实奇函数&$x(t)$为奇偶信号&$a_k$仅有虚部，且虚部为奇序列\\
+    帕塞瓦尔定理&\mc{2}{$(1/N)\Sum[n=\<N>]|x(n)|^2\dd{t}=\Sum[k=\<N>]|a_k|^2$}\\
+\end{Tablex}
+
+除此之外，离散中的差分性质和连续的微分性质也是对应的，不过结论有些不同。
