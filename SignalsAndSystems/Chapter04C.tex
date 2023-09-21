@@ -31,7 +31,7 @@
     就称之为为$x(t)$的\uwave{傅里叶级数}（Fourier Series）表示。
 \end{BoxDefinition}
 
-我们在微积分等课程中更熟悉的那种傅里叶级数，通常是由$\sin(k\omega_0 t)$和$\cos(k\omega_0 t)$表示的，让我们来看，那种形式是如何从\xref{def:傅里叶级数}产生的。事实上，若$x(t)$是实信号，由于$x(t)=x^{*}(t)$
+我们在微积分等课程中更熟悉的那种傅里叶级数，通常是由$\sin(k\omega_0 t)$和$\cos(k\omega_0 t)$表示的，让我们来看，那种形式是如何从\xref{def:连续傅里叶级数}产生的。事实上，若$x(t)$是实信号，由于$x(t)=x^{*}(t)$
 \begin{Equation}
     x(t)=x^{*}(t)=\Sum[k=-\infty][\infty]a_k^{*}\e^{-\j k\omega_0 t}
 \end{Equation}
@@ -50,7 +50,7 @@
 这是一个重要的性质，即，若$x(t)$是实信号，那其傅里叶系数就满足$a_k^{*}=a_{-k}$，或者说
 \begin{itemize}
     \item $a_k$的实部是一个关于$k$的偶函数（序列）。
-    \item $a_k$的虚部是要给关于$k$的奇函数（序列）。
+    \item $a_k$的虚部是一个关于$k$的奇函数（序列）。
 \end{itemize}
 现在，为了导出傅里叶级数的另外一种形式，我们将\xref{def:连续傅里叶级数}的求和重新写成
 \begin{Equation}
@@ -64,7 +64,7 @@
 \begin{Equation}
     x(t)=a_0+\Sum[k=1][\infty]2\Re{a_k\e^{\j k\omega_0t}}
 \end{Equation}
-若$a_k$以极坐标形式呈现$a_k=A_k\e^{j\theta_k}$，这就有
+若$a_k$以极坐标形式呈现$a_k=A_k\e^{\j\theta_k}$，这就有
 \begin{Equation}
     x(t)=a_0+2\Sum[k=1][\infty]A_k\cos(k\omega_0t+\theta_k)
 \end{Equation}
@@ -162,7 +162,7 @@
     a_k=
     \begin{cases}
         2T_1/T,&k=0\\
-        \sin[k\pi(2T_1/T)]/k\pi,&k=0\\
+        \sin[k\pi(2T_1/T)]/k\pi,&k\neq 0\\
     \end{cases}
 \end{Equation}
 特别的，如果$T=4T_1$，即占空比$2T_1/T=0.5$时，此时的方波高电平和低电平各占一半。
