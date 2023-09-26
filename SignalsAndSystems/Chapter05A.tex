@@ -1,0 +1,112 @@
+\section{傅里叶变换的引入}\setpeq{傅里叶变换的引入}
+在开始之前，我们愿意先从一个例子入手，复用\xref{subsec:连续时间傅里叶级数的表示}中方波的例子
+\begin{Equation}&[1]
+    \xwav{x}(t)=\begin{cases}
+        1,&\abs{t}<T_1\\
+        0,&T_1<\abs{t}<T/2
+    \end{cases}
+\end{Equation}
+当$k\neq 0$，其傅里叶系数满足
+\begin{Equation}&[2]
+    a_k=\frac{\sin[k\pi(2T_1/T)]}{k\pi}
+\end{Equation}
+当时，在\xref{tab:周期性方波的傅里叶系数}中，我们曾展示了在周期$T$一定时方波脉冲半宽$T_1$取不同值时的图像，而在这里，我们换一个新的角度来看这个问题。首先，明确一下，本节我们要解决的问题是，非周期信号如何通过傅里叶方法表示。这里，非周期信号可以考虑为一个简单的例子，仍然是方波，但仅包含位于中央的那一个方形脉冲。将非周期的方形脉冲记为$x(t)$，将其对应的周期方波记为$\xwav{x}(t)$。那么，如何通过$\xwav{x}(t)$研究$x(t)$呢？如\xref{tab:傅里叶变换的引入}所示，固定$T_1$，令$\xwav{x}(t)$的周期$T$逐渐增大，这样一来，方波中两个方形脉冲的间距就越来越大，试想，当$T\to\infty$时，方波$\xwav{x}(t)$就只剩下中央的那一个方形脉冲，其两侧的下一个脉冲都到无穷远的地方了。因此，我们就有
+\begin{Equation}&[3]
+    \Lim[T\to\infty]\xwav{x}(t)=x(t)
+\end{Equation}
+由于$T=(2\pi/\omega_0)$，故$T\to\infty$等价于$\omega_0\to 0$
+\begin{Equation}&[4]
+    \Lim[\omega_0\to 0]\xwav{x}(t)=x(t)
+\end{Equation}
+通过这种方式，我们就可以用周期方波$\xwav{x}(t)$来研究非周期方形脉冲$x(t)$的傅里叶表示了。
+
+\begin{Table}[傅里叶变换的引入]{|cc|}
+<时域&频域\\>
+\xcell<c>[2ex][0ex]{\includegraphics[width=0.47\linewidth]{build/Chapter05A_01a.fig.pdf}}&
+\xcell<c>[2ex][0ex]{\includegraphics[width=0.47\linewidth]{build/Chapter05A_01d.fig.pdf}}\\
+\mcx<c>{2}[0ex][1ex](|c|){$T=4T_1=4$\qquad$\omega_0=(2\pi/T)=\pi/2$}\\ \hlinelig
+\xcell<c>[2ex][0ex]{\includegraphics[width=0.47\linewidth]{build/Chapter05A_01b.fig.pdf}}&
+\xcell<c>[2ex][0ex]{\includegraphics[width=0.47\linewidth]{build/Chapter05A_01e.fig.pdf}}\\
+\mcx<c>{2}[0ex][1ex](|c|){$T=8T_1=8$\qquad$\omega_0=(2\pi/T)=\pi/4$}\\ \hlinelig
+\xcell<c>[2ex][0ex]{\includegraphics[width=0.47\linewidth]{build/Chapter05A_01c.fig.pdf}}&
+\xcell<c>[2ex][0ex]{\includegraphics[width=0.47\linewidth]{build/Chapter05A_01f.fig.pdf}}\\
+\mcx<c>{2}[0ex][1ex](|c|){$T=16T_1=16$\qquad$\omega_0=(2\pi/T)=\pi/8$}\\
+\end{Table}
+
+我们将\xrefpeq{2}中的$T$代换为$2\pi/\omega_0$，因为我们更喜欢频率
+\begin{Equation}&[5]
+    a_k=\frac{\sin(k\omega_0T_1)}{k\pi}
+\end{Equation}
+我们这里首先注意到了一个问题，当$\omega_0\to 0$时傅里叶系数$a_k\to 0$。这是合理的，因为$\omega_0$的减小将使得频谱越来越密，因此分配在每一频率上的能量也将越来越小。类似的情况我们曾不止一次的遇到过，最近的一次是“散度”和“旋度”的定义。当我们关心的某个量在连续化时趋于零，我们将转而考察这个量的密度。这里，既然$a_k$趋于零，我们不妨考察$a_k$的频谱密度$2\pi(a_k/\omega_0)$，频谱密度代表单位频率上频谱系数的大小（这里$2\pi$只是无关紧要的系数）。
+
+这里频谱密度$2\pi(a_k/\omega_0)$的表达式为
+\begin{Equation}&[6]
+    2\pi(a_k/\omega_0)=\frac{2\sin(k\omega_0 T_1)}{k\omega_0}
+\end{Equation}
+这里引入$\omega=k\omega_0$代换
+\begin{Equation}&[7]
+    2\pi(a_k/\omega_0)=\frac{2\sin(\omega T_1)}{\omega}
+\end{Equation}
+而当$\omega_0\to 0$时，频谱连续化，频率$\omega$也将称为一个连续变量。通过\xref{tab:傅里叶变换的引入}我们可以很清楚的看到这一点，连续函数$2\sin(\omega T_1)/\omega$是傅里叶系数的频谱密度$2\pi(a_k/\omega_0)$的包络，随着$\omega_0$的减小，频谱密度在包络上的采样也越密集，当$\omega_0$趋于零时，频谱密度就将趋于包络函数。
+
+这个例子说明了对非周期信号建立傅里叶表示的基本思想。具体而言，若非周期信号$x(t)$具有有限持续期$T_1$，就可以构造一个周期为$T>T_1$的周期信号$\xwav{x}(t)$，使得$x(t)$是$\xwav{x}(t)$的一个周期，而当$T\to\infty$即$\omega_0\to 0$时，就有$\xwav{x}(t)\to x(t)$。现在，我们就来考察$\xwav{x}(t)$的傅里叶级数
+
+依据\fancyref{fml:连续傅里叶级数的系数}
+\begin{Equation}&[8]
+    \xwav{x}(t)=\Sum[k=-\infty][\infty]a_k\e^{\j k\omega_0 t}
+\end{Equation}
+其中$a_k$为
+\begin{Equation}&[9]
+    a_k=\frac{1}{T}\Int[-T/2][T/2]\xwav{x}(t)\e^{-\j k\omega_0t}\dd{t}
+\end{Equation}
+代入$T=2\pi/\omega_0$，得到
+\begin{Equation}&[10]
+    a_k=\frac{\omega_0}{2\pi}\Int[-T/2][T/2]\xwav{x}(t)\e^{-\j k\omega_0t}\dd{t}
+\end{Equation}
+由于在$\abs{t}<T/2$时$x(t)=\xwav{x}(t)$，因此
+\begin{Equation}&[11]
+    a_k=\frac{\omega_0}{2\pi}\Int[-T/2][T/2]x(t)\e^{-\j k\omega_0t}\dd{t}
+\end{Equation}
+由于在$\abs{t}>T/2$时$x(t)=0$，因此可以将积分区间拓宽到正负无穷
+\begin{Equation}&[12]
+    a_k=\frac{\omega_0}{2\pi}\Int[-\infty][\infty]x(t)\e^{-\j k\omega_0t}\dd{t}
+\end{Equation}
+按照之前的经验，引入频谱密度$X(\j\omega)=2\pi(a_k/\omega_0)$，并作$\omega=k\omega_0$的代换
+\begin{Equation}&[13]
+    X(\j\omega)=\frac{2\pi a_k}{\omega_0}=\Int[-\infty][\infty]x(t)\e^{-\j\omega t}\dd{t}
+\end{Equation}
+反过来
+\begin{Equation}&[14]
+    a_k=\frac{\omega_0}{2\pi}X(\j\omega)
+\end{Equation}
+将\xrefpeq{14}代回\xrefpeq{8}中
+\begin{Equation}&[15]
+    \xwav{x}(t)=\frac{\omega_0}{2\pi}\Sum[k=-\infty][\infty]X(\j\omega)\e^{\j k\omega_0t}
+\end{Equation}
+将$\omega_0$移入积分，并作$\omega=k\omega_0$的代换
+\begin{Equation}&[16]
+    \xwav{x}(t)=\frac{1}{2\pi}\Sum[k=-\infty][\infty]X(\j\omega)\e^{\j\omega t}\omega_0
+\end{Equation}
+而$x(t)$是$\xwav{x}(t)$在$\omega_0\to 0$时的极限
+\begin{Equation}&[17]
+    x(t)=\Lim[\omega_0\to 0]\xwav{x}(t)=\frac{1}{2\pi}\Lim[\omega_0\to 0]\Sum[k=-\infty][\infty]X(\j\omega)\e^{\j\omega t}\omega_0
+\end{Equation}
+和式的极限，就是积分
+\begin{Equation}&[18]
+    x(t)=\frac{1}{2\pi}\Int[-\infty][\infty]X(\j\omega)\e^{\j\omega t}\dd{\omega}
+\end{Equation}
+至此，我们就完成了傅里叶级数至傅里叶变换的过渡，将\xrefpeq{13}和\xrefpeq{18}整理如下。
+\begin{BoxFormula}[傅里叶变换]
+    \uwave{傅里叶变换}（Fourier Transform）是指，对于非周期信号$x(t)$
+    \begin{Equation}
+        X(\j\omega)=\Int[-\infty][\infty]x(t)\e^{-\j\omega t}\dd{t}=\F{x(t)}
+    \end{Equation}
+    \uwave{傅里叶逆变换}（Inverse Fourier Transform）则是指
+    \begin{Equation}
+        x(t)=\frac{1}{2\pi}\Int[-\infty][\infty]X(\j\omega)\e^{\j\omega t}\dd{\omega}=\F*{x(t)}
+    \end{Equation}
+    其中$x(t)$和$X(\j\omega t)$称为\uwave{傅里叶变换对}（Fourier Transform Pair）
+    \begin{Equation}
+        x(t)\Farr X(\j\omega)
+    \end{Equation}
+\end{BoxFormula}
