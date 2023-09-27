@@ -1,0 +1,241 @@
+\section{傅里叶变换的示例}
+在本节，我们将计算一些常用的函数的傅里叶变换，以此对傅里叶变换有更深刻的理解。
+
+\subsection{指数函数的傅里叶变换}
+这一小节，我们讨论与指数函数$\e^{-at}$有关的一些傅里叶变换。
+
+\begin{Tablex}[单边指数函数的傅里叶变换]{|Y|Y|}
+    <时域&频域\\>
+        \mrx<Y>{2}[-6ex]{\includegraphics[scale=0.75]{build/Chapter05C_01a.fig.pdf}}
+        &\xcell<Y>[2ex][-4ex]{\includegraphics[scale=0.75]{build/Chapter05C_01b.fig.pdf}}\\
+        &\xcell<Y>{\footnotesize $\mal{\Abs[X(\j\omega)]=\frac{1}{\sqrt{a^2+\omega^2}}}$}\\
+        &\xcell<Y>[1ex][-4ex]{\includegraphics[scale=0.75]{build/Chapter05C_01c.fig.pdf}}\\
+        &\xcell<Y>{\footnotesize $\mal{\Arg[X(\j\omega)]=-\arctan(\frac{\omega}{a})}$}\\
+        \xcell<Y>{$\mal{x(t)=\e^{-at}u(t)}$}&
+        \xcell<Y>{$\mal{X(\j\omega)=\frac{1}{a+\j\omega}}$}\\
+\end{Tablex}
+
+\begin{BoxExample}[单边指数函数的傅里叶变换]
+    对于单边指数函数
+    \begin{Equation}
+        x(t)=\e^{-at}u(t)
+    \end{Equation}
+    傅里叶变换为
+    \begin{Equation}
+        X(\j\omega)=\frac{1}{a+\j\omega}
+    \end{Equation}
+    傅里叶变换的模和辐角分别为
+    \begin{Equation}
+        \Abs[X(\j\omega)]=\frac{1}{\sqrt{a^2+\omega^2}}\qquad
+        \Arg[X(\j\omega)]=\arctan(\frac{\omega}{a})
+    \end{Equation}
+\end{BoxExample}
+
+\begin{Proof}
+    根据\fancyref{fml:傅里叶变换}
+    \begin{Equation}
+        X(\j\omega)=\Int[-\infty][\infty]x(t)\e^{-\j\omega t}\dd{t}=\Int[0][\infty]\e^{-at}\e^{-\j\omega t}\dd{t}=\Int[0][\infty]\e^{-(a+\j\omega)t}\dd{t}
+    \end{Equation}
+    计算积分
+    \begin{Equation}
+        X(\j\omega)=\eval{-\frac{1}{a+\j\omega}\e^{-(a+\j\omega)t}}_0^{\infty}
+    \end{Equation}
+    完成求值
+    \begin{Equation}*
+        X(\j\omega)=\frac{1}{a+\j\omega}\qedhere
+    \end{Equation}
+\end{Proof}
+
+在\xref{tab:单边指数函数的傅里叶变换}中展现了单边指数函数和其傅里叶变换的图像。应注意的是，频域$X(\j\omega)$是一个复函数，因此一般来说需要两张图刻画。\xref{tab:单边指数函数的傅里叶变换}绘制了$X(\j\omega)$的模和辐角，亦可以选择实部和虚部。
+
+\begin{Tablex}[双边指数函数的傅里叶变换]{|Y|Y|}
+    <时域&频域\\>
+    \xcell<Y>[2ex][-3ex]{\includegraphics[scale=0.75]{build/Chapter05C_01d.fig.pdf}}&
+    \xcell<Y>[2ex][-3ex]{\includegraphics[scale=0.75]{build/Chapter05C_01e.fig.pdf}}\\
+    \xcell<Y>{$\mal{x(t)=\e^{-a|t|}}$}&
+    \xcell<Y>{$\mal{X(\j\omega)=\frac{2a}{a^2+\omega^2}}$}\\
+    \hlinelig
+    \xcell<Y>[2ex][-3ex]{\includegraphics[scale=0.75]{build/Chapter05C_01f.fig.pdf}}&
+    \xcell<Y>[2ex][-3ex]{\includegraphics[scale=0.75]{build/Chapter05C_01g.fig.pdf}}\\
+    \xcell<Y>{$\mal{x(t)=\e^{-a|t|}\sgn(t)}$}&
+    \xcell<Y>{$\mal{X(\j\omega)=\frac{-2\j\omega}{a^2+\omega^2}}$}\\
+\end{Tablex}
+
+\begin{BoxExample}[双边偶指数函数的傅里叶变换]
+    对于双边偶指数函数
+    \begin{Equation}
+        x(t)=\e^{-a|t|}
+    \end{Equation}
+    傅里叶变换为
+    \begin{Equation}
+        X(\j\omega)=\frac{2a}{a^2+\omega^2}
+    \end{Equation}
+\end{BoxExample}
+
+\begin{Proof}
+    根据\fancyref{fml:傅里叶变换}
+    \begin{Equation}
+        X(\j\omega)=\Int[-\infty][\infty]x(t)\e^{-\j\omega t}\dd{t}=\Int[0][\infty]\e^{-at}\e^{-\j\omega t}\dd{t}+\Int[-\infty][0]\e^{+at}\e^{-\j\omega t}\dd{t}
+    \end{Equation}
+    即
+    \begin{Equation}
+        X(\j\omega)=\Int[0][\infty]\e^{-(a+\j\omega)t}\dd{t}+\Int[-\infty][0]\e^{(a-\j\omega)t}\dd{t}
+    \end{Equation}
+    计算积分
+    \begin{Equation}
+        X(\j\omega)=
+        -
+        \eval{\frac{1}{a+\j\omega}\e^{-(a+\j\omega)t}}_{0}^{\infty}+
+        \eval{\frac{1}{a-\j\omega}\e^{(a-\j\omega)t}}_{-\infty}^{0}
+    \end{Equation}
+    完成求值
+    \begin{Equation}*
+        X(\j\omega)=\frac{1}{a+\j\omega}+\frac{1}{a-\j\omega}+=\frac{2a}{a^2+\omega^2}\qedhere
+    \end{Equation}
+\end{Proof}
+
+\begin{BoxExample}[双边奇指数函数的傅里叶变换]
+    对于双边奇指数函数
+    \begin{Equation}
+        x(t)=\e^{-a|t|}\sgn(t)
+    \end{Equation}
+    傅里叶变换为
+    \begin{Equation}
+        X(\j\omega)=\frac{-2\j\omega}{a^2+\omega^2}
+    \end{Equation}
+\end{BoxExample}
+
+\begin{Proof}
+    根据\fancyref{fml:傅里叶变换}
+    \begin{Equation}
+        X(\j\omega)=\Int[-\infty][\infty]x(t)\e^{-\j\omega t}\dd{t}=\Int[0][\infty]\e^{-at}\e^{-\j\omega t}\dd{t}-\Int[-\infty][0]\e^{+at}\e^{-\j\omega t}\dd{t}
+    \end{Equation}
+    即
+    \begin{Equation}
+        X(\j\omega)=\Int[0][\infty]\e^{-(a+\j\omega)t}\dd{t}-\Int[-\infty][0]\e^{(a-\j\omega)t}\dd{t}
+    \end{Equation}
+    计算积分
+    \begin{Equation}
+        X(\j\omega)=
+        -\eval{\frac{1}{a+\j\omega}\e^{-(a+\j\omega)t}}_{0}^{\infty}
+        -\eval{\frac{1}{a-\j\omega}\e^{(a-\j\omega)t}}_{-\infty}^{0}
+    \end{Equation}
+    完成求值
+    \begin{Equation}*
+        X(\j\omega)=\frac{1}{a+\j\omega}-\frac{1}{a-\j\omega}=\frac{-2\j\omega}{a^2+\omega^2}\qedhere
+    \end{Equation}
+\end{Proof}
+
+在\xref{tab:双边指数函数的傅里叶变换}中展现了双边指数函数和其傅里叶变换的图像。略微有所不同的是，由于双边指数函数中，偶函数的频域仅包含实部，奇函数的频域仅包含虚部，我们可以仅用一张图表示频域。
+
+\subsection{常值函数的傅里叶变换}
+\begin{BoxExample}[常值函数的傅里叶变换]
+    对于常值函数
+    \begin{Equation}
+        x(t)=1
+    \end{Equation}
+    傅里叶变换为
+    \begin{Equation}
+        X(\j\omega)=2\pi\dirac(\omega)
+    \end{Equation}
+    简而言之，常值函数的傅里叶变换给出狄拉克函数。
+\end{BoxExample}
+
+\begin{Proof}
+    试着应用\fancyref{fml:傅里叶变换}，我们会遗憾的发现该积分并不收敛
+    \begin{Equation}
+        X(\j\omega)=\Int[-\infty][\infty]x(t)\e^{-\j\omega t}\dd{t}=\Int[-\infty][\infty]\e^{-\j\omega t}\dd{t}
+    \end{Equation}
+    这就是因为$x(t)=1$并不是一个绝对可积的函数，故无法通过通常的办法完成傅里叶变换。
+
+    这里可以将$x(t)=1$视为双边偶指数函数的极限，如\xref{tab:常值函数的傅里叶变换}所示
+    \begin{Equation}
+        x(t)=\Lim[a\to 0]\e^{-a|t|}=1
+    \end{Equation}
+    故可以预期$x(t)$的傅里叶变换$X(\j\omega)$也是双边偶指数函数的极限，依据\xref{exp:双边偶指数函数的傅里叶变换}和\xref{tab:冲激函数的其他辅助函数}
+    \begin{Equation}*
+        X(\j\omega)=\Lim[a\to 0]\frac{2a}{a^2+\omega^2}=2\pi\dirac(\omega)\qedhere
+    \end{Equation}
+\end{Proof}
+
+\begin{Tablex}[常值函数的傅里叶变换]{|Y|Y|}
+    <时域&频域\\>
+    \xcell<Y>[2ex][-3ex]{\includegraphics[scale=0.75]{build/Chapter05C_01h.fig.pdf}}&
+    \xcell<Y>[2ex][-3ex]{\includegraphics[scale=0.75]{build/Chapter05C_01j.fig.pdf}}\\
+    \xcell<Y>{$\mal{x(t)=\Lim[a\to 0]\e^{-a|t|}}$}&
+    \xcell<Y>{$\mal{X(\j\omega)=\Lim[a\to 0]\frac{2a}{a^2+\omega^2}}=2\pi\dirac(\omega)$}\\
+\end{Tablex}
+
+\subsection{符号函数的傅里叶变换}
+\begin{BoxExample}[符号函数的傅里叶变换]
+    对于符号函数
+    \begin{Equation}
+        x(t)=\sgn(t)
+    \end{Equation}
+    傅里叶变换为
+    \begin{Equation}
+        X(\j\omega)=2/j\omega
+    \end{Equation}
+    简而言之，符号函数的傅里叶变换给出反比例函数。
+\end{BoxExample}
+
+\begin{Proof}
+    试着应用\fancyref{fml:傅里叶变换}，我们会同样发现符号函数也并不收敛
+    \begin{Equation}
+        X(\j\omega)=\Int[-\infty][\infty]x(t)\e^{-\j\omega t}=\Int[0][\infty]\e^{-\j\omega t}\dd{t}-\Int[-\infty][0]\e^{-\j\omega t}\dd{t}
+    \end{Equation}
+    这里可以将$x(t)=\sgn(x)$视为双边奇指数函数的极限，如\xref{tab:符号函数的傅里叶变换}所示
+    \begin{Equation}
+        x(t)=\Lim[a\to 0]\e^{-\alpha|t|}\sgn(t)=1
+    \end{Equation}
+    故可以预期$x(t)$的傅里叶变换$X(\j\omega)$也是双边奇指数函数的极限，依据\xref{exp:双边奇指数函数的傅里叶变换}，计算极限
+    \begin{Equation}*
+        X(\j\omega)=\Lim[a\to 0]\frac{-2\j\omega}{a^2+\omega^2}=\frac{-2\j}{\omega}=\frac{2}{\j\omega}\qedhere
+    \end{Equation}
+\end{Proof}
+
+\begin{Tablex}[符号函数的傅里叶变换]{|Y|Y|}
+    <时域&频域\\>
+    \xcell<Y>[2ex][-3ex]{\includegraphics[scale=0.75]{build/Chapter05C_01i.fig.pdf}}&
+    \xcell<Y>[2ex][-3ex]{\includegraphics[scale=0.75]{build/Chapter05C_01k.fig.pdf}}\\
+    \xcell<Y>{$\mal{x(t)=\Lim[a\to 0]\e^{-a|t|}\sgn(t)}$}&
+    \xcell<Y>{$\mal{X(\j\omega)=\Lim[a\to 0]\frac{-2\j\omega}{a^2+\omega^2}=\frac{2}{\j\omega}}$}\\
+\end{Tablex}
+
+很有意思的是，介于阶跃函数$u(t)$可以用常值函数$1$和符号函数$\sgn(t)$的线性组合表示
+\begin{Equation}
+    u(t)=\frac{1}{2}\qty[1+1\sgn(t)]
+\end{Equation}
+由\xref{exp:常值函数的傅里叶变换}和\xref{exp:符号函数的傅里叶变换}可得
+\begin{Equation}
+    u(t)\Farr\frac{1}{\j\omega}+\pi\dirac(\omega)
+\end{Equation}
+由此，就得到了阶跃函数$u(t)$的傅里叶变换（这里实际默认了傅里叶变换的线性性质）。
+
+\subsection{冲激函数的傅里叶变换}
+\begin{BoxExample}[冲激函数的傅里叶变换]
+    对于冲激函数
+    \begin{Equation}
+        x(t)=\dirac(t)
+    \end{Equation}
+    傅里叶变换为
+    \begin{Equation}
+        X(\j\omega)=1
+    \end{Equation}
+    对于冲激函数的导数
+    \begin{Equation}
+        x(t)=\dirac^{(n)}(t)
+    \end{Equation}
+    傅里叶变换为
+    \begin{Equation}
+        X(\j\omega)=(\j\omega)^n
+    \end{Equation}
+    简而言之，冲激函数及其导数的傅里叶变换给出幂函数，特别的，冲激函数给出常值。
+\end{BoxExample}\goodbreak
+
+\begin{Proof}
+    根据\fancyref{fml:傅里叶变换}和\fancyref{fml:冲激函数的导数}
+    \begin{Equation}*
+        X(\j\omega)=\Int[-\infty][\infty]\dirac^{(n)}(t)\e^{-\j\omega t}\dd{t}=(-1)^n\eval{\dv[n]{t}\e^{-\j\omega t}}_{t=0}=(-1)^n(-\j\omega)^n=(\j\omega)^n\qedhere
+    \end{Equation}
+\end{Proof}
