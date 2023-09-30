@@ -106,7 +106,7 @@ fig3b=Plot[xExpD2FT/I/.{a->1},{w,-5,5},
 
 aList={a->Table[1/2^x,{x,0,5,1}]};
 xFigLegendB={PlotLegends->Placed[LineLegend[
-	Table[xLaTeX["a="<>ToString[2^a],0.7],{a,0,5,1}],
+	Table[xLaTeX["a=1/"<>ToString[2^a],0.6],{a,0,5,1}],
 	LegendFunction->"Panel",
 	LegendLayout -> {"Column",2}],{Right,Bottom}]}
 xFigStyleBt={
