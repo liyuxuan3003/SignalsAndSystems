@@ -30,7 +30,7 @@ ${BUILD_DIR}/%.fig.pdf:%.fig.m
 	octave-cli $<
 
 ${BUILD_DIR}/%.fig.pdf:%.fig.wls
-	wolframscript.exe -script $<
+	wolframscript -script $<
 
 ${BUILD_DIR}:
 	mkdir -p ${BUILD_DIR}

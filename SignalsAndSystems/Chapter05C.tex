@@ -148,14 +148,25 @@
     \end{Equation}
     这就是因为$x(t)=1$并不是一个绝对可积的函数，故无法通过通常的办法完成傅里叶变换。
 
-    这里可以将$x(t)=1$视为双边偶指数函数的极限，如\xref{tab:常值函数的傅里叶变换}所示
+    这里可以将$x(t)=1$视为一个双边偶指数函数的极限，如\xref{tab:常值函数的傅里叶变换}所示
     \begin{Equation}
         x(t)=\Lim[a\to 0]\e^{-a|t|}=1
     \end{Equation}
-    故可以预期$x(t)$的傅里叶变换$X(\j\omega)$也是双边偶指数函数的极限，依据\xref{exp:双边偶指数函数的傅里叶变换}和\xref{tab:冲激函数的其他辅助函数}
-    \begin{Equation}*
-        X(\j\omega)=\Lim[a\to 0]\frac{2a}{a^2+\omega^2}=2\pi\dirac(\omega)\qedhere
+    故可以预期$x(t)$的傅里叶变换$X(\j\omega)$也是双边偶指数函数的极限，依据\xref{exp:双边偶指数函数的傅里叶变换}
+    \begin{Equation}
+        X(\j\omega)=\Lim[a\to 0]\frac{2a}{a^2+\omega^2}
     \end{Equation}
+    然而这个极限是发散的，为此，将两边对$\omega$积分
+    \begin{Equation}
+        \qquad\qquad\qquad
+        \Int[-\infty][\infty]X(\j\omega)\dd{\omega}=\Lim[a\to 0]\Int[-\infty][\infty]\frac{2a}{a^2+\omega^2}\dd{\omega}=\Lim[a\to\infty]2\eval{\arctan\frac{\omega}{a}}_{-\infty}^{+\infty}=2\pi
+        \qquad\qquad\qquad
+    \end{Equation}
+    因此$X(\j\omega)$实际是一个冲激函数
+    \begin{Equation}*
+        X(\j\omega)=2\pi\dirac(\omega)
+    \end{Equation}
+    很巧合的是，以上过程其实也顺带证明了\xref{tab:冲激函数的其他辅助函数}曾给出的一个冲激函数的辅助函数。
 \end{Proof}
 
 \begin{Tablex}[常值函数的傅里叶变换]{|Y|Y|}
@@ -174,7 +185,7 @@
     \end{Equation}
     傅里叶变换为
     \begin{Equation}
-        X(\j\omega)=2/j\omega
+        X(\j\omega)=2/\j\omega
     \end{Equation}
     简而言之，符号函数的傅里叶变换给出反比例函数。
 \end{BoxExample}
@@ -184,13 +195,17 @@
     \begin{Equation}
         X(\j\omega)=\Int[-\infty][\infty]x(t)\e^{-\j\omega t}=\Int[0][\infty]\e^{-\j\omega t}\dd{t}-\Int[-\infty][0]\e^{-\j\omega t}\dd{t}
     \end{Equation}
-    这里可以将$x(t)=\sgn(x)$视为双边奇指数函数的极限，如\xref{tab:符号函数的傅里叶变换}所示
+    这里可以将$x(t)=\sgn(x)$视为一个双边奇指数函数的极限，如\xref{tab:符号函数的傅里叶变换}所示
     \begin{Equation}
         x(t)=\Lim[a\to 0]\e^{-\alpha|t|}\sgn(t)=1
     \end{Equation}
-    故可以预期$x(t)$的傅里叶变换$X(\j\omega)$也是双边奇指数函数的极限，依据\xref{exp:双边奇指数函数的傅里叶变换}，计算极限
+    故可以预期$x(t)$的傅里叶变换$X(\j\omega)$也是双边奇指数函数的极限，依据\xref{exp:双边奇指数函数的傅里叶变换}
+    \begin{Equation}
+        X(\j\omega)=\Lim[a\to 0]\frac{-2\j\omega}{a^2+\omega^2}
+    \end{Equation}
+    这个极限的计算没有任何难度
     \begin{Equation}*
-        X(\j\omega)=\Lim[a\to 0]\frac{-2\j\omega}{a^2+\omega^2}=\frac{-2\j}{\omega}=\frac{2}{\j\omega}\qedhere
+        X(\j\omega)=\frac{-2\j}{\omega}=\frac{2}{\j\omega}\qedhere
     \end{Equation}
 \end{Proof}
 
@@ -202,6 +217,7 @@
     \xcell<Y>{$\mal{X(\j\omega)=\Lim[a\to 0]\frac{-2\j\omega}{a^2+\omega^2}=\frac{2}{\j\omega}}$}\\
 \end{Tablex}
 
+\subsection{阶跃函数的傅里叶变换}
 很有意思的是，介于阶跃函数$u(t)$可以用常值函数$1$和符号函数$\sgn(t)$的线性组合表示
 \begin{Equation}
     u(t)=\frac{1}{2}\qty[1+1\sgn(t)]
@@ -211,9 +227,19 @@
     u(t)\Farr\frac{1}{\j\omega}+\pi\dirac(\omega)
 \end{Equation}
 由此，就得到了阶跃函数$u(t)$的傅里叶变换（这里实际默认了傅里叶变换的线性性质）。
+\begin{BoxExample}[阶跃函数的傅里叶变换]
+    对于阶跃函数
+    \begin{Equation}
+        x(t)=u(t)
+    \end{Equation}
+    傅里叶变换为
+    \begin{Equation}
+        X(\j\omega)=\pi\dirac(\omega)+1/\j\omega
+    \end{Equation}
+\end{BoxExample}
 
 \subsection{冲激函数的傅里叶变换}
-\begin{BoxExample}[冲激函数的傅里叶变换]
+\begin{BoxExample}[冲激函数的傅里叶变换]*
     对于冲激函数
     \begin{Equation}
         x(t)=\dirac(t)

@@ -1,0 +1,477 @@
+\section{傅里叶变换的性质}
+在本节，我们将详细的探讨并证明傅里叶变换的若干重要性质。
+
+\subsection{傅里叶变换的线性性质}
+\begin{BoxProperty}[傅里叶变换的线性性质]
+    傅里叶变换的线性性质是指，若$x(t)\Farr X(\j\omega)$且$y(t)\Farr Y(\j\omega)$，则
+    \begin{Equation}
+        ax(t)+by(t)\Farr aX(\j\omega)+bY(\j\omega)
+    \end{Equation}
+\end{BoxProperty}
+
+\begin{Proof}
+    容易证明。
+\end{Proof}
+
+\subsection{傅里叶变换的对偶性质}
+\begin{BoxProperty}[傅里叶变换的对偶性质]
+    傅里叶变换的对偶性质是指，若$x(t)\Farr X(\j\omega)$，则
+    \begin{Equation}
+        X(\j t)\Farr 2\pi x(-\omega)
+    \end{Equation}
+\end{BoxProperty}
+\begin{Proof}
+    根据\fancyref{fml:傅里叶变换}的逆变换式
+    \begin{Equation}
+        x(t)=\frac{1}{2\pi}\Int[-\infty][\infty]X(\j\omega)\e^{\j\omega t}\dd{\omega}
+    \end{Equation}
+    将$t$改换为$-t$
+    \begin{Equation}
+        x(-t)=\frac{1}{2\pi}\Int[-\infty][\infty]X(\j\omega)\e^{-\j\omega t}\dd{\omega}
+    \end{Equation}
+    将$t$变为$\omega$，将$\omega$变为$t$
+    \begin{Equation}
+        x(-\omega)=\frac{1}{2\pi}\Int[-\infty][\infty]X(\j t)\e^{-\j\omega t}\dd{t}
+    \end{Equation}
+    两边同乘$2\pi$
+    \begin{Equation}
+        2\pi f(-\omega)=\Int[-\infty][\infty]X(\j t)\e^{-\j\omega t}\dd{t}
+    \end{Equation}
+    即
+    \begin{Equation}*
+        F(-\j t)\Farr 2\pi f(-\omega)\qedhere
+    \end{Equation}
+\end{Proof}
+傅里叶变换的对偶性质指出
+\begin{Equation}
+    x(t)\Farr X(\j\omega)\qquad X(\j t)\Farr 2\pi x(-\omega)
+\end{Equation}
+傅里叶变换的对偶性质告诉我们，对一个函数的傅里叶变换再做傅里叶变换，将得到原函数翻转的$2\pi$倍。对偶性质表述中的符号的变换可能让我们感到有些困惑，只需要牢记两点，首先所谓时域函数和频域函数$x(t),X(\j\omega)$本质都是关于某个变量的函数，自变量记为什么，自变量代表什么含义并不重要，因此即便以$x(\omega),X(\j t)$的形式出现也不值得我们惊奇。其次，再次强调这里$X(\j\omega)$的$\j$是函数名的一部分，因此在$X(\j t)$中也并没有什么多余的$\j$被添加。
+
+在\xref{exp:冲激函数的傅里叶变换}和\xref{exp:常值函数的傅里叶变换}中，我们曾分别求得了
+\begin{Equation}
+    \dirac(t)\Farr 1\qquad 1\Farr 2\pi\dirac(\omega)
+\end{Equation}
+这两个结论都被独立的证明了，而对偶性告诉我们，如果左式成立，则必有右式成立。这就给我们了一个计算傅里叶变换的好思路：若要计算某个函数的傅里叶变换，而这个函数恰好是某个已知傅里叶变换的像函数，那我们就可以利用对偶性质立即得到结果，不必任何计算。\nopagebreak
+
+这个想法可以通过下面这个例子实践一下，例子中涉及的函数我们都很熟悉，正式定义一下。\goodbreak
+\begin{BoxDefinition}[门函数]
+    门函数$\rect(t)$被定义为\footnote[2]{不同参考书对此有不同的记号和定义，例如\cite{主参考书}中以$g_{\tau}(t)$表示宽度为$\tau$高度为$1$的门函数，它和这里定义的$\rect(t)$的关系是$g_{1}(t)=2\rect(t/2)$和$g_{\tau}(t)=2\rect(t/2\tau)$。这里选取的$\rect(t)$的定义可以使其傅里叶变化具有最为简洁的形式。}
+    \begin{Equation}
+        \rect(t)=\begin{cases}
+            1/2, &|t|\leq 1\\
+            0, &|t|>1
+        \end{cases}
+    \end{Equation}
+\end{BoxDefinition}
+
+\begin{BoxDefinition}[采样函数]
+    采样函数$\sinc(t)$被定义为\footnote[2]{采样函数$\sinc(t)$有时也被记为$\Sa(t)$，另一项争议是$\sinc(t)=\sin t/t$和$\sinc(t)=\sin\pi t/\pi t$，后者的优点是归一化。}
+    \begin{Equation}
+        \sinc(t)=\frac{\sin t}{t}
+    \end{Equation}
+\end{BoxDefinition}
+
+现在我们要指出：门函数和采样函数间具有傅里叶变换的关系！
+\begin{BoxExample}[门函数和采样函数的傅里叶变换关系]
+    门函数和采样函数间具有傅里叶变换的关系
+    \begin{Equation}
+        \rect(t)\Farr \sinc(\omega)\qquad
+        \sinc(\omega)\Farr 2\pi\rect(t)
+    \end{Equation}
+\end{BoxExample}
+
+\begin{Proof}
+    我们先证明$x(t)=\rect(t)$的傅里叶变换，根据\fancyref{fml:傅里叶变换}
+    \begin{Equation}
+        X(\j\omega)=\Int[-\infty][\infty]x(t)\e^{-\j\omega t}\dd{t}=\Int[-\infty][\infty]\rect(t)\e^{-\j\omega t}\dd{t}
+    \end{Equation}
+    这个积分非常容易，依据\fancyref{def:门函数}
+    \begin{Equation}
+        X(\j\omega)=\frac{1}{2}\Int[-1][+1]\e^{-\j\omega t}\dd{t}
+    \end{Equation}
+    即
+    \begin{Equation}
+        X(\j\omega)=\eval{\frac{-\e^{-\j\omega t}}{2\j\omega}}_{-1}^{+1}=\frac{\e^{\j\omega t}-\e^{-\j\omega t}}{2\j\omega}=\frac{\sin(\omega)}{\omega}=\sinc(\omega)
+    \end{Equation}
+    由此就证明了
+    \begin{Equation}
+        \rect(t)\Farr\sinc(\omega)
+    \end{Equation}
+    由\fancyref{ppt:傅里叶变换的对偶性质}，我们可以立即得到
+    \begin{Equation}
+        \sinc(t)\Farr 2\pi \rect(\omega)
+    \end{Equation}
+    试想，如果这里不运用对偶性质，而是直接计算$\sinc(t)$的傅里叶变换，那会多么麻烦！
+\end{Proof}
+
+\begin{Tablex}[门函数和采样函数的傅里叶变换关系]{|Y|Y|}
+<>
+\xcell<Y>[2ex][0ex]{\includegraphics[scale=0.75]{build/Chapter05C_02a.fig.pdf}}&
+\xcell<Y>[2ex][0ex]{\includegraphics[scale=0.75]{build/Chapter05C_02b.fig.pdf}}\\ \hlinelig
+\mc{2}[1.5ex][1ex](|c|){$\rect(t)\Farr\sinc(\omega)$}\\ \hlinemid
+\xcell<Y>[2ex][0ex]{\includegraphics[scale=0.75]{build/Chapter05C_02c.fig.pdf}}&
+\xcell<Y>[2ex][0ex]{\includegraphics[scale=0.75]{build/Chapter05C_02d.fig.pdf}}\\ \hlinelig
+\mc{2}[1.5ex][1ex](|c|){$\sinc(t)\Farr 2\pi\rect(\omega)$}\\
+\end{Tablex}
+
+\subsection{傅里叶变换的共轭性质}
+\begin{BoxProperty}[傅里叶变换的共轭性质]
+    傅里叶变换的共轭性质是指，若$x(t)\Farr X(\j\omega)$，则
+    \begin{Equation}
+        x^{*}(t)\Farr X^{*}(-\j\omega)
+    \end{Equation}
+\end{BoxProperty}
+\begin{Proof}
+    根据\fancyref{fml:傅里叶变换}
+    \begin{Equation}
+        X(\j\omega)=\Int[-\infty][\infty]x(t)\e^{-\j\omega t}\dd{t}
+    \end{Equation}
+    对上式两端同时取共轭
+    \begin{Equation}
+        X^{*}(\j\omega)=\qty[\Int[-\infty][\infty]x(t)\e^{-\j\omega t}\dd{t}]^{*}
+    \end{Equation}
+    将共轭和积分交换顺序
+    \begin{Equation}
+        X^{*}(\j\omega)=\Int[-\infty][\infty]x^{*}(t)\e^{\j\omega t}\dd{t}
+    \end{Equation}
+    将$\omega$用$-\omega$代替
+    \begin{Equation}
+        X^{*}(-\j\omega)=\Int[-\infty][\infty]x^{*}(t)\e^{-\j\omega t}\dd{t}
+    \end{Equation}
+    这就表明
+    \begin{Equation}*
+        x^{*}(t)\Farr X^{*}(-\j\omega)\qedhere
+    \end{Equation}
+\end{Proof}
+
+傅里叶变换的共轭性质指出：共轭的傅里叶变换，等于傅里叶变换的共轭的翻转。
+
+假若$x(t)$是实函数，由于$x(t)=x^{*}(t)$，那么，两者的傅里叶变换$X(\j\omega),X^{*}(-\j\omega)$也应相等
+\begin{Equation}
+    X(\j\omega)=X^{*}(-\j\omega)
+\end{Equation}
+即有
+\begin{Equation}
+    \Re[X(\j\omega)]=\Re[X(-\j\omega)]\qquad \Im[X(\j\omega)]=-\Im[X(-\j\omega)]
+\end{Equation}
+或者
+\begin{Equation}
+    |X(\j\omega)|=|X(-\j\omega)|\qquad
+    \Arg[X(\j\omega)]=-\Arg[X(-\j\omega)]
+\end{Equation}
+这就告诉我们，若$x(t)$为实函数且$x(t)\Farr X(\j\omega)$
+\begin{itemize}
+    \item 若$X(\j\omega)$以实部和虚部的形式表示，实部为$\omega$的偶函数，虚部为$\omega$的奇函数。
+    \item 若$X(\j\omega)$以模值和辐角的形式表示，模值为$\omega$的偶函数，辐角为$\omega$的奇函数。
+\end{itemize}
+这意味着，由于对称性的存在，实函数的频域函数（实部虚部/模值辐角）均只需要画出一半。
+
+\subsection{傅里叶变换的尺度变换}
+\begin{BoxProperty}[傅里叶变换的尺度变换]
+    傅里叶变换的尺度变换是指，若$x(t)\Farr X(\j\omega)$，则
+    \begin{Equation}
+        x(at)\Farr\frac{1}{|a|}X\qty(\j\frac{\omega}{a})
+    \end{Equation}
+    特别的，当$a=-1$时有
+    \begin{Equation}
+        x(-t)\Farr F(-\j\omega)
+    \end{Equation}
+\end{BoxProperty}
+
+\begin{Proof}
+    根据\fancyref{fml:傅里叶变换}
+    \begin{Equation}&[1]
+        \F{x(at)}=\Int[-\infty][\infty]x(at)\e^{-\j\omega t}\dd{t}
+    \end{Equation}
+    现在作变量代换，令$\tau=at$，则有
+    \begin{Equation}&[2]
+        t=\frac{\tau}{a}\qquad \dd{t}=\frac{\dd{\tau}}{a}
+    \end{Equation}
+    当$a>0$时，积分限不需要交换
+    \begin{Equation}&[3]
+        \qquad\quad
+        \F{x(at)}=\frac{1}{a}\Int[-\infty][\infty]x(\tau)\e^{-\j\omega \tau/a}\dd{\tau}=\frac{1}{a}\Int[-\infty][\infty]x(\tau)\e^{-\j(\omega/a)\tau}\dd{\tau}=\frac{1}{a}X\qty(\j\frac{\omega}{a})
+        \qquad\quad
+    \end{Equation}
+    当$a<0$时，积分限需要交换，这会带来一个额外的负号
+    \begin{Equation}&[4]
+        \qquad\quad
+        \F{x(at)}=\frac{1}{a}\Int[\infty][-\infty]x(\tau)\e^{-\j\omega \tau/a}\dd{\tau}=-\frac{1}{a}\Int[-\infty][\infty]x(\tau)\e^{-\j(\omega/a)\tau}\dd{\tau}=-\frac{1}{a}X\qty(\j\frac{\omega}{a})
+        \qquad\quad
+    \end{Equation}
+    归纳以上两式的结论，即可得到
+    \begin{Equation}
+        \F{x(at)}=\frac{1}{|a|}X\qty(\j\frac{\omega}{a})
+    \end{Equation}
+    即
+    \begin{Equation}*
+        x(at)\Farr\frac{1}{|a|}X\qty(\j\frac{\omega}{a})\qedhere
+    \end{Equation}
+\end{Proof}
+傅里叶变换的尺度变换性质指出
+\begin{itemize}
+    \item 时域上的压缩（$a>1$），意味着频域上的展宽（同时幅值减小）。
+    \item 时域上的展宽（$a<1$），意味着频域上的压缩（同时幅值增大）。
+\end{itemize}
+概括起来，就是，\empx{时域和频域不可同时被压缩}。
+
+傅里叶变换的尺度变换性质的一个直观理解是：$2$倍速声音会更尖锐，$0.5$倍速声音会更低沉。
+
+\subsection{帕斯瓦尔定理}
+\begin{BoxTheorem}[帕斯瓦尔定理]
+    \uwave{帕斯瓦尔定理}（Parseval's Theorem）是指，若$x(t)\Farr X(\j\omega)$，则
+    \begin{Equation}
+        \Int[-\infty][\infty]|x(t)|^2=\frac{1}{2\pi}\Int[-\infty][\infty]|X(\j\omega)|^2\dd{\omega}
+    \end{Equation}
+\end{BoxTheorem}
+\begin{Proof}
+    将$|x(t)|^2$拆分为$x(t)$和其共轭$x^{*}(t)$的积
+    \begin{Equation}
+        \Int[-\infty][\infty]|x(t)|^2\dd{t}=
+        \Int[-\infty][\infty]x(t)x^{*}(t)\dd{t}
+    \end{Equation}
+    根据\fancyref{ppt:傅里叶变换的共轭性质}，有$x^{*}(t)\Farr X^{*}(-\j\omega)$
+    \begin{Equation}
+        \Int[-\infty][\infty]|x(t)|^2\dd{t}=\Int[-\infty][\infty]x(t)\qty[\frac{1}{2\pi}\Int[-\infty][\infty]X^{*}(-\j\omega)\e^{\j\omega t}\dd{\omega}]\dd{t}
+    \end{Equation}
+    将这里的$\omega$代换为$-\omega$
+    \begin{Equation}
+        \Int[-\infty][\infty]|x(t)|^2\dd{t}=\Int[-\infty][\infty]x(t)\qty[\frac{1}{2\pi}\Int[-\infty][\infty]X^{*}(\j\omega)\e^{-\j\omega t}\dd{\omega}]\dd{t}
+    \end{Equation}
+    将积分顺序交换一下
+    \begin{Equation}
+        \Int[-\infty][\infty]|x(t)|^2\dd{t}=\frac{1}{2\pi}\Int[-\infty][\infty]X^{*}(\j\omega)\qty[\Int[-\infty][\infty]x(t)\e^{-\j\omega t}\dd{t}]\dd{\omega}
+    \end{Equation}
+    这里方括号中的恰就是$x(t)$的傅里叶变换$X(\j\omega)$
+    \begin{Equation}
+        \Int[-\infty][\infty]|x(t)|^2\dd{t}=\frac{1}{2\pi}\Int[-\infty][\infty]X^{*}(\j\omega)X(\j\omega)\dd{\omega}
+    \end{Equation}
+    即
+    \begin{Equation}*
+        \Int[-\infty][\infty]|x(t)|^2\dd{t}=\frac{1}{2\pi}\Int[-\infty][\infty]|X(\j\omega)|^2\dd{\omega}\qedhere
+    \end{Equation}
+\end{Proof}
+
+\subsection{傅里叶变换的平移性质}
+\begin{BoxProperty}[傅里叶变换的平移性质]*
+    傅里叶变换的时移性质是指，若$x(t)\Farr X(\j\omega)$，则
+    \begin{Equation}
+        x(t\pm t_0)\Farr\e^{\pm\j\omega t_0}X(\j\omega)
+    \end{Equation}
+    傅里叶变换的频移性质是指，若$x(t)\Farr X(\j\omega)$，则
+    \begin{Equation}
+        x(t)\e^{\mp\j\omega_0t}\Farr X(\j(\omega\pm\omega_0))
+    \end{Equation}
+\end{BoxProperty}
+
+\begin{Proof}\nopagebreak
+    根据\fancyref{fml:傅里叶变换}
+    \begin{Equation}&[1]
+        x(t)=\frac{1}{2\pi}\Int[-\infty][\infty]X(\j\omega)\e^{\j\omega t}\dd{\omega}
+    \end{Equation}\goodbreak
+    \subparagraph{时移性质} 在\xrefpeq{1}中以$t-t_0$代换$t$，可得
+    \begin{Equation}
+        x(t\pm t_0)=\frac{1}{2\pi}\Int[-\infty][\infty]X(\j\omega)\e^{\j\omega(t\pm t_0)}\dd{\omega}
+    \end{Equation}
+    整理得到
+    \begin{Equation}
+        x(t\pm t_0)=\frac{1}{2\pi}\Int[-\infty][\infty][X(\j\omega)\e^{\pm\j\omega t_0}]\e^{\j\omega t}\dd{\omega}
+    \end{Equation}
+    这就证明了时移性质
+    \begin{Equation}*
+        x(t\pm t_0)\Farr X(\j\omega)\e^{\pm\j\omega t_0}
+    \end{Equation}
+    \subparagraph{频移性质} 在\xrefpeq{1}中两端同乘$\e^{\mp\j\omega_0t}$
+    \begin{Equation}
+        x(t)\e^{\mp\j\omega_0t}=\frac{1}{2\pi}\Int[-\infty][\infty]X(\j\omega)\e^{\j(\omega\mp\omega_0)t}\dd{\omega}
+    \end{Equation}
+    令$w=\omega\mp\omega_0$，则$\omega=w\pm\omega_0$
+    \begin{Equation}
+        x(t)\e^{\mp\j\omega_0t}=\frac{1}{2\pi}\Int[-\infty][\infty]X(\j(w\pm \omega_0))\e^{\j wt}\dd{w}
+    \end{Equation}
+    令$w$重新记为$\omega$
+    \begin{Equation}
+        x(t)\e^{\mp\j\omega_0t}=\frac{1}{2\pi}\Int[-\infty][\infty]X(\j(\omega\pm \omega_0))\e^{\j \omega t}\dd{\omega}
+    \end{Equation}
+    这就证明了频移性质
+    \begin{Equation}*
+        x(t)\e^{\mp\j\omega_0t}\Farr X(\j(\omega\pm\omega_0))\qedhere
+    \end{Equation}
+\end{Proof}
+
+傅里叶变换的平移性质指出：时域上的平移在频域上表现为相移，反之亦然。
+
+\subsection{傅里叶变换的卷积性质}
+\begin{BoxProperty}[傅里叶变换的卷积性质]
+    傅里叶变换的时域卷积性质是指，若$x_1(t)\Farr X_1(\j\omega)$和$x_2(t)\Farr X_2(\j\omega)$
+    \begin{Equation}
+        x_1(t)*x_2(t)\Farr X_1(\j\omega)X_2(\j\omega)
+    \end{Equation}
+    傅里叶变换的频域卷积性质是指，若$x_1(t)\Farr X_1(\j\omega)$和$x_2(t)\Farr X_2(\j\omega)$
+    \begin{Equation}
+        x_1(t)x_2(t)=\frac{1}{2\pi}X_1(\j\omega)*X_2(\j\omega)
+    \end{Equation}
+\end{BoxProperty}\goodbreak
+
+\begin{Proof}
+    根据\fancyref{def:卷积积分}
+    \begin{Equation}&[1]
+        x_1(t)*x_2(t)=\Int[-\infty][\infty]x_1(\tau)x_2(t-\tau)\dd{\tau}
+    \end{Equation}
+    根据\fancyref{fml:傅里叶变换}，求其傅里叶变换
+    \begin{Equation}&[2]
+        \F{x_1(t)*x_2(t)}=\Int[-\infty][\infty]\qty[\Int[-\infty][\infty]x_1(\tau)x_2(t-\tau)\dd{\tau}]\e^{-\j\omega t}\dd{t}
+    \end{Equation}
+    调整积分顺序
+    \begin{Equation}&[3]
+        \F{x_1(t)*x_2(t)}=\Int[-\infty][\infty]x_1(\tau)\qty[\Int[-\infty][\infty]x_2(t-\tau)\e^{-\j\omega t}\dd{t}]\dd{\tau}
+    \end{Equation}
+    根据\fancyref{ppt:傅里叶变换的平移性质}
+    \begin{Equation}&[4]
+        \Int[-\infty][\infty]x_2(t-\tau)\e^{-\j\omega t}\dd{t}=X_2(\j\omega)\e^{-\j\omega\tau}
+    \end{Equation}
+    将\xrefpeq{4}代回\xrefpeq{3}
+    \begin{Equation}
+        \F{x_1(t)*x_2(t)}=\Int[-\infty][\infty]x_1(\tau)X_2(\j\omega)\e^{-\j\omega\tau}\dd{\tau}
+    \end{Equation}
+    再次应用傅里叶变换的定义
+    \begin{Equation}
+        \F{x_1(t)*x_2(t)}=X_1(\j\omega)X_2(\j\omega)
+    \end{Equation}
+    即
+    \begin{Equation}
+        x_1(t)*x_2(t)\Farr X_1(\j\omega)X_2(\j\omega)
+    \end{Equation}
+    这就证明了时域卷积性质，类似也可以证明频域卷积性质。
+\end{Proof}
+
+傅里叶变换的卷积性质指出：时域上的卷积在频域上表现为乘积，反之亦然。
+
+有了傅里叶变换的卷积性质后，进一步推导傅里叶变换的微分性质和积分性质就容易很多了。
+
+\subsection{傅里叶变换的微分性质}
+\begin{BoxProperty}[傅里叶变换的微分性质]
+    傅里叶变换的时域微分性质是指，若$x(t)\Farr X(\j\omega)$，则
+    \begin{Equation}
+        x^{(n)}(t)\Farr X(\j\omega)(\j\omega)^n
+    \end{Equation}
+    傅里叶变换的频域微分性质是指，若$x(t)\Farr X(\j\omega)$，则
+    \begin{Equation}
+        x(t)(-\j t)^n\Farr X^{(n)}(\j\omega)
+    \end{Equation}
+\end{BoxProperty}
+
+\begin{Proof}
+    根据\fancyref{ppt:卷积与冲激函数}和\fancyref{ppt:卷积的微分与积分特性}
+    \begin{Equation}
+        x^{(n)}(t)=x^{(n)}(t)*\dirac(t)=x(t)*\dirac^{(n)}(t)
+    \end{Equation}
+    根据\fancyref{ppt:傅里叶变换的卷积性质}
+    \begin{Equation}
+        \F{x^{(n)}(t)}=\F{x(t)*\dirac^{(n)}(t)}=\F{x(t)\vphantom{x^{(n)}(t)}}\F{\dirac^{(n)}(t)}
+    \end{Equation}
+    或者
+    \begin{Equation}
+        \F{x^{(n)}(t)}=X(\j\omega)\F{\dirac^{(n)}(t)}
+    \end{Equation}
+    根据\fancyref{exp:冲激函数的傅里叶变换}
+    \begin{Equation}
+        \F{x^{(n)}(t)}=X(\j\omega)(\j\omega)^n
+    \end{Equation}
+    即
+    \begin{Equation}*
+        x^{(n)}(t)\Farr X(\j\omega)(\j\omega)^n
+    \end{Equation}
+    这就证明了时域微分性质，类似也可以证明频域微分性质。
+\end{Proof}
+
+由此可见，时域上的微分转换，到频域上就变成了很简单的代数运算。
+
+% \begin{Proof}
+%     简洁起见，以下证明均以一阶导数为例进行证明。\goodbreak
+
+%     根据\fancyref{fml:傅里叶变换}
+%     \begin{Equation}
+%         x(t)=\frac{1}{2\pi}\Int[-\infty][\infty]X(\j\omega)\e^{\j\omega t}\dd{\omega}
+%     \end{Equation}
+%     两端对$t$求导
+%     \begin{Equation}
+%         x'(t)=\dv{t}\frac{1}{2\pi}\Int[-\infty][\infty]X(\j\omega)\e^{\j\omega t}\dd{\omega}=\frac{1}{2\pi}\Int[-\infty][\infty]X(\j\omega)(\j\omega)\e^{\j\omega t}\dd{\omega}
+%     \end{Equation}
+%     因此有
+%     \begin{Equation}*
+%         x'(t)\Farr X(\j\omega)(\j\omega)
+%     \end{Equation}
+%     根据\fancyref{fml:傅里叶变换}
+%     \begin{Equation}
+%         X(\omega)=\Int[-\infty][\infty]x(t)\e^{-\j\omega t}\dd{t}
+%     \end{Equation}
+%     两端对$\omega$求导
+%     \begin{Equation}
+%         X'(\omega)=\dv{\omega}\Int[-\infty][\infty]x(t)\e^{-\j\omega t}\dd{t}=\Int[-\infty][\infty]x(t)(-\j t)\e^{-\j\omega t}\dd{t}
+%     \end{Equation}
+%     因此有
+%     \begin{Equation}*
+%         x(t)(-\j t)\Farr X'(\omega)\qedhere
+%     \end{Equation}
+% \end{Proof}
+
+\subsection{傅里叶变换的积分性质}
+\begin{BoxProperty}[傅里叶变换的积分性质]
+    傅里叶变换的时域积分性质是指，若$x(t)\Farr X(\j\omega)$，则
+    \begin{Equation}
+        x^{(-1)}(t)\Farr X(\j\omega)(\j\omega)^{-1}+\pi X(\j 0)\dirac(\omega)
+    \end{Equation}
+    傅里叶变换的频域积分性质是指，若$x(t)\Farr X(\j\omega)$，则
+    \begin{Equation}
+        x(t)(-\j t)^{-1}+\pi x(0)\dirac(t)\Farr X^{-1}(\j\omega)
+    \end{Equation}
+    这里$x^{(-1)}(t)$和$X^{(-1)}(\j\omega)$的含义是
+    \begin{Equation}
+        x^{(-1)}(t)=\Int[-\infty][t]x(\tau)\dd{\tau}\qquad
+        X^{(-1)}(\omega)=\Int[-\infty][\omega]X(\j w)\dd{w}
+    \end{Equation}
+\end{BoxProperty}\goodbreak
+
+\begin{Proof}
+    根据\fancyref{ppt:卷积与冲激函数}和\fancyref{ppt:卷积的微分与积分特性}
+    \begin{Equation}
+        x^{(-1)}(t)=x^{(-1)}(t)*\dirac(t)=x(t)*\dirac^{(-1)}(t)
+    \end{Equation}
+    我们知道，冲激函数的积分是阶跃函数
+    \begin{Equation}
+        x^{(-1)}(t)=x(t)*u(t)
+    \end{Equation}
+    根据\fancyref{ppt:傅里叶变换的卷积性质}
+    \begin{Equation}
+        \F{x^{-1}(t)}=\F{x(t)*u(t)\vphantom{x^{-1}(t)}}=\F{x(t)\vphantom{x^{-1}(t)}}\F{u(t)\vphantom{x^{-1}(t)}}
+    \end{Equation}
+    或者
+    \begin{Equation}
+        \F{x^{-1}(t)}=X(\j\omega)\F{u(t)\vphantom{x^{-1}(t)}}
+    \end{Equation}
+    根据\fancyref{exp:阶跃函数的傅里叶变换}
+    \begin{Equation}
+        \F{x^{-1}(t)}=X(\j\omega)\qty[\pi\dirac(\omega)+\frac{1}{\j\omega}]
+    \end{Equation}
+    展开得
+    \begin{Equation}
+        \F{x^{-1}(t)}=X(\j\omega)(\j\omega)^{-1}+\pi X(\j\omega)\dirac(\omega)
+    \end{Equation}
+    运用\fancyref{ppt:冲激函数与普通函数的乘积}
+    \begin{Equation}
+        \F{x^{-1}(t)}=X(\j\omega)(\j\omega)^{-1}+\pi X(\j 0)\dirac(\omega)
+    \end{Equation}
+    即
+    \begin{Equation}*
+        x^{(-1)}(t)\Farr X(\j\omega)(\j\omega)^{-1}+\pi X(\j 0)\dirac(\omega)
+    \end{Equation}
+    这就证明了时域积分性质，类似也可以证明频域积分性质。
+\end{Proof}
+
+由此可见，积分性质和微分性质是非常相似的，除了增加了直流冲激项。
+
+\section{傅里叶变换与傅里叶级数}
+傅里叶变换最初是从傅里叶级数引出的，适用于非周期信号，但其实，傅里叶变换也可以用于周期信号，这样就可以在统一的框架内考虑周期信号和非周期信号。以上就是本节的目标。
+
